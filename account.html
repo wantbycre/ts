@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>태성건업</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script src="./assets/js/token.js"></script>
+	<script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Open+Sans:300,400,600,700"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/azzara.min.css">
+	<link rel="stylesheet" href="./assets/css/common.css">
+</head>
+
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div id="include-header"></div>
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">거래처 관리</h4>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+								<li class="nav-item submenu">
+									<a class="nav-link active show" id="pills-tab1" data-toggle="pill" href="#pills1"
+										role="tab" aria-controls="pills1" aria-selected="true">종합건설</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab2" data-toggle="pill" href="#pills2" role="tab"
+										aria-controls="pills2" aria-selected="false">전문건설</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab3" data-toggle="pill" href="#pills3" role="tab"
+										aria-controls="pills3" aria-selected="false">판재판매처</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab4" data-toggle="pill" href="#pills4" role="tab"
+										aria-controls="pills4" aria-selected="false">조립공장</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab5" data-toggle="pill" href="#pills5" role="tab"
+										aria-controls="pills5" aria-selected="false">설계업체</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab6" data-toggle="pill" href="#pills6" role="tab"
+										aria-controls="pills6" aria-selected="false">코너철판</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab7" data-toggle="pill" href="#pills7" role="tab"
+										aria-controls="pills7" aria-selected="false">난간대</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab8" data-toggle="pill" href="#pills8" role="tab"
+										aria-controls="pills8" aria-selected="false">철물업체</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab9" data-toggle="pill" href="#pills9" role="tab"
+										aria-controls="pills9" aria-selected="false">DECK업체</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab10" data-toggle="pill" href="#pills10" role="tab"
+										aria-controls="pills10" aria-selected="false">테이블업체</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab11" data-toggle="pill" href="#pills11" role="tab"
+										aria-controls="pills11" aria-selected="false">설치팀</a>
+								</li>
+								<li class="nav-item submenu">
+									<a class="nav-link" id="pills-tab12" data-toggle="pill" href="#pills12" role="tab"
+										aria-controls="pills12" aria-selected="false">기타</a>
+								</li>
+							</ul>
+
+							<div class="tab-content mt-4 mb-3" id="pills-tabContent" style="min-height: 300px;">
+								<div class="tab-pane fade active show" id="pills1" role="tabpanel"
+									aria-labelledby="pills-tab1">
+									<table class="table table-hover text-center" id="accoutn-table1">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<a href="/account-form-detail.html"
+														class="btn btn-warning btn-sm">조회</a>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<a href="/account-form.html" class="btn btn-primary">거래처 등록</a>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills2" role="tabpanel" aria-labelledby="pills-tab2">
+									<table class="table table-hover text-center" id="accoutn-table2">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<button type="button" class="btn btn-primary">거래처 등록</button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills3" role="tabpanel" aria-labelledby="pills-tab3">
+									<table class="table table-hover text-center" id="accoutn-table3">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<button type="button" class="btn btn-primary">거래처 등록</button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills4" role="tabpanel" aria-labelledby="pills-tab4">
+									<table class="table table-hover text-center" id="accoutn-table4">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<button type="button" class="btn btn-primary">거래처 등록</button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills5" role="tabpanel" aria-labelledby="pills-tab5">
+									<table class="table table-hover text-center" id="accoutn-table5">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<button type="button" class="btn btn-primary">거래처 등록</button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills6" role="tabpanel" aria-labelledby="pills-tab6">
+									<table class="table table-hover text-center" id="accoutn-table6">
+										<thead>
+											<tr>
+												<th scope="col">No</th>
+												<th scope="col">회사명</th>
+												<th scope="col">전화번호</th>
+												<th scope="col">담당자명</th>
+												<th scope="col">은행</th>
+												<th scope="col">계좌번호</th>
+												<th scope="col">주소</th>
+												<th scope="col">등록일</th>
+												<th scope="col">상세조회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>현대 ENG</td>
+												<td>010-1233-4567</td>
+												<td>홍길동</td>
+												<td>KB국민</td>
+												<td>111-23453-11</td>
+												<td>서울특별시 강남구 압구정로 11</td>
+												<td>2023-09-01</td>
+												<td>
+													<button type="button" class="btn btn-warning btn-sm">조회</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="mt-4 text-right">
+										<button type="button" class="btn btn-primary">거래처 등록</button>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="pills7" role="tabpanel" aria-labelledby="pills-tab7">
+									7
+								</div>
+								<div class="tab-pane fade" id="pills8" role="tabpanel" aria-labelledby="pills-tab8">
+									8
+								</div>
+								<div class="tab-pane fade" id="pills9" role="tabpanel" aria-labelledby="pills-tab9">
+									9
+								</div>
+								<div class="tab-pane fade" id="pills10" role="tabpanel" aria-labelledby="pills-tab10">
+									10
+								</div>
+								<div class="tab-pane fade" id="pills11" role="tabpanel" aria-labelledby="pills-tab11">
+									11
+								</div>
+								<div class="tab-pane fade" id="pills12" role="tabpanel" aria-labelledby="pills-tab12">
+									12
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="./assets/js/core/popper.min.js"></script>
+	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+	<!-- Chart JS -->
+	<script src="./assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- Azzara JS -->
+	<script src="./assets/js/include.js"></script>
+	<script src="./assets/js/common.js"></script>
+
+</body>
+
+</html>

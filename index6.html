@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>태성건업</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script src="./assets/js/token.js"></script>
+	<script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Open+Sans:300,400,600,700"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/azzara.min.css">
+	<link rel="stylesheet" href="./assets/css/common.css">
+</head>
+
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div id="include-header"></div>
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">공사현황</h4>
+					</div>
+
+					<div class="card">
+						<div class="card-body d-flex align-items-center m-flex-none">
+							<div class="form-group">
+								<label for="squareSelect">진행단계</label>
+								<select class="form-control form-control-sm" id="squareSelect" style="width: 120px;">
+									<option>전체</option>
+								</select>
+							</div>
+							<div class="form-group m-di-ib">
+								<label for="starDate">기간검색</label>
+								<input type="input" class="form-control form-control-sm form-calendar" id="starDate"
+									style="width: 120px;">
+							</div>
+							<div class="mt-4  m-di-ib">~</div>
+							<div class="form-group m-di-ib">
+								<label for="endDate">기간검색</label>
+								<input type="input" class="form-control form-control-sm form-calendar" id="endDate"
+									style="width: 120px;">
+							</div>
+							<div class="mt-4">
+								<button type="button" class="btn btn-dark btn-sm">조회</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<div class="mb-2">
+								<span class="badge step1">설계</span>
+								<span class="badge step2">공사</span>
+								<span class="badge step3">공장</span>
+								<span class="badge step4">공장-코너철판</span>
+							</div>
+							<div class="d-flex">
+								<div style="flex-shrink: 0;">
+									<table class="table v2 left-table">
+										<colgroup>
+											<col style="width: 80px">
+											<col style="width: 80px">
+											<col style="width: 100px">
+											<col style="width: 100px">
+											<col style="width: 80px">
+											<col style="width: 60px" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th>코드명</th>
+												<th>현장명</th>
+												<th>데크보생산처<span class="table-sm">조립/판재/설계</span></th>
+												<th>코너철판<span class="table-sm">공장/설계</span></th>
+												<th>난간대<span class="table-sm">설치팀</span></th>
+												<th>조닝도</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">
+														#원영-현대<br />230804
+													</a>
+												</td>
+												<td>원영<br />현앤</td>
+												<td>음성<br />원하이텍<br />이지디테일</td>
+												<td>삼호<br />마하나임</td>
+												<td>삼호정공</td>
+												<td>
+													<a href="#" data-toggle="modal" data-target=".modal-joning">
+														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>#원영-현대<br />230804</td>
+												<td>원영/현앤</td>
+												<td>음성<br />원하이텍<br />이지디테일</td>
+												<td>삼호/마하나임</td>
+												<td>삼호정공</td>
+												<td>
+													<a href="#">
+														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div class="table-scroll-section" style="flex-grow: 1; ">
+									<table class="table v2">
+										<thead>
+											<tr>
+												<th colspan="14" style="width: 80px;">10월</th>
+											</tr>
+											<tr>
+												<th>2</th>
+												<th>3</th>
+												<th>4</th>
+												<th>5</th>
+												<th>6</th>
+												<th>7</th>
+												<th>8</th>
+												<th>9</th>
+												<th>10</th>
+												<th>11</th>
+												<th>12</th>
+												<th>13</th>
+												<th>14</th>
+												<th>15</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<button type="button" class="aps-button" data-toggle="modal"
+														data-target=".modal-jolip">
+														&nbsp;
+													</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td>
+													<!-- 공사 데크보 [초록] -->
+													<button type="button" class="aps-button active green">
+														<div class="aps-content">
+															<div class="aps-top">1F 5구간</div>
+															<div class="d-flex aps-middle">
+																<div>512</div>
+																<div>5.4</div>
+															</div>
+															<div class="d-flex aps-bottom">
+																<div>53</div>
+																<div>&nbsp;</div>
+															</div>
+														</div>
+													</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+											</tr>
+											<tr>
+												<td>
+													<button type="button" class="aps-button">&nbsp;</button>
+												</td>
+												<td>
+													<button type="button" class="aps-button active purple">
+														<div class="aps-content">
+															<div class="aps-top">1F 5구간</div>
+															<div class="d-flex aps-middle">
+																<div>512</div>
+																<div>5.4</div>
+															</div>
+															<div class="d-flex aps-bottom">
+																<div>53</div>
+																<div>&nbsp;</div>
+															</div>
+														</div>
+													</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+											</tr>
+										</tbody>
+									</table>
+									<table class="table v2">
+										<thead>
+											<tr>
+												<th colspan="14" style="width: 80px;">11월</th>
+											</tr>
+											<tr>
+												<th>2</th>
+												<th>3</th>
+												<th>4</th>
+												<th>5</th>
+												<th>6</th>
+												<th>7</th>
+												<th>8</th>
+												<th>9</th>
+												<th>10</th>
+												<th>11</th>
+												<th>12</th>
+												<th>13</th>
+												<th>14</th>
+												<th>15</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<button type="button" class="aps-button">&nbsp;</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td>
+													<button type="button" class="aps-button active">
+														<div class="aps-content">
+															<div class="aps-top">1F 5구간</div>
+															<div class="d-flex aps-middle">
+																<div>512</div>
+																<div>5.4</div>
+															</div>
+															<div class="d-flex aps-bottom">
+																<div>53</div>
+																<div>&nbsp;</div>
+															</div>
+														</div>
+													</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+											</tr>
+											<tr>
+												<td>
+													<button type="button" class="aps-button">&nbsp;</button>
+												</td>
+												<td>
+													<button type="button" class="aps-button active">
+														<div class="aps-content">
+															<div class="aps-top">1F 5구간</div>
+															<div class="d-flex aps-middle">
+																<div>512</div>
+																<div>5.4</div>
+															</div>
+															<div class="d-flex aps-bottom">
+																<div>53</div>
+																<div>&nbsp;</div>
+															</div>
+														</div>
+													</button>
+												</td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+												<td><button type="button" class="aps-button">&nbsp;</button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div>
+									<table class="table v2">
+										<colgroup>
+											<col style="width: 50px;">
+											<col style="width: 50px;">
+											<col style="width: 50px;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th colspan="3">합계</th>
+											</tr>
+											<tr>
+												<th>333</th>
+												<th>333</th>
+												<th>333</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>123</td>
+												<td>123</td>
+												<td>123</td>
+											</tr>
+											<tr>
+												<td>123</td>
+												<td>123</td>
+												<td>123</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal : 조닝도 -->
+	<div class="modal modal-joning" tabindex="-1" role="dialog" aria-labelledby="" data-keyboard="false"
+		data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="exampleModalLongTitle">조닝도</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="file-box">
+						<div class="file-title">조닝도 자료</div>
+						<div class="file-content">
+							<a href="#">
+								<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+								조닝도 자료 1.pdf </a>
+							<a href="#">
+								<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+								조닝도 자료 2.pdf
+							</a>
+							<a href="#">
+								<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+								조닝도 자료 3.pdf
+							</a>
+							<a href="#">
+								<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+								조닝도 자료 4.pdf
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 100px;">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal : 공장 - 조립공장 -->
+	<div class="modal modal-jolip" tabindex="-1" role="dialog" aria-labelledby="" data-keyboard="false"
+		data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="exampleModalLongTitle">공장 - 조립공장 정보 입력</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body v2">
+					<!-- 파일 업로드 섹션 -->
+					<div class="card">
+						<div class="card-body">
+							<h2>도면자료 다운로드</h2>
+							<div class="file-box mt-4">
+								<div class="file-title">승인(변경)도면 [bom/cp/스트럽]</div>
+								<div class="file-content">
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										승인(변경)도면1.pdf </a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										승인(변경)도면2승인(변경)도면2승인(변경)도면2.pdf
+									</a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										승인(변경)도면3.pdf
+									</a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										승인(변경)도면4.pdf
+									</a>
+								</div>
+							</div>
+
+							<h2 class="mt-5 mb-3">데크보 정보입력</h2>
+							<div class="d-flex">
+								<div class="form-group form-group-default mb-0">
+									<label>송장 색도면 상차사진 업로드</label>
+									<input id="Name" type="file" class="form-control" multiple>
+								</div>
+								<button type="button" class="btn btn-primary ml-1">업로드</button>
+							</div>
+
+
+							<!-- <div class="d-flex mt-2">
+																					<div>AA.pdf</div>
+																					<div class="ml-2">BB.png</div>
+																				</div> -->
+
+							<div class="file-box mt-4">
+								<div class="file-title">송장 색도면 상차사진 자료</div>
+								<div class="file-content">
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										송장1.pdf </a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										송장2.pdf
+									</a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										색도면2.pdf
+									</a>
+									<a href="#">
+										<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+										상차사진1.pdf
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 100px;">카톡방
+						공지</button>
+					<div>
+						<button type="button" class="btn btn-secondary mr-2" data-dismiss="modal"
+							style="width: 150px;">제작완료</button>
+						<button type="button" class="btn btn-success fw-bold" data-dismiss="modal"
+							style="width: 150px;">데크보 입고 확정하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="./assets/js/core/popper.min.js"></script>
+	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<!-- <script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+	<!-- Azzara JS -->
+	<script src="./assets/js/include.js"></script>
+	<script src="./assets/js/common.js"></script>
+
+</body>
+<script>
+</script>
+
+</html>

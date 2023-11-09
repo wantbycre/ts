@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>태성건업</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script src="./assets/js/token.js"></script>
+	<script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Open+Sans:300,400,600,700"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/azzara.min.css">
+	<link rel="stylesheet" href="./assets/css/common.css">
+</head>
+
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div id="include-header"></div>
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">매입매출 통계</h4>
+					</div>
+
+					<div class="card">
+						<div class="card-body d-flex align-items-center">
+							<div class="form-group">
+								<label for="squareSelect">진행단계</label>
+								<select class="form-control form-control-sm" id="squareSelect" style="width: 120px;">
+									<option>전체</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="starDate">기간검색</label>
+								<input type="input" class="form-control form-control-sm form-calendar" id="starDate"
+									style="width: 120px;">
+							</div>
+							<div class="mt-4">~</div>
+							<div class="form-group">
+								<label for="endDate">기간검색</label>
+								<input type="input" class="form-control form-control-sm form-calendar" id="endDate"
+									style="width: 120px;">
+							</div>
+							<div class="mt-4">
+								<button type="button" class="btn btn-dark btn-sm">조회</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<div class="chart-container" style="min-height: 375px">
+								<canvas id="statisticsChart"></canvas>
+							</div>
+							<div id="myChartLegend"></div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<table class="table table-hover text-center">
+								<thead>
+									<tr>
+										<th scope="col">No</th>
+										<th scope="col">프로젝트명</th>
+										<th scope="col">공사일</th>
+										<th scope="col">마감일</th>
+										<th scope="col">매입</th>
+										<th scope="col">매출</th>
+										<th scope="col">순이익</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>5</td>
+										<td>프로젝트 5 - 고양향동 - 33442</td>
+										<td>2023-01-01</td>
+										<td>2023-05-02</td>
+										<td>13,000,000</td>
+										<td>23,000,000</td>
+										<td>10,000,000</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>프로젝트 4 - 인천송도 - 33442</td>
+										<td>2023-01-01</td>
+										<td>2023-05-02</td>
+										<td>13,000,000</td>
+										<td>23,000,000</td>
+										<td>10,000,000</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>프로젝트 5 - 서울강남 - 33442</td>
+										<td>2023-01-01</td>
+										<td>2023-05-02</td>
+										<td>13,000,000</td>
+										<td>23,000,000</td>
+										<td>10,000,000</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>프로젝트 5 - 도봉노원 - 33442</td>
+										<td>2023-01-01</td>
+										<td>2023-05-02</td>
+										<td>13,000,000</td>
+										<td>23,000,000</td>
+										<td>10,000,000</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>프로젝트 5 - 아무개 - 33442</td>
+										<td>2023-01-01</td>
+										<td>2023-05-02</td>
+										<td>13,000,000</td>
+										<td>23,000,000</td>
+										<td>10,000,000</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="./assets/js/core/popper.min.js"></script>
+	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+	<!-- Chart JS -->
+	<script src="./assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- Azzara JS -->
+	<script src="./assets/js/include.js"></script>
+	<script src="./assets/js/common.js"></script>
+
+</body>
+<script>
+	//Chart
+
+	var ctx = document.getElementById("statisticsChart").getContext("2d");
+
+	var statisticsChart = new Chart(ctx, {
+		type: "line",
+		data: {
+			labels: [
+				"Jan",
+				"Feb",
+				"Mar",
+				"Apr",
+				"May",
+				"Jun",
+				"Jul",
+				"Aug",
+				"Sep",
+				"Oct",
+				"Nov",
+				"Dec",
+			],
+			datasets: [
+				{
+					label: "매입",
+					borderColor: "#f3545d",
+					pointBackgroundColor: "rgba(243, 84, 93, 0.2)",
+					pointRadius: 0,
+					backgroundColor: "rgba(243, 84, 93, 0.1)",
+					legendColor: "#f3545d",
+					fill: true,
+					borderWidth: 2,
+					data: [
+						154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 374,
+					],
+				},
+				{
+					label: "매출",
+					borderColor: "#fdaf4b",
+					pointBackgroundColor: "rgba(253, 175, 75, 0.2)",
+					pointRadius: 0,
+					backgroundColor: "rgba(253, 175, 75, 0.1)",
+					legendColor: "#fdaf4b",
+					fill: true,
+					borderWidth: 2,
+					data: [
+						256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521,
+					],
+				},
+				{
+					label: "기타",
+					borderColor: "#177dff",
+					pointBackgroundColor: "rgba(23, 125, 255, 0.2)",
+					pointRadius: 0,
+					backgroundColor: "rgba(23, 125, 255, 0.1)",
+					legendColor: "#177dff",
+					fill: true,
+					borderWidth: 2,
+					data: [
+						542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900,
+					],
+				},
+			],
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: false,
+			},
+			tooltips: {
+				bodySpacing: 4,
+				mode: "nearest",
+				intersect: 0,
+				position: "nearest",
+				xPadding: 10,
+				yPadding: 10,
+				caretPadding: 10,
+			},
+			layout: {
+				padding: { left: 15, right: 15, top: 15, bottom: 15 },
+			},
+			scales: {
+				yAxes: [
+					{
+						ticks: {
+							fontColor: "rgba(0,0,0,0.5)",
+							fontStyle: "500",
+							beginAtZero: false,
+							maxTicksLimit: 5,
+							padding: 20,
+						},
+						gridLines: {
+							drawTicks: false,
+							display: false,
+						},
+					},
+				],
+				xAxes: [
+					{
+						gridLines: {
+							zeroLineColor: "transparent",
+						},
+						ticks: {
+							padding: 20,
+							fontColor: "rgba(0,0,0,0.5)",
+							fontStyle: "500",
+						},
+					},
+				],
+			},
+			legendCallback: function (chart) {
+				var text = [];
+				text.push('<ul class="' + chart.id + '-legend html-legend">');
+				for (var i = 0; i < chart.data.datasets.length; i++) {
+					text.push(
+						'<li><span style="background-color:' +
+						chart.data.datasets[i].legendColor +
+						'"></span>'
+					);
+					if (chart.data.datasets[i].label) {
+						text.push(chart.data.datasets[i].label);
+					}
+					text.push("</li>");
+				}
+				text.push("</ul>");
+				return text.join("");
+			},
+		},
+	});
+
+	var myLegendContainer = document.getElementById("myChartLegend");
+
+	// generate HTML legend
+	myLegendContainer.innerHTML = statisticsChart.generateLegend();
+</script>
+
+</html>

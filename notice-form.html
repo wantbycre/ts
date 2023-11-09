@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>태성건업</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script src="./assets/js/token.js"></script>
+	<script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Open+Sans:300,400,600,700"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/azzara.min.css">
+	<link rel="stylesheet" href="./assets/css/common.css">
+</head>
+
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div id="include-header"></div>
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">공지사항</h4>
+					</div>
+
+					<div class="card" style="max-width: 900px;">
+						<div class="card-body">
+							<table class="table text-center">
+								<tbody>
+									<tr>
+										<th>제목</th>
+										<td>
+											<input type="text" class="form-control" placeholder="제목을 입력하세요.">
+										</td>
+									</tr>
+									<tr>
+										<th>내용</th>
+										<td><textarea cols="30" rows="10" class="form-control"></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="text-center mb-4 mt-4">
+								<a href="#" class="btn btn-primary" style="width: 130px;">등록</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="./assets/js/core/popper.min.js"></script>
+	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
+
+	<!-- Azzara JS -->
+	<script src="./assets/js/include.js"></script>
+	<script src="./assets/js/common.js"></script>
+</body>
+
+</html>
