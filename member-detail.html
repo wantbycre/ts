@@ -64,7 +64,8 @@
 										<td>4,794,000</td>
 										<td>2023-10-10</td>
 										<td>
-											<a href="#" class="btn btn-warning btn-sm">상세보기</a>
+											<a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+												data-target=".member-pay2">상세보기</a>
 										</td>
 									</tr>
 									<tr>
@@ -265,43 +266,87 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">급여명세서 등록</h5>
+					<h2 class="modal-title" id="exampleModalLongTitle">급여명세서 등록</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 					<div class="form-group d-flex align-items-center form-label-width">
-						<label for="companyName" class="placeholder">지급일 선택</label>
-						<input id="companyName" type="text" class="form-control form-calendar v2" style="width: 200px;"
-							placeholder="입사일을 입력하세요.">
+						<label for="type" class="placeholder">직원</label>
+						<select class="form-control" id="type" style="width: 400px;">
+							<option value="default">직원을 선택하세요.</option>
+							<option>홍길동</option>
+							<option>홍길순</option>
+						</select>
 					</div>
 					<div class="form-group d-flex align-items-center form-label-width">
-						<label for="companyName" class="placeholder">이름</label>
-						<input id="companyName" type="text" class="form-control" style="width: 200px;"
-							placeholder="홍길동">
+						<label for="companyName" class="placeholder">년도</label>
+						<input id="companyName" type="text" class="form-control" style="width: 400px;"
+							placeholder="년도를 입력하세요.">
+					</div>
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="companyName" class="placeholder">월</label>
+						<input id="companyName" type="text" class="form-control" style="width: 400px;"
+							placeholder="월을 입력하세요.">
+					</div>
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="companyName" class="placeholder">파일</label>
+						<input id="companyName" type="file" class="form-control" style="width: 400px;">
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 100px;">취소</button>
+					<button type="button" class="btn btn-primary" style="width: 100px;">저장</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal : 급여명세서 -->
+	<div class="modal member-pay2" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="exampleModalLongTitle">급여명세서 등록</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="type" class="placeholder">직원</label>
+						<select class="form-control" id="type" style="width: 400px;" disabled>
+							<option value="default">직원을 선택하세요.</option>
+							<option>홍길동</option>
+							<option>홍길순</option>
+						</select>
+					</div>
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="companyName" class="placeholder">년도</label>
+						<input id="companyName" type="text" class="form-control" style="width: 400px;"
+							placeholder="년도를 입력하세요." value="2023" readonly>
+					</div>
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="companyName" class="placeholder">월</label>
+						<input id="companyName" type="text" class="form-control" style="width: 400px;"
+							placeholder="월을 입력하세요." value="11" readonly>
+					</div>
+					<div class="form-group d-flex align-items-center form-label-width">
+						<label for="companyName" class="placeholder">파일</label>
+						<input id="companyName" type="file" class="form-control" style="width: 400px;" value="25"
+							readonly>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 100px;">취소</button>
+					<div>
+						<button type="button" class="btn btn-warning" style="width: 100px;">수정</button>
+						<button type="button" class="btn btn-danger ml-3" style="width: 100px;">삭제</button>
 					</div>
 
-					<table class="table table-hover text-center">
-						<thead>
-							<tr>
-								<th scope="col">지급항목</th>
-								<th scope="col">지급액</th>
-								<th scope="col">공제항목</th>
-								<th scope="col">공제액</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>기본급</th>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
