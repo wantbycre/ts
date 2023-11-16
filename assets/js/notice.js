@@ -9,6 +9,7 @@ async function GET_NOTICE(page) {
     });
 
     const { paging, result, totalCount } = res.data.data;
+
     console.log(res.data);
 
     $("#table-list tbody").empty();
@@ -25,7 +26,7 @@ async function GET_NOTICE(page) {
 				<tr>
 					<td>${el.UID}</td>
 					<td class="text-left"><a href="#" data-uid="${el.UID}">${el.title}</a></td>
-					<td>2022-01-01</td>
+					<td>${el.regDate}</td>
 				</tr>
 			`);
         });
@@ -34,6 +35,7 @@ async function GET_NOTICE(page) {
         $("#pagination").twbsPagination({
             totalPages: paging.totalPage,
             visiblePages: 10,
+            initiateStartPageClick: false,
             onPageClick: function (event, page) {
                 window.scrollTo(0, 0);
                 GET_NOTICE(page);
