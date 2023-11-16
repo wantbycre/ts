@@ -32,7 +32,7 @@ async function GET_NOTICE(page) {
 
         // 페이징처리
         $("#pagination").twbsPagination({
-            totalPages: paging.totalCount,
+            totalPages: paging.totalPage,
             visiblePages: 10,
             onPageClick: function (event, page) {
                 window.scrollTo(0, 0);
