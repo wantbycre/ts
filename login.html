@@ -34,8 +34,8 @@
 			</h3>
 			<div class="login-form">
 				<div class="form-group form-floating-label">
-					<input id="username" name="username" type="text" class="form-control input-border-bottom" required>
-					<label for="username" class="placeholder">아이디</label>
+					<input id="userId" name="userId" type="text" class="form-control input-border-bottom" required>
+					<label for="userId" class="placeholder">아이디</label>
 				</div>
 				<div class="form-group form-floating-label">
 					<input id="password" name="password" type="password" class="form-control input-border-bottom"
@@ -54,7 +54,7 @@
 					<!-- <a href="#" class="link float-right">Forget Password ?</a> -->
 				</div>
 				<div class="form-action mb-3">
-					<a href="#" class="btn btn-primary btn-login w-100">로그인</a>
+					<a href="#" class="btn btn-primary btn-login w-100" id="handleSubmit">로그인</a>
 				</div>
 				<!-- <div class="login-account">
 					<span class="msg">Don't have an account yet ?</span>
@@ -68,6 +68,12 @@
 	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	<script src="./assets/js/core/popper.min.js"></script>
 	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+
+	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/login.js"></script>
+
 </body>
 
 </html>

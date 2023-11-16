@@ -97,7 +97,7 @@ function setChart() {
 
 	// 프로젝트 종료 DATE
 	const endMoment = moment("2024-05-22");
-	// const endMoment = moment.min(dateRange);
+	// const endMoment = moment.max(dateRange);
 
 	// 해당 월 (0~11 표기하기에 +1)
 	const startMonth = startMoment.month() + 1;

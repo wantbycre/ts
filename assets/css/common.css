@@ -53,6 +53,18 @@ a {
     color: #f00;
 }
 
+.btn-brown {
+    border-color: #d18a2d !important;
+    background-color: #d18a2d !important;
+}
+
+.btn-brown:hover,
+.btn-brown:active,
+.btn-brown:focus {
+    border-color: #91601e !important;
+    background-color: #91601e !important;
+}
+
 .pagination > li > a,
 .pagination > li:first-child > a,
 .pagination > li:last-child > a,
@@ -329,16 +341,28 @@ table.table .complate-tr td button {
     border: 1px solid #afafaf;
 }
 
-.file-content > a {
-    display: block;
+.file-content > div {
     padding: 0 5px 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid #e0dfdf;
 }
 
+.file-content table {
+    margin-top: -11px;
+    margin-bottom: -5px;
+}
+
+.file-content table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.file-list {
+    width: 220px;
+}
+
 .section-history {
     overflow: auto;
-    padding: 10px;
+    padding: 20px;
     background-color: #f4f4f4;
 }
 
@@ -348,6 +372,31 @@ table.table .complate-tr td button {
 
 .modal-body.v2 {
     background: #f1f1f1;
+}
+
+.btn-delete {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 0;
+    background: none;
+    transform: rotate(45deg);
+}
+
+.delete-calendar {
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    border: 0;
+    background: none;
+    transform: rotate(45deg);
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+}
+
+.delete-calendar i {
+    font-size: 16px;
 }
 
 @media (max-width: 780px) {

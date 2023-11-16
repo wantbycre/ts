@@ -44,18 +44,27 @@
 									<tr>
 										<th>제목</th>
 										<td>
-											<input type="text" class="form-control" placeholder="제목을 입력하세요.">
+											<input type="text" class="form-control" id="form-title"
+												placeholder="제목을 입력하세요.">
 										</td>
 									</tr>
 									<tr>
 										<th>내용</th>
-										<td><textarea cols="30" rows="10" class="form-control"></textarea></td>
+										<td><textarea cols="30" rows="10" class="form-control"
+												id="form-content"></textarea></td>
 									</tr>
 								</tbody>
 							</table>
 
-							<div class="text-center mb-4 mt-4">
-								<a href="#" class="btn btn-primary" style="width: 130px;">등록</a>
+							<div class="d-flex justify-content-between mb-4 mt-4">
+								<div>
+									<a href="#" class="btn btn-primary" style="width: 130px;">취소</a>
+								</div>
+								<div>
+									<a href="#" class="btn btn-warning" style="width: 130px;">수정</a>
+									<a href="#" class="btn btn-danger" style="width: 130px;">삭제</a>
+									<a href="#" class="btn btn-primary" style="width: 130px;" id="handleSubmit">등록</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -78,9 +87,13 @@
 
 	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/notice-form.js"></script>
 </body>
 
 </html>
