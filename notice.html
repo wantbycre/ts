@@ -43,7 +43,7 @@
 								<a href="/notice-form.html" class="btn btn-primary">공지 등록</a>
 							</div>
 
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="table-list">
 								<thead>
 									<tr>
 										<th scope="col">No</th>
@@ -52,7 +52,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<td>5</td>
 										<td class="text-left"><a href="#">8월 1일부로 5일간 전직원 여름휴가 입니다.</a></td>
 										<td>2023-09-01</td>
@@ -81,7 +81,7 @@
 										<td>5</td>
 										<td class="text-left"><a href="#">8월 1일부로 5일간 전직원 여름휴가 입니다.</a></td>
 										<td>2023-09-01</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 
@@ -121,14 +121,7 @@
 	<script src="./assets/js/notice.js"></script>
 
 	<script>
-		// 페이징처리
-		$("#pagination").twbsPagination({
-			totalPages: 100,
-			visiblePages: 10,
-			onPageClick: function (event, page) {
-				window.scrollTo(0, 0);
-			},
-		});
+
 	</script>
 </body>
 

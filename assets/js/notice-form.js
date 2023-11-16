@@ -1,6 +1,6 @@
 // 공지사항 등록
 async function POST_NOTICE(title, content) {
-    const res = await instance({
+    const res = await http({
         method: "POST",
         url: "notice",
         data: {

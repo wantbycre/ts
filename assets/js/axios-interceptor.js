@@ -1,34 +1,34 @@
-const instance = axios.create({
+const http = axios.create({
     baseURL: domain + "/api/",
     timeout: 1000,
     headers: { "X-Custom-Header": "foobar" },
 });
 
-// 요청 인터셉터 추가하기
-instance.interceptors.request.use(
+// req 인터셉터 추가
+http.interceptors.request.use(
     // 요청이 전달되기 전에 헤더에 토큰 넣기
     (config) => {
         const token = sessionStorage.getItem("token");
         if (token) {
             config.headers.token = token;
-            console.log("1", "토큰있네");
+            // console.log("1", "REQ - token");
             return config;
         }
         return config;
     },
     (error) => {
-        console.log(2);
+        // console.log("2", "REQ - error");
         // 요청 오류가 있는 작업 수행
         return Promise.reject(error);
     }
 );
 
-// 응답 인터셉터 추가하기
-instance.interceptors.response.use(
+// res 인터셉터 추가
+http.interceptors.response.use(
     (response) => {
         // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
         // 응답 데이터가 있는 작업 수행
-        console.log(3);
+        // console.log("3", "RES - data");
         return response;
     },
     (error) => {
@@ -38,8 +38,8 @@ instance.interceptors.response.use(
         if (statusCode === 401) {
             error.response.statusText = "Unauthorized";
             error.response.status = 401;
-            console.log(4);
-            console.log("href 로그인 이동");
+            // console.log("4", "RES - error");
+            location.href = "/login.html";
         }
         return Promise.reject(error);
     }
