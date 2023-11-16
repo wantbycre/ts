@@ -3,7 +3,7 @@ async function GET_NOTICE(page) {
     const res = await http({
         method: "GET",
         url: "notice",
-        data: {
+        params: {
             page,
         },
     });
@@ -20,7 +20,7 @@ async function GET_NOTICE(page) {
 			</tr>
 		`);
     } else {
-        result.forEach((el) => {
+        $.each(result, (i, el) => {
             $("#table-list tbody").append(`
 				<tr>
 					<td>${el.UID}</td>
