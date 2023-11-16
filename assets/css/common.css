@@ -1,6 +1,9 @@
 a {
     color: #000;
 }
+.form-none {
+    display: none;
+}
 .main-header {
     box-shadow: 1px 0 10px rgba(69, 65, 78, 0.15);
 }

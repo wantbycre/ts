@@ -1,31 +1,43 @@
-// 공지사항 등록
-function POST_NOTICE(title, content) {
-    http({
-        method: "POST",
-        url: "notice",
-        data: {
-            title,
-            content,
-        },
-    })
-        .then((res) => {
-            swal(res.data.message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((res) => {
-                location.href = "/notice.html";
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+// 파일 업로드
+function PUT_FILE(UID, file) {
+    const formData = new FormData();
+    formData.append("file_board", file.files[0]);
+    formData.append("UID", UID);
+
+    // 다중 파일
+    // file.files.forEach((file) => {
+    // 	formData.append("files", file);
+    //     formData.append("UID", UID);
+    // });
+
+    console.log(file.files);
+
+    // http({
+    //     headers: {
+    //         "Content-Type": "multipart/form-data",
+    //     },
+    //     method: "PUT",
+    //     url: "file_board/file",
+    //     data: formData,
+    // }).then((res) => {
+    //     console.log(res);
+    // });
 }
 
-// 공지사항 수정
+// 파일명 등록
+async function POST_FILE_BOARD(title) {
+    const res = await http({
+        method: "POST",
+        url: "file_board",
+        data: {
+            title,
+        },
+    });
+
+    return res.data;
+}
+
+// 파일 수정
 function PUT_NOTICE(UID, title, content) {
     http({
         method: "PUT",
@@ -53,7 +65,7 @@ function PUT_NOTICE(UID, title, content) {
         });
 }
 
-// 공지사항 삭제
+// 파일 삭제
 function DELETE_NOTICE(UID) {
     http({
         method: "DELETE",
@@ -76,7 +88,7 @@ function DELETE_NOTICE(UID) {
         });
 }
 
-// 공지사항 상세
+// 파일 상세
 async function GET_NOTICE_DETAIL(UID) {
     const res = await http({
         method: "GET",
@@ -115,15 +127,17 @@ $(function () {
     // 등록/수정
     $(".handleSubmit").click(function () {
         const title = $("#form-title").val();
-        const content = $("#form-content").val();
+        const file = $("#file")[0];
 
         if (!title) return alertError("제목을 입력하세요");
-        if (!content) return alertError("내용을 입력하세요");
+        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         if (PARAM_UID) {
             PUT_NOTICE(PARAM_UID, title, content);
         } else {
-            POST_NOTICE(title, content);
+            POST_FILE_BOARD(title).then((res) => {
+                PUT_FILE(res.data, file);
+            });
         }
     });
 

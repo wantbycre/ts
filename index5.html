@@ -1163,7 +1163,7 @@
 									<h3>1. 입고일정 변경 / 구간분할 입고</h3>
 									<div class="d-flex">
 										<div class="form-group form-group-default" style="width: 130px;">
-											<label for="companyName" class="placeholder">제작완료일</label>
+											<label for="companyName" class="placeholder">입고일</label>
 											<input id="datepicker" type="text" class="form-control">
 										</div>
 										<div class="mt-2 ml-2">
@@ -1173,7 +1173,7 @@
 											</button>
 										</div>
 									</div>
-									<div class="add-calendar d-flex flex-wrap">
+									<div class="add-calendar d-flex flex-wrap" style="margin-left: -0.5rem">
 									</div>
 								</div>
 								<div class="col-md-5">
@@ -1470,8 +1470,8 @@
 
 		$("#handleAddCalendar").click(function () {
 			$(".add-calendar").append(`
-				<div class="form-group form-group-default ml-2 position-relative" style="width: 130px;">
-					<label for="companyName" class="placeholder">구간분할 입고</label>
+				<div class="form-group form-group-default position-relative ml-2" style="width: 130px;">
+					<label for="companyName" class="placeholder">입고일</label>
 					<input type="text" class="form-control datepicker2">
 					<button type="button" class="delete-calendar">
 						<i class="fas fa-plus-circle"></i>

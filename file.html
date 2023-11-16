@@ -43,7 +43,7 @@
 								<a href="/file-form.html" class="btn btn-primary">파일 등록</a>
 							</div>
 
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="table-list">
 								<thead>
 									<tr>
 										<th scope="col">No</th>
@@ -134,23 +134,14 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
 	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
-
-	<script>
-		// 페이징처리
-		$("#pagination").twbsPagination({
-			totalPages: 100,
-			visiblePages: 10,
-			onPageClick: function (event, page) {
-				window.scrollTo(0, 0);
-			},
-		});
-	</script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<!-- <script src="./assets/js/file.js"></script> -->
 </body>
 
 </html>

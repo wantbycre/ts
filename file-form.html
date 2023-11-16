@@ -44,18 +44,19 @@
 									<tr>
 										<th>파일명</th>
 										<td>
-											<input type="text" class="form-control" placeholder="파일명을 입력하세요.">
+											<input type="text" class="form-control" id="form-title"
+												placeholder="파일명을 입력하세요.">
 										</td>
 									</tr>
 									<tr>
 										<th>업로드</th>
-										<td><input type="file" class="form-control" /></td>
+										<td><input type="file" class="form-control" id="file" /></td>
 									</tr>
 								</tbody>
 							</table>
 
 							<div class="text-center mb-4 mt-4">
-								<a href="#" class="btn btn-primary" style="width: 130px;">등록</a>
+								<a href="#" class="btn btn-primary handleSubmit" style="width: 130px;">등록</a>
 							</div>
 						</div>
 					</div>
@@ -75,12 +76,15 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
 	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/file-form.js"></script>
 </body>
 
 </html>

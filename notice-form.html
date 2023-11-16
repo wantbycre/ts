@@ -58,12 +58,17 @@
 
 							<div class="d-flex justify-content-between mb-4 mt-4">
 								<div>
-									<a href="#" class="btn btn-primary" style="width: 130px;">취소</a>
+									<a href="javascript: history.back();" class="btn btn-default btn-border"
+										style="width: 130px;">뒤로</a>
 								</div>
 								<div>
-									<a href="#" class="btn btn-warning" style="width: 130px;">수정</a>
-									<a href="#" class="btn btn-danger" style="width: 130px;">삭제</a>
-									<a href="#" class="btn btn-primary" style="width: 130px;" id="handleSubmit">등록</a>
+									<div class="form-none">
+										<a href="#" class="btn btn-warning handleSubmit" style="width: 150px;">수정</a>
+										<a href="#" class="btn btn-danger ml-2 handleDelete"
+											style="width: 150px;">삭제</a>
+									</div>
+									<a href="#" class="btn btn-primary form-block handleSubmit"
+										style="width: 150px;">등록</a>
 								</div>
 							</div>
 						</div>
@@ -84,10 +89,9 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
 	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>

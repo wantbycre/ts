@@ -1,8 +1,8 @@
-// 공지사항 리스트
-async function GET_NOTICE(page) {
+// 파일 리스트
+async function GET_FILE(page) {
     const res = await http({
         method: "GET",
-        url: "notice",
+        url: "file_board",
         params: {
             page,
         },
@@ -11,7 +11,7 @@ async function GET_NOTICE(page) {
     const { paging, result, totalCount } = res.data.data;
     const listCount = Math.abs((page || 1 - 1) * 10 - totalCount);
 
-    // console.log(res.data);
+    console.log(res.data);
 
     $("#table-list tbody").empty();
 
@@ -41,12 +41,12 @@ async function GET_NOTICE(page) {
             initiateStartPageClick: false,
             onPageClick: function (event, page) {
                 window.scrollTo(0, 0);
-                GET_NOTICE(page);
+                GET_FILE(page);
             },
         });
     }
 }
 
 $(function () {
-    GET_NOTICE();
+    GET_FILE();
 });
