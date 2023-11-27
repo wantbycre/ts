@@ -1,6 +1,6 @@
 const http = axios.create({
     baseURL: domain + "/api/",
-    timeout: 1000,
+    // timeout: 1000,
     headers: { "X-Custom-Header": "foobar" },
 });
 
@@ -10,6 +10,17 @@ http.interceptors.request.use(
     (config) => {
         const token = sessionStorage.getItem("token");
         if (token) {
+            if (config.url.includes("pay/file")) {
+                $("body").append(`
+                	<div id="common-loading">
+						<div>
+							<img src="/assets/img/loading.gif" alt="">
+							<p>업로드 중입니다</p>
+						</div>
+					</div>
+                `);
+            }
+
             config.headers.token = token;
             // console.log("1", "REQ - token");
             return config;
@@ -19,6 +30,7 @@ http.interceptors.request.use(
     (error) => {
         // console.log("2", "REQ - error");
         // 요청 오류가 있는 작업 수행
+        $("#common-loading").remove();
         return Promise.reject(error);
     }
 );
@@ -29,11 +41,14 @@ http.interceptors.response.use(
         // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
         // 응답 데이터가 있는 작업 수행
         // console.log("3", "RES - data");
+        // $("#common-loading").remove();
         return response;
     },
     (error) => {
         // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
         // 응답 오류가 있는 작업 수행
+        // $("#common-loading").remove();
+
         const statusCode = error.response?.status;
         if (statusCode === 401) {
             error.response.statusText = "Unauthorized";

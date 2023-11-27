@@ -64,13 +64,13 @@
 								<div style="flex-shrink: 0;">
 									<table class="table v2 left-table">
 										<colgroup>
+											<col style="width: 60px">
+											<col style="width: 60px">
+											<col style="width: 90px">
 											<col style="width: 80px">
-											<col style="width: 80px">
-											<col style="width: 100px">
-											<col style="width: 100px">
-											<col style="width: 80px">
-											<col style="width: 60px" />
-											<col style="width: 60px" />
+											<col style="width: 60px">
+											<col style="width: 50px">
+											<col style="width: 50px">
 										</colgroup>
 										<thead>
 											<tr>
@@ -364,8 +364,7 @@
 	</div>
 
 	<!-- Modal : 조닝도 -->
-	<div class="modal modal-joning" tabindex="-1" role="dialog" aria-labelledby="" data-keyboard="false"
-		data-backdrop="static">
+	<div class="modal modal-joning" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -435,8 +434,7 @@
 	</div>
 
 	<!-- Modal : 공장 - 판재공장 -->
-	<div class="modal modal-sulchi" tabindex="-1" role="dialog" aria-labelledby="" data-keyboard="false"
-		data-backdrop="static">
+	<div class="modal modal-sulchi" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -542,8 +540,7 @@
 	</div>
 
 	<!-- Modal : 노무비 -->
-	<div class="modal modal-nomu" tabindex="-1" role="dialog" aria-labelledby="" data-keyboard="false"
-		data-backdrop="static">
+	<div class="modal modal-nomu" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -553,21 +550,54 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<h3>고향향동</h3>
-					<div class="form-group">
-						<input type="email" class="form-control" id="email2" value="공장-판재공장" readonly>
+					<div class="d-flex">
+						<div class="form-group form-group-default mb-0">
+							<label>노무비 파일 업로드</label>
+							<input id="Name" type="file" class="form-control" multiple>
+						</div>
+						<button type="button" class="btn btn-primary px-4 ml-2">업로드</button>
 					</div>
-					<div class="form-group">
-						<label for="email2">물량</label>
-						<input type="email" class="form-control" id="email2" placeholder="물량을 입력하세요.">
-					</div>
-					<div class="form-group">
-						<label for="email2">외주단가</label>
-						<input type="email" class="form-control" id="email2" placeholder="외주단가를 입력하세요.">
-					</div>
-					<div class="form-group">
-						<label for="email2">총 금액</label>
-						<input type="email" class="form-control" id="email2" placeholder="" readonly>
+
+					<div class="file-box mt-4">
+						<div class="file-title">노무비 집계 자료</div>
+						<div class="file-content">
+							<div class="d-flex justify-content-between">
+								<a href="#" class="file-list">
+									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+									2023-01 노무비 자료 1.pdf
+								</a>
+								<a href="#" type="button" class="btn-delete">
+									<i class="fas fa-plus text-danger ml-1"></i>
+								</a>
+							</div>
+							<div class="d-flex justify-content-between">
+								<a href="#" class="file-list">
+									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+									2023-01 노무비 자료 2.pdf
+								</a>
+								<a href="#" type="button" class="btn-delete">
+									<i class="fas fa-plus text-danger ml-1"></i>
+								</a>
+							</div>
+							<div class="d-flex justify-content-between">
+								<a href="#" class="file-list">
+									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+									2023-01 노무비 자료 3.pdf
+								</a>
+								<a href="#" type="button" class="btn-delete">
+									<i class="fas fa-plus text-danger ml-1"></i>
+								</a>
+							</div>
+							<div class="d-flex justify-content-between">
+								<a href="#" class="file-list">
+									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+									2023-01 노무비 자료 4.pdf
+								</a>
+								<a href="#" type="button" class="btn-delete">
+									<i class="fas fa-plus text-danger ml-1"></i>
+								</a>
+							</div>
+						</div>
 					</div>
 
 				</div>

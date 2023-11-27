@@ -53,29 +53,6 @@ function PUT_NOTICE(UID, title, content) {
         });
 }
 
-// 공지사항 삭제
-function DELETE_NOTICE(UID) {
-    http({
-        method: "DELETE",
-        url: "notice/" + UID,
-    })
-        .then((res) => {
-            swal(res.data.message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((res) => {
-                location.href = "/notice.html";
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 // 공지사항 상세
 async function GET_NOTICE_DETAIL(UID) {
     const res = await http({
@@ -125,25 +102,5 @@ $(function () {
         } else {
             POST_NOTICE(title, content);
         }
-    });
-
-    // 삭제
-    $(".handleDelete").click(function () {
-        swal("삭제하시겠습니까?", {
-            icon: "error",
-            buttons: {
-                confirm: {
-                    text: "네, 삭제하겠습니다.",
-                    className: "btn btn-danger",
-                },
-                cancel: {
-                    text: "아니요",
-                    visible: true,
-                    className: "btn btn-default btn-border",
-                },
-            },
-        }).then((res) => {
-            DELETE_NOTICE(PARAM_UID);
-        });
     });
 });

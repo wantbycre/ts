@@ -34,33 +34,23 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title"></h4>
+						<h4 class="page-title">폴더 관리</h4>
 					</div>
 
-					<div class="card" style="max-width: 900px;">
+					<div class="card">
 						<div class="card-body">
-							<div class="text-right mb-4 mt-4">
-								<a href="#" class="btn btn-primary page-new"></a>
+							<ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">
+							</ul>
+
+							<div class="tab-content mt-4 mb-3">
+								<div class="d-flex flex-wrap folder-section" id="folder">
+								</div>
+
+
+								<div class="mt-4 mr-4 text-right">
+									<a href="/folder-form.html" class="btn btn-primary">폴더 등록</a>
+								</div>
 							</div>
-
-							<table class="table table-hover text-center" id="table-list">
-								<thead>
-									<tr>
-										<th scope="col">No</th>
-										<th scope="col">제목</th>
-										<th scope="col">등록일</th>
-										<th scope="col">다운로드</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
-
-							<div class="d-flex justify-content-center pt-3">
-								<ul id="pagination" class="pagination-sm pagination">
-								</ul>
-							</div>
-
-
 						</div>
 					</div>
 				</div>
@@ -79,7 +69,6 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
 	<script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
@@ -87,7 +76,8 @@
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
 	<script src="./assets/js/axios-interceptor.js"></script>
-	<script src="./assets/js/file.js"></script>
+	<script src="./assets/js/folder.js"></script>
+
 </body>
 
 </html>

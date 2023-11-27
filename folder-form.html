@@ -34,33 +34,31 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title"></h4>
+						<h4 class="page-title">폴더 등록</h4>
 					</div>
 
-					<div class="card" style="max-width: 900px;">
+					<div class="card" style="max-width: 700px;">
 						<div class="card-body">
-							<div class="text-right mb-4 mt-4">
-								<a href="#" class="btn btn-primary page-new"></a>
-							</div>
-
-							<table class="table table-hover text-center" id="table-list">
-								<thead>
+							<table class="table text-center">
+								<tbody>
 									<tr>
-										<th scope="col">No</th>
-										<th scope="col">제목</th>
-										<th scope="col">등록일</th>
-										<th scope="col">다운로드</th>
+										<th>분류</th>
+										<td>
+											<select class="form-control" id="fbUID" style="width: 100%;">
+												<option value="default">분류 선택</option>
+											</select>
+										</td>
 									</tr>
-								</thead>
-								<tbody></tbody>
+									<tr>
+										<th>폴더 이름</th>
+										<td><input type="text" class="form-control" id="folderName" /></td>
+									</tr>
+								</tbody>
 							</table>
 
-							<div class="d-flex justify-content-center pt-3">
-								<ul id="pagination" class="pagination-sm pagination">
-								</ul>
+							<div class="text-center mb-4 mt-4">
+								<a href="#" class="btn btn-primary handleSubmit" style="width: 130px;">등록</a>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
@@ -87,7 +85,7 @@
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
 	<script src="./assets/js/axios-interceptor.js"></script>
-	<script src="./assets/js/file.js"></script>
+	<script src="./assets/js/folder-form.js"></script>
 </body>
 
 </html>

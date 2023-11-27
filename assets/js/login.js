@@ -23,4 +23,10 @@ $(function () {
             sessionStorage.setItem("level", data.level);
         });
     });
+
+    $("#id, #password").on("keypress", function (e) {
+        if (e.keyCode == "13") {
+            $("#handleSubmit").click();
+        }
+    });
 });

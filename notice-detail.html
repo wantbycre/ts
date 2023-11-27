@@ -34,33 +34,39 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title"></h4>
+						<h4 class="page-title">공지사항</h4>
 					</div>
 
 					<div class="card" style="max-width: 900px;">
 						<div class="card-body">
-							<div class="text-right mb-4 mt-4">
-								<a href="#" class="btn btn-primary page-new"></a>
-							</div>
-
-							<table class="table table-hover text-center" id="table-list">
-								<thead>
+							<table class="table text-center">
+								<colgroup>
+									<col style="width: 150px;">
+								</colgroup>
+								<tbody>
 									<tr>
-										<th scope="col">No</th>
-										<th scope="col">제목</th>
-										<th scope="col">등록일</th>
-										<th scope="col">다운로드</th>
+										<th>제목</th>
+										<td id="form-title" class="text-left"></td>
 									</tr>
-								</thead>
-								<tbody></tbody>
+									<tr>
+										<th>내용</th>
+										<td>
+											<div id="form-content" class="text-left" style="min-height: 200px;"></div>
+										</td>
+									</tr>
+								</tbody>
 							</table>
 
-							<div class="d-flex justify-content-center pt-3">
-								<ul id="pagination" class="pagination-sm pagination">
-								</ul>
+							<div class="d-flex justify-content-between mb-4 mt-4">
+								<div>
+									<a href="javascript: history.back();" class="btn btn-default btn-border"
+										style="width: 130px;">뒤로</a>
+								</div>
+								<div>
+									<a href="#" class="btn btn-warning handleSubmit" style="width: 150px;">수정</a>
+									<a href="#" class="btn btn-danger handleDelete ml-2" style="width: 150px;">삭제</a>
+								</div>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
@@ -87,7 +93,7 @@
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
 	<script src="./assets/js/axios-interceptor.js"></script>
-	<script src="./assets/js/file.js"></script>
+	<script src="./assets/js/notice-detail.js"></script>
 </body>
 
 </html>

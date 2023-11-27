@@ -121,27 +121,27 @@ table.table.v2 thead tr th,
 table.table.v2 tbody tr td {
     text-align: center;
     padding: 1px 0 !important;
-    line-height: 16px;
+    line-height: 13px;
     border-color: #afafaf !important;
     padding: 0 !important;
 }
 
 table.table.v2 thead tr th {
-    height: 38px;
+    height: 23px;
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
     /* background: #e1e6ee; */
     background-color: #484848;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 table.table.v2 tbody tr td {
-    height: 69px;
+    height: 47px;
     border-left: 1px solid #dddddd !important;
     border-bottom: 1px solid #dddddd !important;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 table.table.v2 tbody tr td:first-child {
@@ -165,7 +165,7 @@ table.table .table-sm {
 }
 
 table.table.v2.left-table thead th {
-    height: 76px;
+    height: 46px;
 }
 
 table.table .complate-tr th,
@@ -209,7 +209,7 @@ table.table .complate-tr td button {
 
 .aps-button {
     display: block;
-    width: 100px;
+    width: 60px;
     height: 100%;
     padding: 0;
     border: 0;
@@ -253,7 +253,8 @@ table.table .complate-tr td button {
 }
 
 .aps-top {
-    line-height: 24px;
+    font-size: 11px;
+    line-height: 14px;
     border-bottom: 1px solid #000;
     background-color: #ecff9e;
 }
@@ -263,9 +264,10 @@ table.table .complate-tr td button {
 }
 
 .aps-middle > div {
+    font-size: 11px;
     flex-grow: 1;
     width: 50%;
-    line-height: 20px;
+    line-height: 14px;
     background-color: #ffcc00;
 }
 
@@ -276,7 +278,8 @@ table.table .complate-tr td button {
 .aps-bottom > div {
     flex-grow: 1;
     width: 50%;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 14px;
     background-color: #ffcc00;
 }
 
@@ -285,17 +288,32 @@ table.table .complate-tr td button {
 }
 
 .aps-button.v2 {
-    width: 140px;
+    width: 100px;
+}
+
+.aps-button.v3 {
+    width: 120px;
 }
 
 .aps-button.v2 .aps-content {
     width: 100px;
 }
 
-.aps-side {
+.aps-button.v3 .aps-content {
+    width: 120px;
+}
+
+.aps-button.v2 .aps-side {
     width: 40px;
+}
+
+.aps-button.v3 .aps-side {
+    width: 90px;
+}
+
+.aps-side {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .aps-side div {
@@ -315,14 +333,33 @@ table.table .complate-tr td button {
     height: 100%;
 }
 
-.aps-side div:first-child span {
+.aps-side div span {
+    background-color: #0b8b28;
+    color: #fff;
+}
+
+.aps-side div.aps-memo span {
     background-color: #f00;
     color: #fff;
 }
 
-.aps-side div:last-child span {
-    background-color: #0b8b28;
-    color: #fff;
+.aps-plus {
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.aps-plus span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 100%;
+    border: 1px solid #000;
+    background-color: #eee;
+    color: #000;
+    border-left: 0;
 }
 
 .file-box {
@@ -400,6 +437,88 @@ table.table .complate-tr td button {
 
 .delete-calendar i {
     font-size: 16px;
+}
+
+#common-loading {
+    /* display: none; */
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20000;
+    right: 0;
+    bottom: 0;
+}
+
+#common-loading::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.4;
+}
+
+#common-loading div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20001;
+    border-radius: 40px;
+}
+
+#common-loading img {
+    border-radius: 40px;
+    width: 300px;
+}
+#common-loading p {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.folder-section > div {
+    width: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+}
+
+.folder-section a {
+    display: block;
+    width: 150px;
+    text-align: center;
+}
+
+.folder-section a:hover {
+    text-decoration: none;
+}
+
+.folder-section a div {
+    margin: -20px 0 10px;
+}
+
+.folder-section i {
+    font-size: 80px;
+}
+
+.folder-section button {
+    border: 0;
+    background: transparent;
+    position: absolute;
+    right: -10px;
+    top: -7px;
+    cursor: pointer;
+}
+
+.folder-section button i {
+    font-size: 20px;
 }
 
 @media (max-width: 780px) {
