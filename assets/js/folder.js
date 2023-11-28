@@ -7,10 +7,8 @@ async function GET_FILE_FOLDER(PARAM_UID) {
         url: "file_folder/" + PARAM_UID,
     });
 
-    console.log(res.data.data);
-
+    // console.log(res.data.data);
     const { data } = res.data;
-    let listCount = data.length;
 
     $("#folder").empty();
 
@@ -61,15 +59,14 @@ async function GET_FILE_BOARD(PARAM_UID) {
     });
 }
 
-// FIXME: 삭제가 안되는듯
+// 삭제
 function DELETE_FOLDER(UID) {
     http({
         method: "DELETE",
         url: "file_folder/" + UID,
     })
         .then((res) => {
-            console.log(res);
-            // location.reload();
+            location.reload();
         })
         .catch(function (error) {
             console.log(error);
@@ -95,7 +92,7 @@ $(function () {
             method: "GET",
             url: "FOLDER_FILE/" + UID,
         }).then((res) => {
-            if (res.data.data.length === 0) {
+            if (res.data.data.result.length === 0) {
                 swal("삭제하시겠습니까?", {
                     icon: "error",
                     buttons: {

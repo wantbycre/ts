@@ -9,9 +9,9 @@ async function GET_NOTICE(page) {
     });
 
     const { paging, result, totalCount } = res.data.data;
-    const listCount = Math.abs((page || 1 - 1) * 10 - totalCount);
+    const listCount = Math.abs((page - 1) * 10 - totalCount);
 
-    // console.log(res.data);
+    // console.log(paging, result, totalCount);
 
     $("#table-list tbody").empty();
 
@@ -48,5 +48,5 @@ async function GET_NOTICE(page) {
 }
 
 $(function () {
-    GET_NOTICE();
+    GET_NOTICE(1);
 });

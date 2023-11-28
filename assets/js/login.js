@@ -19,6 +19,7 @@ $(function () {
         POST_LOGIN(userId, password).then((res) => {
             const { data } = res;
             console.log(res);
+            // FIXME: 레벨을 주면 레벨에 따라 index를 다르게
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("level", data.level);
         });

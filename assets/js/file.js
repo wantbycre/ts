@@ -1,29 +1,35 @@
+const PARAM_TAB = new URL(window.location.href).searchParams.get("tab");
+const PARAM_UID = new URL(window.location.href).searchParams.get("uid");
+const PARAM_NAME = new URL(window.location.href).searchParams.get("name");
+
 // 파일 리스트
-async function GET_FILE(ffUID) {
+async function GET_FILE(page) {
     const res = await http({
         method: "GET",
-        url: "FOLDER_FILE/" + ffUID,
+        url: "FOLDER_FILE/" + PARAM_UID,
+        params: {
+            page,
+        },
     });
 
-    const { data } = res.data;
-    // const { paging, result, totalCount } = res.data.data;
-    // const listCount = Math.abs((page || 1 - 1) * 10 - totalCount);
+    const { paging, result, totalCount } = res.data.data;
+    const listCount = Math.abs((page - 1) * 10 - totalCount);
 
-    console.log(data);
+    // console.log(listCount, totalCount);
 
     $("#table-list tbody").empty();
 
-    if (data.length === 0) {
+    if (result.length === 0) {
         $("#table-list tbody").append(`
 			<tr>
 				<td colspan="4">조회된 파일이 없습니다.</td>
 			</tr>
 		`);
     } else {
-        data.forEach((el, i) => {
+        result.forEach((el, i) => {
             $("#table-list tbody").append(`
 				<tr>
-					<td>${data.length - i}</td>
+					<td>${listCount - i}</td>
 					<td class="text-left">${el.fileName}</td>
 					<td>${el.regDate}</td>
 					<td>
@@ -47,15 +53,15 @@ async function GET_FILE(ffUID) {
         });
 
         // 페이징처리
-        // $("#pagination").twbsPagination({
-        //     totalPages: paging.totalPage,
-        //     visiblePages: 10,
-        //     initiateStartPageClick: false,
-        //     onPageClick: function (event, page) {
-        //         window.scrollTo(0, 0);
-        //         GET_FILE(page);
-        //     },
-        // });
+        $("#pagination").twbsPagination({
+            totalPages: paging.totalPage,
+            visiblePages: 10,
+            initiateStartPageClick: false,
+            onPageClick: function (event, page) {
+                window.scrollTo(0, 0);
+                GET_FILE(page);
+            },
+        });
     }
 }
 
@@ -73,14 +79,10 @@ function DELETE_FILE(UID) {
 }
 
 $(function () {
-    const PARAM_TAB = new URL(window.location.href).searchParams.get("tab");
-    const PARAM_UID = new URL(window.location.href).searchParams.get("uid");
-    const PARAM_NAME = new URL(window.location.href).searchParams.get("name");
-
     $(".page-title").text(`${PARAM_NAME} 파일 관리`);
     $(".page-new").text(`${PARAM_NAME} 파일 등록`);
 
-    GET_FILE(PARAM_UID);
+    GET_FILE(1);
 
     // 파일 신규등록
     $(".page-new").click(function () {

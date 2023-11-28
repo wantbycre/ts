@@ -6,16 +6,12 @@ const PARAM_NAME = new URL(window.location.href).searchParams.get("name");
 function POST_FILE(files) {
     const formData = new FormData();
 
-    console.log(files.length);
-
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
-        console.log(files[i]);
-        formData.append("ffUID", PARAM_UID);
-        formData.append("file_board/" + PARAM_TAB, files[i]);
+        formData.append(`file_board/${PARAM_TAB}/${PARAM_NAME}`, files[i]);
     }
 
-    // FIXME: 올리는건 다중으로 올리는데 리스트는 한개만 나옴.
+    formData.append("ffUID", PARAM_UID);
 
     http({
         headers: {

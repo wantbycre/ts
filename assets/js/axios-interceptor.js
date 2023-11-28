@@ -10,7 +10,8 @@ http.interceptors.request.use(
     (config) => {
         const token = sessionStorage.getItem("token");
         if (token) {
-            if (config.url.includes("pay/file")) {
+            // if (config.url.includes("pay/file")) {
+            if (config.url.slice(-4) === "file") {
                 $("body").append(`
                 	<div id="common-loading">
 						<div>
@@ -41,13 +42,13 @@ http.interceptors.response.use(
         // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
         // 응답 데이터가 있는 작업 수행
         // console.log("3", "RES - data");
-        // $("#common-loading").remove();
+        $("#common-loading").remove();
         return response;
     },
     (error) => {
         // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
         // 응답 오류가 있는 작업 수행
-        // $("#common-loading").remove();
+        $("#common-loading").remove();
 
         const statusCode = error.response?.status;
         if (statusCode === 401) {
