@@ -47,6 +47,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     			</button>
     		`);
 
+        // GITTEST
         // TODO: 코너철판은 cnStts 번호보고 갈색 및 데이터 넣어주기
     });
 
