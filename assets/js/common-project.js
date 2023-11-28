@@ -55,6 +55,7 @@ function setChart(DATAS) {
             _THIS_YEAR = thisYear;
             _THIS_MONTH = thisMonth;
 
+            // console.log("1");
             setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth);
         } else {
             // 다른 월 일경우
@@ -93,6 +94,7 @@ function setChart(DATAS) {
                 _THIS_YEAR = thisYear;
                 _THIS_MONTH = thisMonth;
 
+                // console.log("2");
                 setChartTable(
                     DATAS,
                     calendar,
@@ -231,6 +233,7 @@ function setChart(DATAS) {
             _THIS_YEAR = String(thisYear);
             _THIS_MONTH = thisMonth;
 
+            // console.log("3");
             setChartTable(
                 DATAS,
                 calendarData,
@@ -344,7 +347,7 @@ function setUniqueObj(DATAS) {
         ...new Map(DATAS.map((obj) => [obj.UID, obj])).values(),
     ];
 
-    console.log(uniqueObjArr);
+    // console.log(uniqueObjArr);
 
     // TODO: 공무/설계에 따라 링크 제거 및 추가
 
@@ -364,12 +367,28 @@ function setUniqueObj(DATAS) {
 						${el.projectCode}
 					</a>
 				</td>
-				<td>원영<br />현앤</td>
-				<td>음성<br />원하이텍<br />이지디테일</td>
-				<td>삼호<br />마하나임</td>
-				<td>삼호정공</td>
 				<td>
-					<a href="#" data-toggle="modal" data-target=".modal-joning">
+					${el.jhName}<br/>
+					${el.jmName}<br/>
+				</td>
+				<td>
+					${el.pjName}<br/>
+					${el.jrName}<br/>
+					${el.sgName}
+				</td>
+				<td>
+					${el.cornerName}<br/>
+					${el.sgName}<br/>
+				</td>
+				<td>${el.scName}</td>
+				<td>
+					<a 
+						href="#"
+						data-toggle="modal"
+						data-target=".modal-joning"
+						data-uid="${el.UID}" 
+						class="handleProjectJoningPop"
+					>
 						<i class="fas fa-file-alt" style="font-size: 18px;"></i>
 					</a>
 				</td>
@@ -394,19 +413,19 @@ function setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth) {
     let th = [];
     let td = [];
 
-    // console.log("DATAS", DATAS);
+    console.log("DATAS", calendar);
 
     // 우측 켈린더 Day 세팅
     calendar.forEach((el) => {
-        el.forEach((day) => {
+        el.forEach((day, i) => {
             if (day) {
                 th.push(`<th>${day}</th>`);
-                td.push(`
-					<td data-date="${thisYear}-${thisMonth}-${
+                td.push(`<td data-date="${thisYear}-${thisMonth}-${
                     String(day).length === 1
                         ? String(day).padStart(2, "0")
                         : String(day)
-                }">
+                }" class="${i === 0 || i === 6 ? "bg-gray" : ""}"
+				>
 						<button type="button" class="aps-button">&nbsp;</button>
 					</td>`);
             }
@@ -437,7 +456,7 @@ function setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth) {
                 (thisYear + thisMonth) +
                 "] tbody"
         ).append(`
-			<tr data-uid="${el.UID}">${td}</tr>
+			<tr data-uid="${el.UID}" data-code="${el.projectCode}">${td}</tr>
 		`);
     });
 

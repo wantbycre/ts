@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>태성건업</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -34,27 +35,13 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">공사현황 (공무 : 프로젝트 등록/공통자료등록/조닝도등록/현재프로젝트 확인만 가능) - 추후 제거요망</h4>
-						<!-- <div class="btn-group btn-group-page-header ml-auto">
-							<button type="button"
-								class="btn btn-light btn-round btn-page-header-dropdown dropdown-toggle"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fa fa-ellipsis-h"></i>
-							</button>
-							<div class="dropdown-menu">
-								<div class="arrow"></div>
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another action</a>
-								<a class="dropdown-item" href="#">Something else here</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Separated link</a>
-							</div>
-						</div> -->
+						<h4 class="page-title">공사현황 (설계-데크보 : 설계일자,구간정보,일정정보,파일) - 추후 제거요망</h4>
 					</div>
 
-					<div class="card set-project">
+					<div class="card">
 						<div class="card-header d-flex align-items-end justify-content-between">
-							<div class="d-flex align-items-center m-flex-none"></div>
+							<div class="d-flex align-items-center m-flex-none">
+							</div>
 							<div class="mb-2">
 								<div class="mb-2">
 									<!-- 노랑 -->
@@ -103,18 +90,8 @@
 									</table>
 								</div>
 
-								<div class="table-scroll-section" style="flex-grow: 1;" id="chart-content"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="card not-project" style="display: none;">
-						<div class="card-body">
-							<div class="d-flex align-items-center justify-content-center flex-column"
-								style="min-height: 400px;">
-								<div class="mb-3">생성된 프로젝트가 없습니다.</div>
-								<button type="button" class="btn btn-primary" style="width: 200px;" data-toggle="modal"
-									data-target="#modal-new">프로젝트 생성</button>
+								<div class="table-scroll-section" style="flex-grow: 1; " id="chart-content">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -365,6 +342,242 @@
 		</div>
 	</div>
 
+	<!-- Modal : 설계 - 데크보 -->
+	<div class="modal modal-seol" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="exampleModalLongTitle">설계 - 데크보 설계정보 입력</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body v2">
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-3">
+									<h3>1. 설계일자 입력</h3>
+									<div id="dkbDesignDate"></div>
+								</div>
+								<div class="col-md-4 ml-5">
+									<h3>2. 구간정보 입력</h3>
+
+									<div class="d-flex">
+										<div>
+											<label>층</label>
+											<div class="input-group" style="width: 100px;">
+												<input type="text" id="floor" class="form-control" style="width: 60px;">
+												<div class="input-group-append">
+													<span class="input-group-text">F</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="ml-2">
+											<label>구간</label>
+											<div class="input-group" style="width: 120px;">
+												<input type="text" id="section" class="form-control"
+													style="width: 60px;">
+												<div class="input-group-append">
+													<span class="input-group-text">구간</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<h3 class="mt-5">3. 수량정보 입력</h3>
+
+									<div class="d-flex">
+										<div>
+											<label>면적</label>
+											<div class="input-group" style="width: 110px;">
+												<input type="text" id="area" class="form-control" style="width: 60px;">
+												<div class="input-group-append">
+													<span class="input-group-text">m2</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="ml-2">
+											<label>스트럽</label>
+											<div class="input-group" style="width: 120px;">
+												<input type="text" id="strup" class="form-control" style="width: 60px;">
+												<div class="input-group-append">
+													<span class="input-group-text">ton</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="ml-2">
+											<label>부재수</label>
+											<div class="input-group" style="width: 120px;">
+												<input type="text" id="dkbCnt" class="form-control"
+													style="width: 60px;">
+												<div class="input-group-append">
+													<span class="input-group-text">부재</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-4 ml-4">
+									<h3>4. 일정정보입력 [데크보]</h3>
+
+									<div class="d-flex">
+										<div>
+											<div class="form-group form-group-default" style="width: 130px;">
+												<label>판재공장입고 예정일</label>
+												<select class="form-control" id="pjInputDate">
+													<option value="10">10일 소요</option>
+													<option value="14">14일 소요</option>
+													<option value="21">21일 소요</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="ml-2">
+											<div class="form-group form-group-default" style="width: 130px;">
+												<label>현장납품 예정일</label>
+												<select class="form-control" id="inputDate">
+													<option value="5">+5일 [일반보]</option>
+													<option value="10">+10일 [TG보]</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer d-flex justify-content-between">
+							<div>
+								<button type="button" class="btn btn-default btn-border" style="width: 100px;">카톡방
+									공지</button>
+								<button type="button" class="btn btn-default btn-border ml-3" id="share-email"
+									style="width: 100px;" data-toggle="modal" data-target=".modal-email">
+									이메일 공유
+								</button>
+							</div>
+
+							<!-- data-dismiss="modal" -->
+							<button type="button" class="btn btn-warning fw-bold" style="width: 200px;"
+								id="handleSgdSubmit">등록/저장</button>
+						</div>
+					</div>
+
+					<!-- 파일 업로드 섹션 -->
+					<div class="card">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-4">
+									<h2>5. 파일업로드</h2>
+									<div class="d-flex">
+										<div class="form-group form-group-default mb-0">
+											<label for="file-sgd-seung">승인도면 [BOM/CP/스트럽] 업로드</label>
+											<input id="file-sgd-seung" type="file" class="form-control" multiple>
+										</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileSgdSeung">업로드</button>
+									</div>
+
+									<div class="file-box mt-4">
+										<div class="file-title">승인도면 [BOM/CP/스트럽] 자료</div>
+										<div class="file-content" id="content-sgd-seung"></div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<h2>&nbsp;</h2>
+									<div class="d-flex">
+										<div class="form-group form-group-default mb-0">
+											<label for="file-sgd-byon">변경승인도면 [BOM/CP/스트럽] 업로드</label>
+											<input id="file-sgd-byon" type="file" class="form-control" multiple>
+										</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileSgdByon">업로드</button>
+									</div>
+
+									<div class="file-box mt-4">
+										<div class="file-title">변경승인도면 [BOM/CP/스트럽] 자료</div>
+										<div class="file-content" id="content-sgd-byon"></div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<h2>&nbsp;</h2>
+									<div class="d-flex">
+										<div class="form-group form-group-default mb-0">
+											<label for="file-sgd-yo">승인요청서 업로드</label>
+											<input id="file-sgd-yo" type="file" class="form-control" multiple>
+										</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileSgdYo">업로드</button>
+									</div>
+
+									<div class="file-box mt-4">
+										<div class="file-title">승인요청서 자료</div>
+										<div class="file-content" id="content-sgd-yo"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 200px;">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal : 이메일공유 -->
+	<div class="modal modal-email" tabindex="-1" role="dialog" style="z-index: 2000;">
+		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title" id="exampleModalLongTitle">이메일 공유</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="comment">보내는사람</label>
+						<select name="" id="" class="form-control">
+							<option value="">abc@gmail.com</option>
+							<option value="">abc2@gmail.com</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="comment">받는사람</label>
+						<textarea class="form-control" id="comment" rows="3"
+							placeholder="콤마(,)를 구분으로 입력하세요."></textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="comment">내용</label>
+						<textarea class="form-control" id="comment" rows="3">"설계 - 데크보 설계정보가 입력되었습니다."</textarea>
+					</div>
+
+					<div class="form-group" style="width: 100%;">
+						<label for="comment">파일첨부</label>
+						<input id="file" type="file" class="form-control" multiple>
+					</div>
+
+
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100px;">이메일
+						보내기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!--   Core JS Files   -->
 	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="./assets/js/core/popper.min.js"></script>
@@ -372,29 +585,31 @@
 
 	<!-- jQuery UI -->
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/i18n.js"></script>
 	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
-	<script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+	<!-- <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script> -->
 
 	<!-- moment -->
 	<script src="./assets/js/plugin/moment/moment.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
 	<script src="./assets/js/axios-interceptor.js"></script>
 	<script src="./assets/js/common-project.js"></script>
-	<script src="./assets/js/index.js"></script>
 	<script src="./assets/js/common-project-file.js"></script>
 	<script src="./assets/js/common-project-joningdo.js"></script>
+	<script src="./assets/js/index-sgd.js"></script>
 
 </body>
-<script>
-
-</script>
 
 </html>

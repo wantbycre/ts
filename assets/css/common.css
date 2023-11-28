@@ -177,6 +177,7 @@ table.table .complate-tr td button {
 
 .badge {
     border-radius: 5px;
+    width: 83px;
 }
 
 .badge.step1 {
@@ -203,6 +204,34 @@ table.table .complate-tr td button {
 .badge.step4 {
     background: #d18a2d;
     border: 1px solid #d18a2d;
+    color: #fff;
+    font-weight: bold;
+}
+
+.badge.step5 {
+    background: #b3b3b3;
+    border: 1px solid #b3b3b3;
+    color: #fff;
+    font-weight: bold;
+}
+
+.badge.step6 {
+    background: #dfa65c;
+    border: 1px solid #dfa65c;
+    color: #fff;
+    font-weight: bold;
+}
+
+.badge.step7 {
+    background: #9a6725;
+    border: 1px solid #9a6725;
+    color: #fff;
+    font-weight: bold;
+}
+
+.badge.step8 {
+    background: #f8c7dd;
+    border: 1px solid #f8c7dd;
     color: #fff;
     font-weight: bold;
 }
@@ -235,7 +264,7 @@ table.table .complate-tr td button {
 }
 
 .aps-button.brown .aps-bottom > div:last-child {
-    background-color: #d18a2d !important;
+    background-color: #cd8323 !important;
 }
 
 .aps-button.active {
@@ -393,7 +422,7 @@ table.table .complate-tr td button {
 }
 
 .file-content table tbody tr:last-child td {
-    border-bottom: 0;
+    /* border-bottom: 0; */
 }
 
 .file-list {
@@ -519,6 +548,18 @@ table.table .complate-tr td button {
 
 .folder-section button i {
     font-size: 20px;
+}
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    background: #f6f6f6 !important;
+    border: 1px solid #c5c5c5 !important;
+    color: #454545 !important;
+}
+
+.bg-gray button {
+    background: #f8f8d8;
 }
 
 @media (max-width: 780px) {
