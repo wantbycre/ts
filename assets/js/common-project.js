@@ -350,6 +350,7 @@ function setUniqueObj(DATAS) {
     // console.log(uniqueObjArr);
 
     // TODO: 공무/설계에 따라 링크 제거 및 추가
+    // TODO: 권한에 따라 기성/노무비 컬럼을 추가해야합니다.
 
     // 좌측 타이틀 적용
     uniqueObjArr.forEach((el, i) => {
@@ -412,8 +413,6 @@ function setUniqueObj(DATAS) {
 function setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth) {
     let th = [];
     let td = [];
-
-    console.log("DATAS", calendar);
 
     // 우측 켈린더 Day 세팅
     calendar.forEach((el) => {

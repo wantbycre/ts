@@ -14,7 +14,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(DATAS, thisYear, thisMonth);
 
     // 설계 완료 데이터만 추출
-    const sgdArray = DATAS.filter((n) => n.stts === 3);
+    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
     sgdArray.forEach((data, i) => {
         $(
@@ -46,8 +46,6 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     				</div>
     			</button>
     		`);
-
-        // TODO: 코너철판은 cnStts 번호보고 갈색 및 데이터 넣어주기
     });
 
     // console.log(sgdArray);
@@ -304,7 +302,7 @@ function alertError(text) {
 
 $(function () {
     // 설계-데크보 입력 팝업
-    $(document).on("click", ".aps-button", function () {
+    $(document).on("click", ".aps-button.active", function () {
         const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");

@@ -13,7 +13,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(DATAS, thisYear, thisMonth);
 
     // 설계 완료 데이터만 추출
-    const sgdArray = DATAS.filter((n) => n.stts === 3);
+    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
     // FIXME: cnCnt 를 넣어줘야 함.
 
@@ -47,8 +47,6 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     				</div>
     			</button>
     		`);
-
-        // TODO: 코너철판은 cnStts 번호보고 갈색 및 데이터 넣어주기
     });
 
     // console.log(sgdArray);
@@ -194,9 +192,7 @@ function alertError(text) {
 
 $(function () {
     // 설계-코너철판 입력 팝업
-    $(document).on("click", ".aps-button", function () {
-        if (!$(this).hasClass("active")) return;
-
+    $(document).on("click", ".aps-button.active", function () {
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");

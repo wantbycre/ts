@@ -209,9 +209,9 @@ table.table .complate-tr td button {
 }
 
 .badge.step5 {
-    background: #b3b3b3;
-    border: 1px solid #b3b3b3;
-    color: #fff;
+    background: rgb(184, 184, 184);
+    border: 1px solid rgb(184, 184, 184);
+    color: #000;
     font-weight: bold;
 }
 
@@ -232,7 +232,7 @@ table.table .complate-tr td button {
 .badge.step8 {
     background: #f8c7dd;
     border: 1px solid #f8c7dd;
-    color: #fff;
+    color: #000;
     font-weight: bold;
 }
 
@@ -259,8 +259,14 @@ table.table .complate-tr td button {
     background: #b1acf6 !important;
 }
 
-.aps-button.gray .aps-bottom > div:last-child {
-    background: #c9c9c9 !important;
+.aps-button.gray .aps-top,
+.aps-button.gray .aps-middle > div,
+.aps-button.gray .aps-bottom > div {
+    background: rgb(184, 184, 184) !important;
+}
+
+.aps-button.gray.blur {
+    opacity: 0.4;
 }
 
 .aps-button.brown .aps-bottom > div:last-child {
@@ -552,10 +558,25 @@ table.table .complate-tr td button {
 
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight,
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
     background: #f6f6f6 !important;
     border: 1px solid #c5c5c5 !important;
     color: #454545 !important;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    border: 1px solid #003eff !important;
+    background: #007fff !important;
+    font-weight: normal !important;
+    color: #ffffff !important;
 }
 
 .bg-gray button {
