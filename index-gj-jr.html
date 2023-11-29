@@ -35,7 +35,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">공사현황 (공장-코너철판 : 조닝도,기성, 출하정보) - 추후 제거요망</h4>
+						<h4 class="page-title">공사현황 (공장-조립공장 : 조닝도,기성, 제작완료, 데크보 입고 확정 등록) - 추후 제거요망</h4>
 					</div>
 
 					<div class="card">
@@ -135,12 +135,12 @@
 		</div>
 	</div>
 
-	<!-- Modal : 공장 - 판재공장 -->
-	<div class="modal modal-panjea" tabindex="-1" role="dialog">
+	<!-- Modal : 공장 - 조립공장 -->
+	<div class="modal modal-jorip" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title" id="exampleModalLongTitle">코너 철판 출하정보</h2>
+					<h2 class="modal-title" id="exampleModalLongTitle">공장 - 조립공장 정보 입력</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -149,36 +149,80 @@
 					<!-- 파일 업로드 섹션 -->
 					<div class="card">
 						<div class="card-body">
-							<h2 class="mb-4">코너철판 출하날짜를 클릭하세요.</h2>
-							<div id="cnOutputDate" class="d-flex justify-content-center"></div>
-						</div>
-						<div class="card-footer text-center">
-							<button type="button" class="btn btn-primary fw-bold btn-brown" data-dismiss="modal"
-								style="width: 200px;" id="handleSubmit">
-								등록 / 저장
-							</button>
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-body">
-							<div class="file-box text-left">
-								<div class="file-title">코너철판 도면</div>
-								<div class="file-content" id="content-sgd-sul">
+							<h2>도면자료 다운로드</h2>
+							<div class="file-box mt-4">
+								<div class="file-title">승인(변경)도면 [bom/cp/스트럽]</div>
+								<div class="file-content">
+									<div class="d-flex justify-content-between">
+										<a href="#" class="file-list">
+											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+											승인(변경)도면1.pdf </a>
+										<a href="#" type="button" class="btn-delete">
+											<i class="fas fa-plus text-danger ml-1"></i>
+										</a>
+									</div>
+									<div class="d-flex justify-content-between">
+										<a href="#" class="file-list">
+											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+											승인(변경)도면2승인(변경)도면2승인(변경)도면2.pdf
+										</a>
+										<a href="#" type="button" class="btn-delete">
+											<i class="fas fa-plus text-danger ml-1"></i>
+										</a>
+									</div>
+									<div class="d-flex justify-content-between">
+										<a href="#" class="file-list">
+											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+											승인(변경)도면3.pdf
+										</a>
+										<a href="#" type="button" class="btn-delete">
+											<i class="fas fa-plus text-danger ml-1"></i>
+										</a>
+									</div>
+									<div class="d-flex justify-content-between">
+										<a href="#" class="file-list">
+											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
+											승인(변경)도면4.pdf
+										</a>
+										<a href="#" type="button" class="btn-delete">
+											<i class="fas fa-plus text-danger ml-1"></i>
+										</a>
+									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h2 class="mb-3">데크보 정보입력</h2>
+							<div class="d-flex">
+								<div class="form-group form-group-default mb-0">
+									<label for="file-jr">송장 색도면 상차사진 업로드</label>
+									<input id="file-jr" type="file" class="form-control" multiple>
+								</div>
+								<button type="button" class="btn btn-primary ml-1" id="handleFileJr">업로드</button>
+							</div>
 
-							<div class="file-box mt-4 text-left">
-								<div class="file-title">코너철판 변경 도면</div>
-								<div class="file-content" id="content-sgd-bsul">
+							<div class="file-box mt-4">
+								<div class="file-title">송장 색도면 상차사진 자료</div>
+								<div class="file-content" id="content-jr">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer justify-content-center">
+
+				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
-						style="width: 200px;">닫기</button>
+						style="width: 100px;">카톡방
+						공지</button>
+					<div>
+						<button type="button" class="btn btn-secondary mr-2" data-dismiss="modal" style="width: 150px;"
+							id="handlePurpleSubmit">제작완료</button>
+						<button type="button" class="btn btn-success fw-bold" disabled data-dismiss="modal"
+							style="width: 150px;" id="handleGreenSubmit">데크보
+							입고 확정하기</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -282,7 +326,7 @@
 	<script src="./assets/js/axios-interceptor.js"></script>
 	<script src="./assets/js/common-project.js"></script>
 	<script src="./assets/js/common-project-joningdo.js"></script>
-	<script src="./assets/js/index-gj-corner.js"></script>
+	<script src="./assets/js/index-gj-jr.js"></script>
 
 </body>
 

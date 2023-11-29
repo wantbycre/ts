@@ -35,7 +35,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">공사현황 (공장-코너철판 : 조닝도,기성, 출하정보) - 추후 제거요망</h4>
+						<h4 class="page-title">공사현황 (공장-DECK : 조닝도,기성, 입고일정/면적 등록) - 추후 제거요망</h4>
 					</div>
 
 					<div class="card">
@@ -135,47 +135,106 @@
 		</div>
 	</div>
 
-	<!-- Modal : 공장 - 판재공장 -->
-	<div class="modal modal-panjea" tabindex="-1" role="dialog">
+	<!-- Modal : 공장 - DECK -->
+	<div class="modal modal-deck" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title" id="exampleModalLongTitle">코너 철판 출하정보</h2>
+					<h2 class="modal-title" id="exampleModalLongTitle">DECK 정보입력</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body v2">
-					<!-- 파일 업로드 섹션 -->
 					<div class="card">
 						<div class="card-body">
-							<h2 class="mb-4">코너철판 출하날짜를 클릭하세요.</h2>
-							<div id="cnOutputDate" class="d-flex justify-content-center"></div>
+							<div class="text-center">
+								<h3>1. DECK 입고(변경)일정등록</h3>
+								<div id="deckInputDate" class="d-flex justify-content-center"></div>
+							</div>
+
+							<div class="text-center mt-4">
+								<h3>2. 구간정보 입력</h3>
+
+								<div class="d-flex justify-content-center">
+									<div>
+										<label>층</label>
+										<div class="input-group" style="width: 100px;">
+											<input type="text" id="floor" class="form-control" style="width: 60px;"
+												readonly>
+											<div class="input-group-append">
+												<span class="input-group-text">F</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="ml-2">
+										<label>구간</label>
+										<div class="input-group" style="width: 120px;">
+											<input type="text" id="section" class="form-control" style="width: 60px;"
+												readonly>
+											<div class="input-group-append">
+												<span class="input-group-text">구간</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<h3 class="mt-4">3. 수량정보 입력</h3>
+
+								<div class="d-flex justify-content-center">
+									<div>
+										<label>입고면적</label>
+										<div class="input-group" style="width: 110px;">
+											<input type="text" id="deckArea" class="form-control" style="width: 60px;">
+											<div class="input-group-append">
+												<span class="input-group-text">m2</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="ml-2">
+										<label>프로젝트 누적면적</label>
+										<div class="input-group" style="width: 120px;">
+											<input type="text" class="form-control" placeholder="5.413"
+												style="width: 60px;">
+											<div class="input-group-append">
+												<span class="input-group-text">m2</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-primary fw-bold btn-brown" data-dismiss="modal"
+							<button type="button" class="btn btn-primary fw-bold" data-dismiss="modal"
 								style="width: 200px;" id="handleSubmit">
 								등록 / 저장
 							</button>
 						</div>
 					</div>
 
+					<!-- 파일 업로드 섹션 -->
 					<div class="card">
 						<div class="card-body">
-							<div class="file-box text-left">
-								<div class="file-title">코너철판 도면</div>
-								<div class="file-content" id="content-sgd-sul">
+							<h2 class="text-center">4. 파일업로드</h2>
+							<div class="d-flex">
+								<div class="form-group form-group-default mb-0">
+									<label for="file-deck">DECK 업로드</label>
+									<input id="file-deck" type="file" class="form-control" multiple>
 								</div>
+								<button type="button" class="btn btn-primary ml-1" id="handleFileDeck">업로드</button>
 							</div>
 
-							<div class="file-box mt-4 text-left">
-								<div class="file-title">코너철판 변경 도면</div>
-								<div class="file-content" id="content-sgd-bsul">
+							<div class="file-box mt-4">
+								<div class="file-title">DECK 자료</div>
+								<div class="file-content" id="content-deck">
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="modal-footer justify-content-center">
 					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
 						style="width: 200px;">닫기</button>
@@ -282,7 +341,7 @@
 	<script src="./assets/js/axios-interceptor.js"></script>
 	<script src="./assets/js/common-project.js"></script>
 	<script src="./assets/js/common-project-joningdo.js"></script>
-	<script src="./assets/js/index-gj-corner.js"></script>
+	<script src="./assets/js/index-gj-deck.js"></script>
 
 </body>
 

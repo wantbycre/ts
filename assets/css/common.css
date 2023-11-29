@@ -273,6 +273,12 @@ table.table .complate-tr td button {
     background-color: #cd8323 !important;
 }
 
+.aps-button.pink .aps-top,
+.aps-button.pink .aps-middle > div,
+.aps-button.pink .aps-bottom > div {
+    background: #f8c7dd !important;
+}
+
 .aps-button.active {
     border: 1px solid #000;
 }
