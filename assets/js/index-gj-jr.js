@@ -125,7 +125,7 @@ function listsSgdFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "송장색도면상차사진":
+                case "송장_색도면_상차사진":
                     $("#content-jr").append(lists(el));
                     break;
                 default:
@@ -235,12 +235,12 @@ $(function () {
         PUT_FACTORY(6);
     });
 
-    // 공장 - 조립공장 송장색도면상차사진 업로드
+    // 공장 - 조립공장 송장_색도면_상차사진 업로드
     $("#handleFileJr").click(function () {
         const file = $("#file-jr")[0];
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공장", "송장색도면상차사진", file.files);
+        POST_SGD_FILE("공장", "송장_색도면_상차사진", file.files);
     });
 });

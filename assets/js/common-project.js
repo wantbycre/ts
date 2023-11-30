@@ -381,7 +381,17 @@ function setUniqueObj(DATAS) {
 					${el.cornerName}<br/>
 					${el.sgName}<br/>
 				</td>
-				<td>${el.scName}</td>
+				<td>
+					<a 
+						href="#"
+						data-toggle="modal"
+						data-target=".modal-seolchi"
+						data-schedule-uid="${el.scheduleUID}" 
+						class="handleProjectSeolchi"
+					>
+						${el.scName}
+					</a>
+				</td>
 				<td>
 					<a 
 						href="#"

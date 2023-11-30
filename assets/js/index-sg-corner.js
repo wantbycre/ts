@@ -156,10 +156,10 @@ function listsSgdFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "코너철판설계도면":
+                case "코너철판_설계도면":
                     $("#content-sgd-sul").append(lists(el));
                     break;
-                case "코너철판변경설계도면":
+                case "코너철판_변경설계도면":
                     $("#content-sgd-bsul").append(lists(el));
                     break;
                 default:
@@ -285,7 +285,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "코너철판설계도면", file.files);
+        POST_SGD_FILE("설계", "코너철판_설계도면", file.files);
     });
 
     // 코너철판 변경설계도면 업로드
@@ -294,6 +294,6 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "코너철판변경설계도면", file.files);
+        POST_SGD_FILE("설계", "코너철판_변경설계도면", file.files);
     });
 });
