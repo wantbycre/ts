@@ -14,7 +14,14 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
     // 설계 완료 데이터만 추출
     // 조립 입고 확정 , 공사입고확정
-    const sgdArray = DATAS.filter((n) => n.cnStts === 9 || n.cnStts === 7);
+    const sgdArray = DATAS.filter(
+        (n) =>
+            n.stts === 3 ||
+            n.stts === 4 ||
+            n.stts === 5 ||
+            n.stts === 6 ||
+            n.stts === 7
+    );
 
     sgdArray.forEach((data, i) => {
         $(
@@ -23,7 +30,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 "] tbody tr[data-uid=" +
                 data.UID +
                 "] td[data-date=" +
-                (data.cnInputDate || data.dkbDesignDate) +
+                data.inputDate +
                 "]"
         ).empty().append(`
     			<button 
@@ -129,7 +136,7 @@ function listsSgdFecth() {
                     $("#content-gsd-corner").append(lists(el));
                     break;
                 case "설치팀_노무비":
-                    $("#content-gsd-corner").append(lists(el));
+                    $("#content-nomu").append(lists(el));
                     break;
                 default:
                     return;
@@ -178,17 +185,21 @@ $(function () {
 
         $(".modal-sc-team").modal();
 
+        console.log("?", scheduleUID);
         listsSgdFecth();
     });
 
-    // 설치팀 기성 팝업
+    // 설치팀 노무비 팝업
     $(document).on("click", ".handleProjectGisungPop", function () {
+        const scheduleUid = $(this).data("schedule-uid");
         const name = $(this).data("name");
         const code = $(this).data("code");
 
         scheduleCode = code;
-
+        scheduleUID = scheduleUid;
         listsSgdFecth();
+
+        console.log("?!", scheduleUID);
 
         $(".gisung-title").text(name);
     });

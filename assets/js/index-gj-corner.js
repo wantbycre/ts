@@ -14,9 +14,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
     // 설계 완료 데이터만 추출
     // 설계완료 / 코너철판입고전 / "코너철판출하완료"
-    const sgdArray = DATAS.filter(
-        (n) => n.stts === 3 || n.cnStts === 8 || n.cnStts === 9
-    );
+    const sgdArray = DATAS.filter((n) => n.cnStts === 8 || n.cnStts === 9);
 
     sgdArray.forEach((data, i) => {
         $(
@@ -25,7 +23,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 "] tbody tr[data-uid=" +
                 data.UID +
                 "] td[data-date=" +
-                (data.cnInputDate || data.dkbDesignDate) +
+                data.inputDate +
                 "]"
         ).empty().append(`
     			<button 
@@ -238,7 +236,7 @@ $(function () {
 
             $("#cnOutputDate")
                 .datepicker()
-                .datepicker("setDate", data.cnOutputDate || today);
+                .datepicker("setDate", data.inputDate || today);
         });
     });
 

@@ -268,7 +268,7 @@ $(function () {
         listsSgdFecth();
 
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
 
             const data = res.data[0];
             const cnOutputDate = moment(data.cnOutputDate).diff(

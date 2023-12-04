@@ -28,7 +28,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
             if (data.stts === 6) {
                 sttsColor = `green`;
             } else {
-                sttsColor = `gray blur`;
+                sttsColor = `gray`;
             }
         }
 
@@ -224,17 +224,27 @@ $(function () {
 
         const stts = $(this).data("stts");
 
-        if (stts === 5) {
-            $("#handleGreenSubmit").attr("disabled", false);
+        console.log(stts);
+
+        // 입고확정
+        if (stts >= 6) {
+            $("#handlePurpleSubmit").attr("disabled", true);
+            $("#handleGreenSubmit").attr("disabled", true);
         } else {
-            if (stts === 6) {
-                console.log(2);
-                $("#handlePurpleSubmit, #handleGreenSubmit").attr(
-                    "disabled",
-                    true
-                );
-            } else {
+            // 판재입고 될 경우
+            if (stts >= 4) {
                 $("#handlePurpleSubmit").attr("disabled", false);
+                $("#handleGreenSubmit").attr("disabled", true);
+            } else {
+                $("#handlePurpleSubmit").attr("disabled", true);
+                $("#handleGreenSubmit").attr("disabled", true);
+            }
+
+            // 조립제작 완료일 경우
+            if (stts >= 5) {
+                $("#handlePurpleSubmit").attr("disabled", true);
+                $("#handleGreenSubmit").attr("disabled", false);
+            } else {
                 $("#handleGreenSubmit").attr("disabled", true);
             }
         }

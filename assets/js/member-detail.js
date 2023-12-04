@@ -65,8 +65,6 @@ function GET_PAY(page) {
 
         $("#pay-list tbody").empty();
 
-        // console.log(paging, result, totalCount);
-
         if (result.length === 0) {
             $("#pay-list tbody").append(`
 				<tr>
@@ -74,8 +72,6 @@ function GET_PAY(page) {
 				</tr>
 			`);
         } else {
-            $("#pay-userName").val(result[0].userName);
-
             result.forEach((el, i) => {
                 $("#pay-list tbody").append(`
 					<tr>
@@ -91,7 +87,6 @@ function GET_PAY(page) {
 								data-toggle="modal"
 								data-target=".member-pay"
 								data-uid=${el.UID}
-								data-user-name=${el.userName}
 								data-file-name="${el.fileName}"
 								data-file-path="${el.filePath}"
 								data-year="${el.year}"
@@ -119,29 +114,29 @@ function GET_PAY(page) {
 }
 
 // 급여 등록
-async function POST_PAY(year, month, userUID) {
+async function POST_PAY(year, month) {
     const res = await http({
         method: "POST",
         url: "pay",
         data: {
             year,
             month,
-            userUID,
+            userUID: PARAM_UID,
         },
     });
     return res.data;
 }
 
 // 급여 수정
-async function PUT_PAY(year, month, userUID) {
+async function PUT_PAY(year, month) {
     const res = await http({
-        method: "POST",
+        method: "PUT",
         url: "pay",
         data: {
             year,
             month,
-            userUID,
-            UID: PARAM_UID,
+            userUID: PARAM_UID,
+            UID: currentUserUID,
         },
     });
     return res.data;
@@ -356,9 +351,9 @@ $(function () {
             quittingDate,
         } = data.data[0];
 
-        $("#userName").val(userName);
+        $("#userName, #pay-userName").val(userName);
         $("#userId").val(userId);
-        $("#position").val(position).attr("selected", "selected");
+        $("#position").val(position);
         $("#levelUID").val(levelUID).attr("selected", "selected");
         $("#telNum").val(telNum);
         $("#postNum").val(postNum);
@@ -374,6 +369,7 @@ $(function () {
         $(".handlePayClick").show();
         $("#year").val("");
         $("#month").val("");
+        $("#file").val("");
         $("#pay-file-down a").text("");
     });
 
@@ -387,7 +383,7 @@ $(function () {
         if (!month) return alertError("월을 입력하세요");
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PAY(year, month, PARAM_UID).then((res) => {
+        POST_PAY(year, month).then((res) => {
             PUT_PAY_FILE(res.data, file);
         });
     });
@@ -395,7 +391,6 @@ $(function () {
     // 급여 수정 팝업
     $(document).on("click", ".pay-edit", function () {
         const uid = $(this).data("uid");
-        const userName = $(this).data("user-name");
         const fileName = $(this).data("file-name");
         const filePath = $(this).data("file-path");
         const year = $(this).data("year");
@@ -403,11 +398,11 @@ $(function () {
 
         currentUserUID = uid;
 
-        $("#pay-userName").val(userName);
         $(".handlePayClick").hide();
         $(".form-none").show();
         $("#year").val(year);
         $("#month").val(month);
+        $("#file").val("");
         $("#pay-file-down a")
             .text(fileName)
             .attr("href", filePath)
@@ -422,11 +417,25 @@ $(function () {
 
         if (!year) return alertError("년도를 입력하세요");
         if (!month) return alertError("월을 입력하세요");
-        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        PUT_PAY(year, month, PARAM_UID).then((res) => {
-            PUT_PAY_FILE(res.data, file);
-        });
+        if (file.files.length === 0) {
+            PUT_PAY(year, month).then((res) => {
+                swal(res.message, {
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-success",
+                        },
+                    },
+                }).then((res) => {
+                    location.reload();
+                });
+            });
+        } else {
+            PUT_PAY(year, month).then(() => {
+                PUT_PAY_FILE(currentUserUID, file);
+            });
+        }
     });
 
     // 급여 삭제
@@ -475,7 +484,7 @@ $(function () {
         const joiningDate = $("#joiningDate").val() || null;
         const quittingDate = $("#quittingDate").val() || null;
 
-        if (position === "default") return alertError("직급을 선택하세요");
+        if (!position) return alertError("직급을 입력하세요.");
         if (levelUID === "default") {
             return alertError("권한을 선택하세요.");
         }

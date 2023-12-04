@@ -15,7 +15,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
     // 설계 완료 데이터만 추출
     // 설계완료 / 코너철판입고전
-    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.cnStts === 8);
+    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
     sgdArray.forEach((data, i) => {
         $(

@@ -119,7 +119,7 @@ function DELETE_PARTNER(UID, PARAM_TAB) {
                     },
                 },
             }).then((res) => {
-                history.back();
+                location.href = "/account.html";
             });
         })
         .catch(function (error) {

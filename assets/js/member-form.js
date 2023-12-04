@@ -169,7 +169,7 @@ $(function () {
 
         if (!userName) return alertError("이름을 입력하세요");
         if (!userId) return alertError("아이디를 입력하세요");
-        if (position === "default") return alertError("직급을 선택하세요");
+        if (!position) return alertError("직급을 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
         if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
             return alertError("영문 숫자 조합 8자리 이상 입력하세요.");

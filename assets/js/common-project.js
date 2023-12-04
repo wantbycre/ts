@@ -421,6 +421,7 @@ function setUniqueObj(DATAS) {
 								data-target=".modal-gisung"
 								data-uid="${el.UID}" 
 								data-code="${el.projectCode}"
+								data-schedule-uid="${el.scheduleUID}"
 								data-name="${
                                     currentPath === `/index-gpj.html`
                                         ? el.pjName

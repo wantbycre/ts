@@ -89,7 +89,7 @@ function POST_PARTNER(
                     },
                 },
             }).then((res) => {
-                history.back();
+                location.href = "/account.html";
             });
         })
         .catch(function (error) {
@@ -98,15 +98,30 @@ function POST_PARTNER(
 }
 
 // 거래처 항목
-async function GET_PARTNER_MASTER(PARAM_UID) {
+async function GET_PARTNER_MASTER() {
     const res = await http({
         method: "GET",
         url: "pt_master",
     });
 
     res.data.data.forEach((el, i) => {
-        $("#ptUID").append(`<option value="${i}">${el.ptName}</option>`);
+        $("#ptUID").append(`<option value="${i + 1}">${el.ptName}</option>`);
     });
+}
+
+// 거래처 아이디 등록
+async function POST_PARTNER_ID(partnerUID, userId, pw) {
+    const res = await http({
+        method: "POST",
+        url: "partner/partnerId",
+        data: {
+            partnerUID,
+            userId,
+            pw,
+        },
+    });
+
+    return res;
 }
 
 function alertError(text) {
@@ -139,17 +154,53 @@ $(function () {
         if (ptUID === "default") return alertError("분류를 선택하세요.");
         if (!partnerName) return alertError("건설사명을 입력하세요");
 
-        POST_PARTNER(
-            ptUID,
-            partnerName,
-            manager,
-            partnerTel,
-            bank,
-            bankNum,
-            postNum,
-            addr1,
-            addr2,
-            memo
-        );
+        const userId = $("#userId").val();
+        const pw = $("#pw").val();
+        const confirmPw = $("#confirmPw").val();
+
+        if (userId || pw || confirmPw) {
+            if (!userId) return alertError("아이디를 입력하세요");
+            if (!pw) return alertError("패스워드를 입력하세요");
+            if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+                return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+            }
+            if (!confirmPw) return alertError("패스워드 재확인 하세요");
+
+            if (pw !== confirmPw) {
+                return alertError("비밀번호 재확인 하세요.");
+            }
+
+            // POST_PARTNER(
+            //     ptUID,
+            //     partnerName,
+            //     manager,
+            //     partnerTel,
+            //     bank,
+            //     bankNum,
+            //     postNum,
+            //     addr1,
+            //     addr2,
+            //     memo
+            // );
+
+            POST_PARTNER_ID(ptUID, userId, pw).then((res) => {
+                console.log(res);
+            });
+        } else {
+            POST_PARTNER(
+                ptUID,
+                partnerName,
+                manager,
+                partnerTel,
+                bank,
+                bankNum,
+                postNum,
+                addr1,
+                addr2,
+                memo
+            );
+        }
     });
+
+    // 옵션 계정
 });

@@ -14,8 +14,16 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(DATAS, thisYear, thisMonth);
 
     // 설계 완료 데이터만 추출
-    const sgdArray = DATAS.filter((n) => n.stts === 6);
+    const sgdArray = DATAS.filter(
+        (n) =>
+            n.stts === 3 ||
+            n.stts === 4 ||
+            n.stts === 5 ||
+            n.stts === 6 ||
+            n.stts === 7
+    );
 
+    // TODO 3,4,5,6,7 번 각각 색 넣어줘라
     sgdArray.forEach((data, i) => {
         $(
             "#chart-content table[data-index=" +
@@ -435,7 +443,10 @@ $(function () {
         // FIXME: deckArea DECK입고일 / 입고면적 -> 사용자가 입력은 하나 기본 데이터는 얹어줘야하나?
         // FIXME: 누적면적 필요
 
+        // TODO: inputDate 기준임 무조건
+
         // TODO: 입고일정 변경은 수시로
+        // TODO: 입고 확정 stts 6번일 경우만 가능
         // TODO: 입고확정시 일정 변경 불가.
 
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
