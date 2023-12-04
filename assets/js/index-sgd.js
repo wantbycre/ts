@@ -537,4 +537,16 @@ $(function () {
 
         POST_SGD_FILE("설계", "승인요청서", file.files);
     });
+
+    Kakao.init("ec0f051073badccef5ffb3dee53acf4e"); // 사용하려는 앱의 JavaScript 키 입력
+    Kakao.Share.createDefaultButton({
+        container: "#kakaotalk-sharing-btn",
+        objectType: "text",
+        text: "[프로젝트1번] 이 생성 되었습니다. 날짜를 확정 하세요",
+        link: {
+            // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
+        },
+    });
 });
