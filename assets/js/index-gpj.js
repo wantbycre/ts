@@ -11,13 +11,11 @@ let scheduleDate = "";
  * @param {Array} thisMonth - 해당 월
  */
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    console.log(DATAS, thisYear, thisMonth);
+    const sttsData = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
-    // 설계 완료 데이터만 추출
-    // 설계완료 / 코너철판입고전
-    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
+    console.log(sttsData);
 
-    sgdArray.forEach((data, i) => {
+    sttsData.forEach((data) => {
         $(
             "#chart-content table[data-index=" +
                 (thisYear + thisMonth) +
@@ -25,8 +23,19 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 data.UID +
                 "] td[data-date=" +
                 data.pjInputDate +
-                "]"
-        ).empty().append(`
+                "] .add-section .nbsp"
+        ).remove();
+
+        $(
+            "#chart-content table[data-index=" +
+                (thisYear + thisMonth) +
+                "] tbody tr[data-uid=" +
+                data.UID +
+                "] td[data-date=" +
+                data.pjInputDate +
+                "] .add-section"
+        ).append(`
+			<div class="d-flex">
     			<button 
 					type="button" 
 					class="aps-button active ${data.cnStts === 8 ? `gray blur` : `gray`}"
@@ -46,7 +55,8 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     					</div>
     				</div>
     			</button>
-    		`);
+			</div>
+    	`);
     });
 }
 

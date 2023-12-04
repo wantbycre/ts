@@ -2,6 +2,7 @@
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
+
 /**
  *
  * common-project 호출하는 함수
@@ -10,13 +11,11 @@ let scheduleDate = "";
  * @param {Array} thisMonth - 해당 월
  */
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    console.log(DATAS, thisYear, thisMonth);
+    const sttsData = DATAS.filter((n) => n.cnStts === 8 || n.cnStts === 9);
 
-    // 설계 완료 데이터만 추출
-    // 설계완료 / 코너철판입고전 / "코너철판출하완료"
-    const sgdArray = DATAS.filter((n) => n.cnStts === 8 || n.cnStts === 9);
+    console.log(sttsData);
 
-    sgdArray.forEach((data, i) => {
+    sttsData.forEach((data) => {
         $(
             "#chart-content table[data-index=" +
                 (thisYear + thisMonth) +
@@ -24,28 +23,40 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 data.UID +
                 "] td[data-date=" +
                 data.inputDate +
-                "]"
-        ).empty().append(`
-    			<button 
+                "] .add-section .nbsp"
+        ).remove();
+
+        $(
+            "#chart-content table[data-index=" +
+                (thisYear + thisMonth) +
+                "] tbody tr[data-uid=" +
+                data.UID +
+                "] td[data-date=" +
+                data.inputDate +
+                "] .add-section"
+        ).append(`
+			<div class="d-flex">
+				<button 
 					type="button" 
 					class="aps-button active ${data.cnStts === 9 ? `brown` : ``}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
 				>
-    				<div class="aps-content">
-    					<div class="aps-top">${data.floor}F ${data.section}구간</div>
-    					<div class="d-flex aps-middle">
-    						<div>${data.area}</div>
-    						<div>${data.strup}</div>
-    					</div>
-    					<div class="d-flex aps-bottom">
-    						<div>${data.dkbCnt}</div>
-    						<div>${data.cnCnt || ``}</div>
-    					</div>
-    				</div>
-    			</button>
-    		`);
+					<div class="aps-content">
+						<div class="aps-top">${data.floor}F ${data.section}구간</div>
+						<div class="d-flex aps-middle">
+							<div>${data.area}</div>
+							<div>${data.strup}</div>
+						</div>
+						<div class="d-flex aps-bottom">
+							<div>${data.dkbCnt}</div>
+							<div>${data.cnCnt || ``}</div>
+						</div>
+					</div>
+				</button>
+			</div>
+    	`);
     });
 }
 

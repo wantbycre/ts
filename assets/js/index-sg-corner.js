@@ -2,57 +2,38 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 
-// 차트 기본 데이터
-function standardCartData(data, thisYear, thisMonth) {
-    $(
-        "#chart-content table[data-index=" +
-            (thisYear + thisMonth) +
-            "] tbody tr[data-uid=" +
-            data.UID +
-            "] td[data-date=" +
-            data.dkbDesignDate +
-            "]"
-    ).empty().append(`
-				<div class="d-flex add-section">
-					<div class="d-flex">
-						<button 
-							type="button" 
-							class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
-							data-product-uid="${data.UID}"
-							data-schedule-uid="${data.scheduleUID}"
-							data-div-uid="${data.divUID}"
-						>
-							<div class="aps-content">
-								<div class="aps-top">${data.floor}F ${data.section}구간</div>
-								<div class="d-flex aps-middle">
-									<div>${data.area}</div>
-									<div>${data.strup}</div>
-								</div>
-								<div class="d-flex aps-bottom">
-									<div>${data.dkbCnt}</div>
-									<div>${data.cnCnt || ``}</div>
-								</div>
-							</div>
-						</button>
-						<button type="button" class="aps-plus">
-							<span><i class="fas fa-plus"></i></span>
-						</button>
-					</div>
-				</div>
-    		`);
-}
+/**
+ *
+ * common-project 호출하는 함수
+ * @param {Array} DATAS - 실제 데이터
+ * @param {Array} thisYear - 해당 년
+ * @param {Array} thisMonth - 해당 월
+ */
+function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
+    const sttsData = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
-// 추가 기본 데이터
-function addCartData(data, thisYear, thisMonth) {
-    $(
-        "#chart-content table[data-index=" +
-            (thisYear + thisMonth) +
-            "] tbody tr[data-uid=" +
-            data.UID +
-            "] td[data-date=" +
-            data.dkbDesignDate +
-            "] .add-section"
-    ).prepend(`
+    console.log(sttsData);
+
+    sttsData.forEach((data) => {
+        $(
+            "#chart-content table[data-index=" +
+                (thisYear + thisMonth) +
+                "] tbody tr[data-uid=" +
+                data.UID +
+                "] td[data-date=" +
+                data.dkbDesignDate +
+                "] .add-section .nbsp"
+        ).remove();
+
+        $(
+            "#chart-content table[data-index=" +
+                (thisYear + thisMonth) +
+                "] tbody tr[data-uid=" +
+                data.UID +
+                "] td[data-date=" +
+                data.dkbDesignDate +
+                "] .add-section"
+        ).append(`
 			<div class="d-flex">
 				<button 
 					type="button" 
@@ -74,29 +55,7 @@ function addCartData(data, thisYear, thisMonth) {
 					</div>
 				</button>
 			</div>
-	`);
-}
-
-/**
- *
- * common-project 호출하는 함수
- * @param {Array} DATAS - 실제 데이터
- * @param {Array} thisYear - 해당 년
- * @param {Array} thisMonth - 해당 월
- */
-function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    console.log(DATAS, thisYear, thisMonth);
-
-    // 설계 완료 데이터만 추출
-    const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
-
-    sgdArray.forEach((data, i) => {
-        // 현재 프로젝트와 이전 프로젝트가 같다면
-        if (data.UID === sgdArray[i - 1]?.UID) {
-            addCartData(data, thisYear, thisMonth);
-        } else {
-            standardCartData(data, thisYear, thisMonth);
-        }
+		`);
     });
 }
 

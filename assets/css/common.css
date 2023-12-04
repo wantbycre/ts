@@ -590,6 +590,10 @@ a.ui-button:active,
     background: #f8f8d8;
 }
 
+.add-section {
+    height: 100%;
+}
+
 @media (max-width: 780px) {
     .m-flex-none {
         display: block !important;

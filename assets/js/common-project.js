@@ -470,14 +470,19 @@ function setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth) {
         el.forEach((day, i) => {
             if (day) {
                 th.push(`<th>${day}</th>`);
-                td.push(`<td data-date="${thisYear}-${thisMonth}-${
+                td.push(`<td
+							data-date="${thisYear}-${thisMonth}-${
                     String(day).length === 1
                         ? String(day).padStart(2, "0")
                         : String(day)
-                }" class="${i === 0 || i === 6 ? "bg-gray" : ""}"
-				>
-						<button type="button" class="aps-button">&nbsp;</button>
-					</td>`);
+                }" 
+							class="${i === 0 || i === 6 ? "bg-gray" : ""}"
+						>
+							<div class="d-flex add-section">
+								<button type="button" class="aps-button nbsp">&nbsp;</button>
+							</div>
+						</td>
+				`);
             }
         });
     });

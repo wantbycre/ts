@@ -11,11 +11,7 @@ let totalArea = 0;
  * @param {Array} thisMonth - 해당 월
  */
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    console.log(DATAS, thisYear, thisMonth);
-
-    // 설계 완료 데이터만 추출
-    // 설계완료 / 코너철판입고전
-    const sgdArray = DATAS.filter(
+    const sttsData = DATAS.filter(
         (n) =>
             n.stts === 3 ||
             n.stts === 4 ||
@@ -24,7 +20,9 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
             n.stts === 7
     );
 
-    sgdArray.forEach((data, i) => {
+    console.log(sttsData);
+
+    sttsData.forEach((data) => {
         $(
             "#chart-content table[data-index=" +
                 (thisYear + thisMonth) +
@@ -32,8 +30,19 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 data.UID +
                 "] td[data-date=" +
                 data.inputDate +
-                "]"
-        ).empty().append(`
+                "] .add-section .nbsp"
+        ).remove();
+
+        $(
+            "#chart-content table[data-index=" +
+                (thisYear + thisMonth) +
+                "] tbody tr[data-uid=" +
+                data.UID +
+                "] td[data-date=" +
+                data.inputDate +
+                "] .add-section"
+        ).append(`
+			<div class="d-flex">
     			<button 
 					type="button" 
 					class="aps-button active ${data.deckInputDate ? `pink blur` : `pink`}"
@@ -53,7 +62,8 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     					</div>
     				</div>
     			</button>
-    		`);
+			</div>
+    	`);
     });
 }
 
