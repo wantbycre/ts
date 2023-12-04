@@ -438,7 +438,7 @@
 										<div>
 											<label>입고면적</label>
 											<div class="input-group" style="width: 150px;">
-												<input type="text" class="form-control" placeholder="55"
+												<input type="text" class="form-control" id="deckArea"
 													style="width: 60px;">
 												<div class="input-group-append">
 													<span class="input-group-text">m2</span>
@@ -449,8 +449,8 @@
 										<div class="ml-2">
 											<label>프로젝트 누적면적</label>
 											<div class="input-group" style="width: 150px;">
-												<input type="text" class="form-control" placeholder="2355"
-													style="width: 60px;">
+												<input type="text" class="form-control" style="width: 60px;"
+													id="totalArea" readonly>
 												<div class="input-group-append">
 													<span class="input-group-text">m2</span>
 												</div>
@@ -535,14 +535,14 @@
 							<div class="row">
 								<div class="col-md-4">
 									<h2>5. 파일업로드</h2>
-									<div class="d-flex">
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
 											<label for="file-gsd-seung">승인도면 [BOM/CP/스트럽] 업로드</label>
 											<input id="file-gsd-seung" type="file" class="form-control" multiple>
 										</div>
 										<button type="button" class="btn btn-primary ml-1"
 											id="handleFileGsdSeung">업로드</button>
-									</div>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">승인도면 [BOM/CP/스트럽] 자료</div>
@@ -553,14 +553,14 @@
 
 								<div class="col-md-4">
 									<h2>&nbsp;</h2>
-									<div class="d-flex">
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
 											<label for="file-gsd-corner">코너철판 (변경) 도면 업로드</label>
 											<input id="file-gsd-corner" type="file" class="form-control" multiple>
 										</div>
 										<button type="button" class="btn btn-primary ml-1"
 											id="handleFileGsdCorner">업로드</button>
-									</div>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">코너철판 (변경) 도면 자료</div>
@@ -571,14 +571,14 @@
 
 								<div class="col-md-4">
 									<h2>&nbsp;</h2>
-									<div class="d-flex">
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
 											<label for="file-gsd-song">송장,색도면,상차사진 업로드</label>
 											<input id="file-gsd-song" type="file" class="form-control" multiple>
 										</div>
 										<button type="button" class="btn btn-primary ml-1"
 											id="handleFileGsdSong">업로드</button>
-									</div>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">송장,색도면,상차사진 자료</div>

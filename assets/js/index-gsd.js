@@ -3,6 +3,7 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 let isSubmitType = true; // t = 신규, f = 수정
+let totalArea = 0;
 /**
  *
  * common-project 호출하는 함수
@@ -261,9 +262,6 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete gsd-delete" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
 		</div>
 	`;
 }
@@ -413,6 +411,16 @@ async function PUT_ETC_NOTE(etcNote) {
         });
 }
 
+// 누적면적
+async function GET_TOTAL_AREA(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/totalArea/" + projectUID,
+    });
+
+    return res.data;
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -456,6 +464,9 @@ $(function () {
             const ipDate = data.inputDate;
             const pjInputDate = moment(pjDate).diff(moment(dkbDate), "days");
 
+            // 특이 사항 NOTE
+            $("#etcNote").val(data.etcNote);
+
             console.log("최초", data, scheduleDate);
             // const inputDate = moment(ipDate).diff(moment(pjDate), "days");
 
@@ -480,6 +491,12 @@ $(function () {
 
         // 파일리스트
         listsGsdFecth();
+
+        // 누적면적
+        GET_TOTAL_AREA(projectUID).then((res) => {
+            totalArea = Number(res.data[0].totalArea);
+            $("#totalArea").val(totalArea);
+        });
     });
 
     // 난간대/설치팀
@@ -509,8 +526,18 @@ $(function () {
         $(this).parents(".form-group").remove();
     });
 
+    // 입고면적 자동계산
+    $("#deckArea").keyup(function () {
+        const val = Number($(this).val());
+
+        $("#totalArea").val(totalArea + val);
+    });
+
     // 공사 - 데크보 등록/저장
     $("#handleSgdSubmit").click(function () {
+        // 입고면적 입력
+        // TODO: 입고 확정시 /index-dj-dexk 여기 면적 올리는 함수 실행하기
+
         const dkbDesignDate = $("#dkbDesignDate").val();
         const floor = $("#floor").val();
         const section = $("#section").val();

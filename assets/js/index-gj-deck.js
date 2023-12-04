@@ -2,6 +2,7 @@ let projectUID = 0;
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
+let totalArea = 0;
 /**
  *
  * common-project 호출하는 함수
@@ -196,6 +197,16 @@ async function POST_SGD_FILE(filePath, fileType, files) {
         });
 }
 
+// 누적면적
+async function GET_TOTAL_AREA(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/totalArea/" + projectUID,
+    });
+
+    return res.data;
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -225,6 +236,7 @@ $(function () {
 
         listsSgdFecth();
 
+        // 기본 상세
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
             const data = res.data[0];
             const today = moment(new Date()).format("YYYY-MM-DD");
@@ -235,6 +247,12 @@ $(function () {
             $("#deckInputDate")
                 .datepicker()
                 .datepicker("setDate", data.inputDate || today);
+        });
+
+        // 누적면적
+        GET_TOTAL_AREA(projectUID).then((res) => {
+            totalArea = Number(res.data[0].totalArea);
+            $("#totalArea").val(totalArea);
         });
     });
 
@@ -258,6 +276,13 @@ $(function () {
         }).then((res) => {
             if (res) DELETE_PROJECT_DECK(uid);
         });
+    });
+
+    // 입고면적 자동계산
+    $("#deckArea").keyup(function () {
+        const val = Number($(this).val());
+
+        $("#totalArea").val(totalArea + val);
     });
 
     // 공장 - DECK 일정/면적 등록
