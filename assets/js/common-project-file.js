@@ -68,21 +68,21 @@ function DELETE_PROJECT(UID) {
 }
 
 // 공통자료 리스트
-function lists(el) {
+function commonLists(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete" data-uid="${el.UID}">
+			<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
 	`;
 }
 
-function tbodys(el) {
+function commonTbodys(el) {
     return `
 		<tr>
 			<td>${el.memo}</td>
@@ -101,7 +101,7 @@ function tbodys(el) {
 				
 			</td>
 			<td style="border-left: 1px solid #000;">
-				<a href="#" type="button" class="btn-delete">
+				<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
 					<i class="fas fa-plus text-danger ml-1"></i>
 				</a>
 			</td>
@@ -118,25 +118,25 @@ function listsFecth() {
         res.data.forEach((el) => {
             switch (el.fileType) {
                 case "견적자료":
-                    $("#content-gong-geun").append(lists(el));
+                    $("#content-gong-geun").append(commonLists(el));
                     break;
                 case "계약서":
-                    $("#content-gong-gue").append(lists(el));
+                    $("#content-gong-gue").append(commonLists(el));
                     break;
                 case "설계도면":
-                    $("#content-sul").append(lists(el));
+                    $("#content-sul").append(commonLists(el));
                     break;
                 case "구조검토서":
-                    $("#content-gong-gu").append(lists(el));
+                    $("#content-gong-gu").append(commonLists(el));
                     break;
                 case "DECK도면":
-                    $("#content-gong-deck").append(lists(el));
+                    $("#content-gong-deck").append(commonLists(el));
                     break;
                 case "공장":
-                    $("#content-gongjang tbody").append(tbodys(el));
+                    $("#content-gongjang tbody").append(commonTbodys(el));
                     break;
                 case "설치":
-                    $("#content-sulchi tbody").append(tbodys(el));
+                    $("#content-sulchi tbody").append(commonTbodys(el));
                     break;
                 default:
                     return;
@@ -169,7 +169,7 @@ $(function () {
     });
 
     // 자료 삭제
-    $(document).on("click", ".btn-delete", function () {
+    $(document).on("click", ".common-delete", function () {
         const uid = $(this).data("uid");
 
         swal("삭제하시겠습니까?", {

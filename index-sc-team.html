@@ -35,7 +35,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">공사현황 (공장-코너철판 : 조닝도,기성, 출하정보) - 추후 제거요망</h4>
+						<h4 class="page-title">공사현황 (설치팀 : 조닝도, 노무비, 승인(변경도면),코너철판(변경도면)) - 추후 제거요망</h4>
 					</div>
 
 					<div class="card">
@@ -85,7 +85,7 @@
 												<th>코너철판<span class="table-sm">공장/설계</span></th>
 												<th>난간대<span class="table-sm">설치팀</span></th>
 												<th>조닝도</th>
-												<th>기성</th>
+												<th>노무비</th>
 											</tr>
 										</thead>
 										<tbody></tbody>
@@ -135,42 +135,28 @@
 		</div>
 	</div>
 
-	<!-- Modal : 공장 - 판재공장 -->
-	<div class="modal modal-panjea" tabindex="-1" role="dialog">
+	<!-- Modal : 설치 - 도면다운로드 -->
+	<div class="modal modal-sc-team" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title" id="exampleModalLongTitle">코너 철판 출하정보</h2>
+					<h2 class="modal-title" id="exampleModalLongTitle">도면자료 다운로드</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body v2">
-					<!-- 파일 업로드 섹션 -->
-					<div class="card">
-						<div class="card-body">
-							<h2 class="mb-4">코너철판 출하날짜를 클릭하세요.</h2>
-							<div id="cnOutputDate" class="d-flex justify-content-center"></div>
-						</div>
-						<div class="card-footer text-center">
-							<button type="button" class="btn btn-primary fw-bold btn-brown" data-dismiss="modal"
-								style="width: 200px;" id="handleSubmit">
-								등록 / 저장
-							</button>
-						</div>
-					</div>
-
 					<div class="card">
 						<div class="card-body">
 							<div class="file-box text-left">
-								<div class="file-title">코너철판 도면</div>
-								<div class="file-content" id="content-sgd-sul">
+								<div class="file-title">승인 (변경) 도면</div>
+								<div class="file-content" id="content-gsd-seung">
 								</div>
 							</div>
 
 							<div class="file-box mt-4 text-left">
-								<div class="file-title">코너철판 변경 도면</div>
-								<div class="file-content" id="content-sgd-bsul">
+								<div class="file-title">코너철판 (변경) 도면</div>
+								<div class="file-content" id="content-gsd-corner">
 								</div>
 							</div>
 						</div>
@@ -190,7 +176,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h2 class="modal-title" id="exampleModalLongTitle">
-						<span class="gisung-title"></span> 기성 파일
+						<span class="gisung-title"></span> 노무비 파일
 					</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -249,7 +235,7 @@
 	<script src="./assets/js/axios-interceptor.js"></script>
 	<script src="./assets/js/common-project.js"></script>
 	<script src="./assets/js/common-project-joningdo.js"></script>
-	<script src="./assets/js/index-gj-corner.js"></script>
+	<script src="./assets/js/index-sc-team.js"></script>
 
 </body>
 

@@ -6,7 +6,7 @@ async function GET_ACCOUNT(PARAM_UID) {
     });
 
     const { data } = res.data;
-    const list = data.filter((n) => n.ptUID === PARAM_UID - 1);
+    const list = data.filter((n) => n.ptUID === PARAM_UID);
     let listCount = list.length;
 
     $("#account-table tbody").empty();

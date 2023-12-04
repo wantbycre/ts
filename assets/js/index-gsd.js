@@ -41,17 +41,16 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     					</div>
     					<div class="d-flex aps-bottom">
     						<div>${data.dkbCnt}</div>
-    						<div></div>
+    						<div>${data.cnCnt || ``}</div>
     					</div>
     				</div>
     			</button>
     		`);
     });
-
-    // console.log(sgdArray);
 }
 
 // 설계 등록
+// 아직안됨
 function POST_DESIGN(
     dkbDesignDate,
     floor,
@@ -86,7 +85,7 @@ function POST_DESIGN(
                     },
                 },
             }).then((res) => {
-                location.href = "/index-sgd.html";
+                location.href = "/index-gsd.html";
             });
         })
         .catch(function (error) {
@@ -137,6 +136,20 @@ function PUT_DESIGN(
         });
 }
 
+// 자료 삭제
+function DELETE_PROJECT_GSD(UID) {
+    http({
+        method: "DELETE",
+        url: "design/" + UID,
+    })
+        .then((res) => {
+            listsGsdFecth();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 // 히스토리 조회
 async function GET_CONSTRUCTION(scheduleUID) {
     const res = await http({
@@ -147,59 +160,37 @@ async function GET_CONSTRUCTION(scheduleUID) {
     return res.data;
 }
 
+function getHitoryDetail(el) {
+    return `
+		${moment(el.scheduleDate).year()}년 
+		${moment(el.scheduleDate).month() + 1}월 
+		${moment(el.scheduleDate).date()}일<br />
+	`;
+}
+
 // 히스토리 출력
 function setHistory(data) {
-    let result = "";
-
-    // console.log(data);
-
     data.forEach((el) => {
-        if (el.changeType === "데크보설계이력") {
-            result += `
-				<div class="text-danger">데크보 설계이력</div>
-				설 계 일 :
-				${moment(el.regDate).year()}년 
-				${moment(el.regDate).month() + 1}월 
-				${moment(el.regDate).date()}일<br />
-				설계 변경일 1차 : 
-				${moment(el.scheduleDate).year()}년 
-				${moment(el.scheduleDate).month() + 1}월 
-				${moment(el.scheduleDate).date()}일<br/><br/>
-			`;
-        } else if (el.changeType === "데크보입고이력") {
-            result += `
-				<div class="text-danger">데크보 입고이력</div>
-				입 고 일 :
-				${moment(el.regDate).year()}년 
-				${moment(el.regDate).month() + 1}월 
-				${moment(el.regDate).date()}일<br />
-				입고일 변경 1차 : 
-				${moment(el.scheduleDate).year()}년 
-				${moment(el.scheduleDate).month() + 1}월 
-				${moment(el.scheduleDate).date()}일<br/>
-				데크보 분할입고이력<br />
-				구간분할입고 1회차 :<br /><br />
-			`;
-        } else if (el.changeType === "코너철판설계이력") {
-            result += `
-				<div class="text-danger">코너철판 설계이력</div>
-				코너 철판 설계일 :
-				${moment(el.scheduleDate).year()}년 
-				${moment(el.scheduleDate).month() + 1}월 
-				${moment(el.scheduleDate).date()}일<br/><br />
-			`;
-        } else if (el.changeType === "코너철판입고이력") {
-            result += `
-				<div class="text-danger">코너철판 입고이력</div>
-				코너 철판 입고일 :
-				${moment(el.scheduleDate).year()}년 
-				${moment(el.scheduleDate).month() + 1}월 
-				${moment(el.scheduleDate).date()}일<br/><br />
-			`;
+        switch (el.changeType) {
+            case "데크보설계이력":
+                $(".history1").append(getHitoryDetail(el));
+                break;
+            case "데크보입고이력":
+                $(".history2").append(getHitoryDetail(el));
+                break;
+            case "코너철판설계이력":
+                $(".history3").append(getHitoryDetail(el));
+                break;
+            case "코너철판입고이력":
+                $(".history4").append(getHitoryDetail(el));
+                break;
+            case "구간분할입고이력":
+                $(".history5").append(getHitoryDetail(el));
+                break;
+            default:
+                return;
         }
     });
-
-    $("#gsd-history").html(result);
 }
 
 // 공사 자료 조회
@@ -246,7 +237,7 @@ async function POST_SGD_FILE(filePath, fileType, files, memo) {
                 },
             }).then((_) => {
                 $("input[type=file]").val("");
-                listsSgdFecth();
+                listsGsdFecth();
             });
         })
         .catch((error) => {
@@ -262,7 +253,7 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete" data-uid="${el.UID}">
+			<a href="#" type="button" class="btn-delete gsd-delete" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
@@ -288,7 +279,7 @@ function tbodys(el) {
 				
 			</td>
 			<td style="border-left: 1px solid #000;">
-				<a href="#" type="button" class="btn-delete">
+				<a href="#" type="button" class="btn-delete gsd-delete">
 					<i class="fas fa-plus text-danger ml-1"></i>
 				</a>
 			</td>
@@ -297,7 +288,7 @@ function tbodys(el) {
 }
 
 // 공통자료 리스트 업데이트
-function listsSgdFecth() {
+function listsGsdFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
         console.log(res.data);
         $(
@@ -306,16 +297,16 @@ function listsSgdFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "승인도면_BOM_CP_스트럽":
+                case "변경승인도면_BOM_CP_스트럽":
                     $("#content-gsd-seung").append(lists(el));
                     break;
-                case "코너철판(변경)도면":
+                case "코너철판_변경설계도면":
                     $("#content-gsd-corner").append(lists(el));
                     break;
                 case "송장_색도면_상차사진":
                     $("#content-gsd-song").append(lists(el));
                     break;
-                case "난간대_설치":
+                case "난간대_설치팀":
                     $("#content-gsd-sulchi tbody").append(tbodys(el));
                     break;
                 default:
@@ -387,6 +378,33 @@ async function GET_DESIGN_DETAIL(scheduleUID) {
     return res.data;
 }
 
+// 메모등록/수정
+async function PUT_ETC_NOTE(etcNote) {
+    http({
+        method: "PUT",
+        url: "construction/etcNote",
+        data: {
+            scheduleUID,
+            etcNote,
+        },
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((res) => {
+                location.href = "/index-gsd.html";
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -413,15 +431,35 @@ $(function () {
 
         $(".modal-gongsa").modal();
 
-        console.log(scheduleDate);
-
         // FIXME: deckInputDate 이게 들어와야 하나? DECK입고일
         // FIXME: deckArea DECK입고일 / 입고면적 -> 사용자가 입력은 하나 기본 데이터는 얹어줘야하나?
         // FIXME: 누적면적 필요
 
-        // TODO:  입고일정 변경은 수시로
+        // TODO: 입고일정 변경은 수시로
         // TODO: 입고확정시 일정 변경 불가.
 
+        GET_DESIGN_DETAIL(scheduleUID).then((res) => {
+            const data = res.data[0];
+            const dkbDate = data.dkbDesignDate;
+            const pjDate = data.pjInputDate;
+            const ipDate = data.inputDate;
+            const pjInputDate = moment(pjDate).diff(moment(dkbDate), "days");
+
+            console.log("최초", data, scheduleDate);
+            // const inputDate = moment(ipDate).diff(moment(pjDate), "days");
+
+            // $("#floor").val(data.floor);
+
+            // $("#section").val(data.section);
+            // $("#area").val(data.area);
+            // $("#strup").val(data.strup);
+            // $("#dkbCnt").val(data.dkbCnt);
+            // $("#pjInputDate").val(pjInputDate).attr("selected", "selected");
+            // $("#inputDate").val(inputDate).attr("selected", "selected");
+            // $("#dkbDesignDate").datepicker().datepicker("setDate", dkbDate);
+
+            $("#inputDate").datepicker().datepicker("setDate", scheduleDate);
+        });
         $("#inputDate").datepicker().datepicker("setDate", scheduleDate);
 
         // 구간이력사항
@@ -430,48 +468,7 @@ $(function () {
         });
 
         // 파일리스트
-        listsSgdFecth();
-
-        // 수정
-        // if ($(this).hasClass("active")) {
-        //     isSubmitType = false;
-
-        //     GET_DESIGN_DETAIL(scheduleUID).then((res) => {
-        //         const data = res.data[0];
-        //         const dkbDate = data.dkbDesignDate;
-        //         const pjDate = data.pjInputDate;
-        //         const ipDate = data.inputDate;
-        //         const pjInputDate = moment(pjDate).diff(
-        //             moment(dkbDate),
-        //             "days"
-        //         );
-        //         const inputDate = moment(ipDate).diff(moment(pjDate), "days");
-
-        //         $("#floor").val(data.floor);
-        //         $("#section").val(data.section);
-        //         $("#area").val(data.area);
-        //         $("#strup").val(data.strup);
-        //         $("#dkbCnt").val(data.dkbCnt);
-        //         $("#pjInputDate").val(pjInputDate).attr("selected", "selected");
-        //         $("#inputDate").val(inputDate).attr("selected", "selected");
-        //         $("#dkbDesignDate").datepicker().datepicker("setDate", dkbDate);
-        //     });
-        // } else {
-        //     // 신규
-        //     $("#floor").val("");
-        //     $("#section").val("");
-        //     $("#area").val("");
-        //     $("#strup").val("");
-        //     $("#dkbCnt").val("");
-        //     $("#pjInputDate").val(10);
-        //     $("#inputDate").val(5);
-
-        //     // 설계일자 세팅
-        //     isSubmitType = true;
-        //     $("#dkbDesignDate")
-        //         .datepicker()
-        //         .datepicker("setDate", scheduleDate);
-        // }
+        listsGsdFecth();
     });
 
     // 난간대/설치팀
@@ -480,7 +477,7 @@ $(function () {
         scheduleUID = scheduleUid;
 
         // 파일리스트
-        listsSgdFecth(scheduleUID);
+        listsGsdFecth(scheduleUID);
     });
 
     $("#handleAddCalendar").click(function () {
@@ -551,41 +548,62 @@ $(function () {
     });
 
     // 특이사항 NOTE 메모
-    // FIXME: 여기 데이터 어디로~?
     $("#handleFileMemo").click(function () {
-        const text = $("#gsd-text").val();
+        const etcNote = $("#etcNote").val();
 
-        if (!text) return alertError("내용을 작성하세요.");
+        if (!etcNote) return alertError("내용을 작성하세요.");
 
-        POST_SGD_FILE("공사", "NOTE", [], text);
+        PUT_ETC_NOTE(etcNote);
+    });
+
+    // 자료 삭제
+    $(document).on("click", ".gsd-delete", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_GSD(uid);
+        });
     });
 
     // 승인도면 업로드
-    $("#handleFileGsdSeung").click(function () {
-        const file = $("#file-gsd-seung")[0];
+    // $("#handleFileGsdSeung").click(function () {
+    //     const file = $("#file-gsd-seung")[0];
 
-        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
+    //     if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공사", "승인도면_BOM_CP_스트럽", file.files);
-    });
+    //     POST_SGD_FILE("공사", "승인도면_BOM_CP_스트럽", file.files);
+    // });
 
     // 코너철판 업로드
-    $("#handleFileGsdCorner").click(function () {
-        const file = $("#file-gsd-corner")[0];
+    // $("#handleFileGsdCorner").click(function () {
+    //     const file = $("#file-gsd-corner")[0];
 
-        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
+    //     if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공사", "코너철판(변경)도면", file.files);
-    });
+    //     POST_SGD_FILE("공사", "코너철판(변경)도면", file.files);
+    // });
 
     // 송장 업로드
-    $("#handleFileGsdSong").click(function () {
-        const file = $("#file-gsd-song")[0];
+    // $("#handleFileGsdSong").click(function () {
+    //     const file = $("#file-gsd-song")[0];
 
-        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
+    //     if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공사", "송장_색도면_상차사진", file.files);
-    });
+    //     POST_SGD_FILE("공사", "송장_색도면_상차사진", file.files);
+    // });
 
     // 난간대/설치팀
     $("#handleFileSeolchi").click(function () {
@@ -595,6 +613,6 @@ $(function () {
         if (file.files.length === 0 && !val)
             return alertError("메모 또는 파일첨부 하세요.");
 
-        POST_SGD_FILE("공사", "난간대_설치", file.files, val);
+        POST_SGD_FILE("공사", "난간대_설치팀", file.files, val);
     });
 });

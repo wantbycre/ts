@@ -262,11 +262,7 @@ table.table .complate-tr td button {
 .aps-button.gray .aps-top,
 .aps-button.gray .aps-middle > div,
 .aps-button.gray .aps-bottom > div {
-    background: rgb(184, 184, 184) !important;
-}
-
-.aps-button.gray.blur {
-    opacity: 0.4;
+    background: rgb(218, 218, 218) !important;
 }
 
 .aps-button.brown .aps-bottom > div:last-child {
@@ -277,6 +273,11 @@ table.table .complate-tr td button {
 .aps-button.pink .aps-middle > div,
 .aps-button.pink .aps-bottom > div {
     background: #f8c7dd !important;
+}
+
+.aps-button.blur {
+    /* opacity: 0.4; */
+    filter: brightness(60%);
 }
 
 .aps-button.active {

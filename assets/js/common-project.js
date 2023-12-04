@@ -352,6 +352,10 @@ function setUniqueObj(DATAS) {
     // TODO: 공무/설계에 따라 링크 제거 및 추가
     // TODO: 권한에 따라 기성/노무비 컬럼을 추가해야합니다.
 
+    const currentPath = window.location.pathname;
+
+    console.log(currentPath);
+
     // 좌측 타이틀 적용
     uniqueObjArr.forEach((el, i) => {
         $("#chart-title tbody").append(`
@@ -403,6 +407,42 @@ function setUniqueObj(DATAS) {
 						<i class="fas fa-file-alt" style="font-size: 18px;"></i>
 					</a>
 				</td>
+				${
+                    currentPath === `/index-gpj.html` ||
+                    currentPath === `/index-gj-corner.html` ||
+                    currentPath === `/index-gj-jr.html` ||
+                    currentPath === `/index-gj-deck.html` ||
+                    currentPath === `/index-sc-team.html`
+                        ? `
+						<td>
+							<a 
+								href="#"
+								data-toggle="modal"
+								data-target=".modal-gisung"
+								data-uid="${el.UID}" 
+								data-code="${el.projectCode}"
+								data-name="${
+                                    currentPath === `/index-gpj.html`
+                                        ? el.pjName
+                                        : currentPath ===
+                                          `/index-gj-corner.html`
+                                        ? el.cornerName
+                                        : currentPath === `/index-gj-jr.html`
+                                        ? el.jrName
+                                        : currentPath === `/index-gj-deck.html`
+                                        ? el.deckName
+                                        : currentPath === `/index-sc-team.html`
+                                        ? el.scName
+                                        : ``
+                                }"
+								class="handleProjectGisungPop"
+							>
+								<i class="fas fa-file-alt" style="font-size: 18px;"></i>
+							</a>
+						</td>		
+					`
+                        : ``
+                }
 			</tr>
 		`);
     });

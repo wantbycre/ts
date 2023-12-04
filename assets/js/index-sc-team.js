@@ -13,10 +13,8 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(DATAS, thisYear, thisMonth);
 
     // 설계 완료 데이터만 추출
-    // 설계완료 / 코너철판입고전 / "코너철판출하완료"
-    const sgdArray = DATAS.filter(
-        (n) => n.stts === 3 || n.cnStts === 8 || n.cnStts === 9
-    );
+    // 조립 입고 확정 , 공사입고확정
+    const sgdArray = DATAS.filter((n) => n.cnStts === 9 || n.cnStts === 7);
 
     sgdArray.forEach((data, i) => {
         $(
@@ -30,7 +28,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
         ).empty().append(`
     			<button 
 					type="button" 
-					class="aps-button active ${data.cnStts === 9 ? `brown` : ``}"
+					class="aps-button active ${data.cnStts === 9 ? `green` : ``}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
@@ -49,43 +47,6 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     			</button>
     		`);
     });
-}
-
-// 공장 - 판재공장 입력
-function PUT_FACTORY(cnOutputDate) {
-    http({
-        method: "PUT",
-        url: "factory/corner",
-        data: {
-            scheduleUID,
-            cnOutputDate,
-        },
-    })
-        .then((res) => {
-            swal(res.data.message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((res) => {
-                location.href = "/index-gj-corner.html";
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-// 프로젝트 상세조회
-async function GET_DESIGN_DETAIL(scheduleUID) {
-    const res = await http({
-        method: "GET",
-        url: "design/" + scheduleUID,
-    });
-
-    return res.data;
 }
 
 // 코너철판 자료 조회
@@ -139,19 +100,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
         });
 }
 
-// 공통자료 상세 리스트
 function lists(el) {
-    return `
-		<div class="d-flex">
-			<a href="${el.filePath}" class="file-list" download="${el.fileName}" style="width: 100%">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-				${el.fileName}
-			</a>
-		</div>
-	`;
-}
-
-function lists2(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
@@ -168,19 +117,19 @@ function lists2(el) {
 // 공통자료 리스트 업데이트
 function listsSgdFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         $(".file-content").empty();
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "코너철판_설계도면":
-                    $("#content-sgd-sul").append(lists(el));
+                case "변경승인도면_BOM_CP_스트럽":
+                    $("#content-gsd-seung").append(lists(el));
                     break;
                 case "코너철판_변경설계도면":
-                    $("#content-sgd-bsul").append(lists(el));
+                    $("#content-gsd-corner").append(lists(el));
                     break;
-                case "코너철판_기성":
-                    $("#content-gisung").append(lists2(el));
+                case "설치팀_노무비":
+                    $("#content-gsd-corner").append(lists(el));
                     break;
                 default:
                     return;
@@ -215,7 +164,7 @@ function alertError(text) {
 }
 
 $(function () {
-    // 공장-코너철판 입력 팝업
+    // 설치팀 입력 팝업
     $(document).on("click", ".aps-button.active", function () {
         // const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
@@ -227,29 +176,12 @@ $(function () {
         scheduleCode = code;
         scheduleDate = date;
 
-        $(".modal-panjea").modal();
-        $("#cnOutputDate").datepicker();
+        $(".modal-sc-team").modal();
 
         listsSgdFecth();
-
-        GET_DESIGN_DETAIL(scheduleUID).then((res) => {
-            const data = res.data[0];
-            const today = moment(new Date()).format("YYYY-MM-DD");
-
-            $("#cnOutputDate")
-                .datepicker()
-                .datepicker("setDate", data.cnOutputDate || today);
-        });
     });
 
-    // 공장 - 코너철판 저장
-    $("#handleSubmit").click(function () {
-        const cnOutputDate = $("#cnOutputDate").val();
-
-        PUT_FACTORY(cnOutputDate);
-    });
-
-    // 공장-코너철판 기성 팝업
+    // 설치팀 기성 팝업
     $(document).on("click", ".handleProjectGisungPop", function () {
         const name = $(this).data("name");
         const code = $(this).data("code");
@@ -261,13 +193,13 @@ $(function () {
         $(".gisung-title").text(name);
     });
 
-    // 공장-코너철판 기성 업로드
+    // 설치팀 기성 업로드
     $("#handleFileGisung").click(function () {
         const file = $("#file-gisung")[0];
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공장", "코너철판_기성", file.files);
+        POST_SGD_FILE("설치", "설치팀_노무비", file.files);
     });
 
     // 자료 삭제

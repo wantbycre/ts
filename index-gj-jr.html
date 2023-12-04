@@ -152,42 +152,7 @@
 							<h2>도면자료 다운로드</h2>
 							<div class="file-box mt-4">
 								<div class="file-title">승인(변경)도면 [bom/cp/스트럽]</div>
-								<div class="file-content">
-									<div class="d-flex justify-content-between">
-										<a href="#" class="file-list">
-											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-											승인(변경)도면1.pdf </a>
-										<a href="#" type="button" class="btn-delete">
-											<i class="fas fa-plus text-danger ml-1"></i>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<a href="#" class="file-list">
-											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-											승인(변경)도면2승인(변경)도면2승인(변경)도면2.pdf
-										</a>
-										<a href="#" type="button" class="btn-delete">
-											<i class="fas fa-plus text-danger ml-1"></i>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<a href="#" class="file-list">
-											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-											승인(변경)도면3.pdf
-										</a>
-										<a href="#" type="button" class="btn-delete">
-											<i class="fas fa-plus text-danger ml-1"></i>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<a href="#" class="file-list">
-											<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-											승인(변경)도면4.pdf
-										</a>
-										<a href="#" type="button" class="btn-delete">
-											<i class="fas fa-plus text-danger ml-1"></i>
-										</a>
-									</div>
+								<div class="file-content" id="content-gsd-seung">
 								</div>
 							</div>
 						</div>
@@ -233,7 +198,9 @@
 		<div class="modal-dialog modal-dialog-centered modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title" id="exampleModalLongTitle">자재비 기성 집계</h2>
+					<h2 class="modal-title" id="exampleModalLongTitle">
+						<span class="gisung-title"></span> 기성 파일
+					</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -241,57 +208,22 @@
 				<div class="modal-body">
 					<div class="d-flex">
 						<div class="form-group form-group-default mb-0">
-							<label>기성 파일 업로드</label>
-							<input id="Name" type="file" class="form-control" multiple>
+							<label for="file-gisung">기성 파일 업로드</label>
+							<input id="file-gisung" type="file" class="form-control" multiple>
 						</div>
-						<button type="button" class="btn btn-primary px-4 ml-2">업로드</button>
+						<button type="button" class="btn btn-primary px-4 ml-2" id="handleFileGisung">업로드</button>
 					</div>
 
 					<div class="file-box mt-4">
 						<div class="file-title">기성 자료</div>
-						<div class="file-content">
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									2023-01 기성 자료 1.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									2023-01 기성 자료 2.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									2023-01 기성 자료 3.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									2023-01 기성 자료 4.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
+						<div class="file-content" id="content-gisung">
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer justify-content-center">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 200px;">등록</button>
+					<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
+						style="width: 100px;">확인</button>
 				</div>
 			</div>
 		</div>

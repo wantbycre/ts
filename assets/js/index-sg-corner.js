@@ -2,6 +2,81 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 
+// 차트 기본 데이터
+function standardCartData(data, thisYear, thisMonth) {
+    $(
+        "#chart-content table[data-index=" +
+            (thisYear + thisMonth) +
+            "] tbody tr[data-uid=" +
+            data.UID +
+            "] td[data-date=" +
+            data.dkbDesignDate +
+            "]"
+    ).empty().append(`
+				<div class="d-flex add-section">
+					<div class="d-flex">
+						<button 
+							type="button" 
+							class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
+							data-product-uid="${data.UID}"
+							data-schedule-uid="${data.scheduleUID}"
+							data-div-uid="${data.divUID}"
+						>
+							<div class="aps-content">
+								<div class="aps-top">${data.floor}F ${data.section}구간</div>
+								<div class="d-flex aps-middle">
+									<div>${data.area}</div>
+									<div>${data.strup}</div>
+								</div>
+								<div class="d-flex aps-bottom">
+									<div>${data.dkbCnt}</div>
+									<div>${data.cnCnt || ``}</div>
+								</div>
+							</div>
+						</button>
+						<button type="button" class="aps-plus">
+							<span><i class="fas fa-plus"></i></span>
+						</button>
+					</div>
+				</div>
+    		`);
+}
+
+// 추가 기본 데이터
+function addCartData(data, thisYear, thisMonth) {
+    $(
+        "#chart-content table[data-index=" +
+            (thisYear + thisMonth) +
+            "] tbody tr[data-uid=" +
+            data.UID +
+            "] td[data-date=" +
+            data.dkbDesignDate +
+            "] .add-section"
+    ).prepend(`
+			<div class="d-flex">
+				<button 
+					type="button" 
+					class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
+					data-product-uid="${data.UID}"
+					data-schedule-uid="${data.scheduleUID}"
+					data-div-uid="${data.divUID}"
+				>
+					<div class="aps-content">
+						<div class="aps-top">${data.floor}F ${data.section}구간</div>
+						<div class="d-flex aps-middle">
+							<div>${data.area}</div>
+							<div>${data.strup}</div>
+						</div>
+						<div class="d-flex aps-bottom">
+							<div>${data.dkbCnt}</div>
+							<div>${data.cnCnt || ``}</div>
+						</div>
+					</div>
+				</button>
+			</div>
+	`);
+}
+
 /**
  *
  * common-project 호출하는 함수
@@ -15,41 +90,14 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     // 설계 완료 데이터만 추출
     const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
-    // FIXME: cnCnt 를 넣어줘야 함.
-
     sgdArray.forEach((data, i) => {
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "]"
-        ).empty().append(`
-    			<button 
-					type="button" 
-					class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
-					data-product-uid="${data.UID}"
-					data-schedule-uid="${data.scheduleUID}"
-					data-div-uid="${data.divUID}"
-				>
-    				<div class="aps-content">
-    					<div class="aps-top">${data.floor}F ${data.section}구간</div>
-    					<div class="d-flex aps-middle">
-    						<div>${data.area}</div>
-    						<div>${data.strup}</div>
-    					</div>
-    					<div class="d-flex aps-bottom">
-    						<div>${data.dkbCnt}</div>
-    						<div>${data.cnCnt || 0}</div>
-    					</div>
-    				</div>
-    			</button>
-    		`);
+        // 현재 프로젝트와 이전 프로젝트가 같다면
+        if (data.UID === sgdArray[i - 1]?.UID) {
+            addCartData(data, thisYear, thisMonth);
+        } else {
+            standardCartData(data, thisYear, thisMonth);
+        }
     });
-
-    // console.log(sgdArray);
 }
 
 // 코너철판 등록수정
@@ -74,8 +122,22 @@ function PUT_DESIGN(cnDesignDate, cnCnt, cnInputDate, cnOutputDate) {
                     },
                 },
             }).then((res) => {
-                location.href = "/index-sgd-corner.html";
+                location.href = "/index-sg-corner.html";
             });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+// 자료 삭제
+function DELETE_PROJECT_SG_CORNER(UID) {
+    http({
+        method: "DELETE",
+        url: "design/" + UID,
+    })
+        .then((res) => {
+            listsSgdFecth();
         })
         .catch(function (error) {
             console.log(error);
@@ -141,7 +203,7 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete" data-uid="${el.UID}">
+			<a href="#" type="button" class="btn-delete sg-corner-delete" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
@@ -195,7 +257,7 @@ $(function () {
     $(document).on("click", ".aps-button.active", function () {
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
-        const date = $(this).parent().data("date");
+        const date = $(this).parents("td").data("date");
 
         scheduleUID = scheduleUid;
         scheduleCode = code;
@@ -238,7 +300,8 @@ $(function () {
 
     // 설계 - 코너철판 등록/저장
     $("#handleSgdSubmit").click(function () {
-        const cnDesignDate = $("#cnDesignDate").val();
+        const cnDesignDate =
+            $("#cnDesignDate").val() || moment().format("YYYY-MM-DD");
         const cnCnt = $("#cnCnt").val();
         const cnInputDate = $("#cnInputDate").val();
         const standardCnOutputDate = $("#cnOutputDate").val();
@@ -250,6 +313,28 @@ $(function () {
             .format("YYYY-MM-DD");
 
         PUT_DESIGN(cnDesignDate, cnCnt, cnInputDate, cnOutputDate);
+    });
+
+    // 자료 삭제
+    $(document).on("click", ".sg-corner-delete", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_SG_CORNER(uid);
+        });
     });
 
     // 이메일 공유 2중팝업 처리

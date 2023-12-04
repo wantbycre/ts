@@ -3,6 +3,82 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 let isSubmitType = true; // t = 신규, f = 수정
+
+// 차트 기본 데이터
+function standardCartData(data, thisYear, thisMonth) {
+    $(
+        "#chart-content table[data-index=" +
+            (thisYear + thisMonth) +
+            "] tbody tr[data-uid=" +
+            data.UID +
+            "] td[data-date=" +
+            data.dkbDesignDate +
+            "]"
+    ).empty().append(`
+				<div class="d-flex add-section">
+					<div class="d-flex">
+						<button 
+							type="button" 
+							class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
+							data-product-uid="${data.UID}"
+							data-schedule-uid="${data.scheduleUID}"
+							data-div-uid="${data.divUID}"
+						>
+							<div class="aps-content">
+								<div class="aps-top">${data.floor}F ${data.section}구간</div>
+								<div class="d-flex aps-middle">
+									<div>${data.area}</div>
+									<div>${data.strup}</div>
+								</div>
+								<div class="d-flex aps-bottom">
+									<div>${data.dkbCnt}</div>
+									<div>${data.cnCnt || ``}</div>
+								</div>
+							</div>
+						</button>
+						<button type="button" class="aps-plus">
+							<span><i class="fas fa-plus"></i></span>
+						</button>
+					</div>
+				</div>
+    		`);
+}
+
+// 추가 기본 데이터
+function addCartData(data, thisYear, thisMonth) {
+    $(
+        "#chart-content table[data-index=" +
+            (thisYear + thisMonth) +
+            "] tbody tr[data-uid=" +
+            data.UID +
+            "] td[data-date=" +
+            data.dkbDesignDate +
+            "] .add-section"
+    ).prepend(`
+			<div class="d-flex">
+				<button 
+					type="button" 
+					class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
+					data-product-uid="${data.UID}"
+					data-schedule-uid="${data.scheduleUID}"
+					data-div-uid="${data.divUID}"
+				>
+					<div class="aps-content">
+						<div class="aps-top">${data.floor}F ${data.section}구간</div>
+						<div class="d-flex aps-middle">
+							<div>${data.area}</div>
+							<div>${data.strup}</div>
+						</div>
+						<div class="d-flex aps-bottom">
+							<div>${data.dkbCnt}</div>
+							<div>${data.cnCnt || ``}</div>
+						</div>
+					</div>
+				</button>
+			</div>
+	`);
+}
+
 /**
  *
  * common-project 호출하는 함수
@@ -17,38 +93,13 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     const sgdArray = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
     sgdArray.forEach((data, i) => {
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "]"
-        ).empty().append(`
-    			<button 
-					type="button" 
-					class="aps-button active ${data.cnStts === 8 ? `brown` : ``}"
-					data-product-uid="${data.UID}"
-					data-schedule-uid="${data.scheduleUID}"
-					data-div-uid="${data.divUID}"
-				>
-    				<div class="aps-content">
-    					<div class="aps-top">${data.floor}F ${data.section}구간</div>
-    					<div class="d-flex aps-middle">
-    						<div>${data.area}</div>
-    						<div>${data.strup}</div>
-    					</div>
-    					<div class="d-flex aps-bottom">
-    						<div>${data.dkbCnt}</div>
-    						<div></div>
-    					</div>
-    				</div>
-    			</button>
-    		`);
+        // 현재 프로젝트와 이전 프로젝트가 같다면
+        if (data.UID === sgdArray[i - 1]?.UID) {
+            addCartData(data, thisYear, thisMonth);
+        } else {
+            standardCartData(data, thisYear, thisMonth);
+        }
     });
-
-    // console.log(sgdArray);
 }
 
 // 설계 등록
@@ -137,6 +188,20 @@ function PUT_DESIGN(
         });
 }
 
+// 자료 삭제
+function DELETE_PROJECT_SGD(UID) {
+    http({
+        method: "DELETE",
+        url: "design/" + UID,
+    })
+        .then((res) => {
+            listsSgdFecth();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 // 설계 자료 조회
 async function GET_DESIGN_FILE(scheduleUID) {
     const res = await http({
@@ -196,7 +261,7 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete" data-uid="${el.UID}">
+			<a href="#" type="button" class="btn-delete sgd-delete" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
@@ -211,10 +276,10 @@ function listsSgdFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "승인도면":
+                case "승인도면_BOM_CP_스트럽":
                     $("#content-sgd-seung").append(lists(el));
                     break;
-                case "변경승인도면":
+                case "변경승인도면_BOM_CP_스트럽":
                     $("#content-sgd-byon").append(lists(el));
                     break;
                 case "승인요청서":
@@ -289,29 +354,19 @@ async function GET_DESIGN_DETAIL(scheduleUID) {
     return res.data;
 }
 
-function alertError(text) {
-    swal(text, {
-        icon: "error",
-        buttons: {
-            confirm: {
-                className: "btn btn-danger",
-            },
-        },
-    });
-}
-
 $(function () {
     // 설계-데크보 입력 팝업
-    $(document).on("click", ".aps-button.active", function () {
+    $(document).on("click", ".aps-button, .aps-plus", function () {
         const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
+        const tdDate = $(this).parents("td").data("date");
         const date = $(this).parent().data("date");
 
         projectUID = productUid;
         scheduleUID = scheduleUid;
         scheduleCode = code;
-        scheduleDate = date;
+        scheduleDate = tdDate || date;
 
         $(".modal-seol").modal();
         listsSgdFecth();
@@ -407,6 +462,28 @@ $(function () {
         }
     });
 
+    // 자료 삭제
+    $(document).on("click", ".sgd-delete", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_SGD(uid);
+        });
+    });
+
     // 이메일 공유 2중팝업 처리
     $(document).on(
         {
@@ -440,7 +517,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "승인도면", file.files);
+        POST_SGD_FILE("설계", "승인도면_BOM_CP_스트럽", file.files);
     });
 
     // 변경승인도면 업로드
@@ -449,7 +526,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "변경승인도면", file.files);
+        POST_SGD_FILE("설계", "변경승인도면_BOM_CP_스트럽", file.files);
     });
 
     // 승인요청서 업로드

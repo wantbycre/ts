@@ -57,7 +57,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     					</div>
     					<div class="d-flex aps-bottom">
     						<div>${data.dkbCnt}</div>
-    						<div></div>
+    						<div>${data.cnCnt || ``}</div>
     					</div>
     				</div>
     			</button>
@@ -92,6 +92,20 @@ function PUT_FACTORY(stts) {
         });
 }
 
+// 자료 삭제
+function DELETE_PROJECT_GJ_JR(UID) {
+    http({
+        method: "DELETE",
+        url: "design/" + UID,
+    })
+        .then((res) => {
+            listsSgdFecth();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 // 조립공장 자료 조회
 async function GET_DESIGN_FILE(scheduleUID) {
     const res = await http({
@@ -103,16 +117,22 @@ async function GET_DESIGN_FILE(scheduleUID) {
 }
 
 // 조립공장 상세 리스트
-function lists(el) {
+function lists(el, bool) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
+			${
+                bool
+                    ? `
+					<a href="#" type="button" class="btn-delete gj-jr-delete" data-uid="${el.UID}">
+						<i class="fas fa-plus text-danger"></i>
+					</a>`
+                    : ``
+            }
+			
 		</div>
 	`;
 }
@@ -125,8 +145,14 @@ function listsSgdFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
+                case "변경승인도면_BOM_CP_스트럽":
+                    $("#content-gsd-seung").append(lists(el, false));
+                    break;
                 case "송장_색도면_상차사진":
-                    $("#content-jr").append(lists(el));
+                    $("#content-jr").append(lists(el, true));
+                    break;
+                case "조립공장_기성":
+                    $("#content-gisung").prepend(lists(el, true));
                     break;
                 default:
                     return;
@@ -225,6 +251,28 @@ $(function () {
         listsSgdFecth();
     });
 
+    // 자료 삭제
+    $(document).on("click", ".gj-jr-delete", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_GJ_JR(uid);
+        });
+    });
+
     // 공장 - 조립공장 제작완료 등록
     $("#handlePurpleSubmit").click(function () {
         PUT_FACTORY(5);
@@ -242,5 +290,26 @@ $(function () {
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         POST_SGD_FILE("공장", "송장_색도면_상차사진", file.files);
+    });
+
+    // 공장-조립공장 기성 팝업
+    $(document).on("click", ".handleProjectGisungPop", function () {
+        const name = $(this).data("name");
+        const code = $(this).data("code");
+
+        scheduleCode = code;
+
+        listsSgdFecth();
+
+        $(".gisung-title").text(name);
+    });
+
+    // 공장-조립공장 기성 업로드
+    $("#handleFileGisung").click(function () {
+        const file = $("#file-gisung")[0];
+
+        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
+
+        POST_SGD_FILE("공장", "조립공장_기성", file.files);
     });
 });

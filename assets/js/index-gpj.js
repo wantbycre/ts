@@ -24,7 +24,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 "] tbody tr[data-uid=" +
                 data.UID +
                 "] td[data-date=" +
-                data.inputDate +
+                data.pjInputDate +
                 "]"
         ).empty().append(`
     			<button 
@@ -42,7 +42,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     					</div>
     					<div class="d-flex aps-bottom">
     						<div>${data.dkbCnt}</div>
-    						<div></div>
+    						<div>${data.cnCnt || ``}</div>
     					</div>
     				</div>
     			</button>
@@ -87,6 +87,104 @@ async function GET_DESIGN_DETAIL(scheduleUID) {
     return res.data;
 }
 
+// 자료 조회
+async function GET_DESIGN_FILE(scheduleUID) {
+    const res = await http({
+        method: "GET",
+        url: "design/file/" + scheduleUID,
+    });
+
+    return res.data;
+}
+
+// 기성 자료 업로드
+async function POST_SGD_FILE(filePath, fileType, files) {
+    const formData = new FormData();
+
+    // 다중 파일
+    for (let i = 0; i < files.length; i++) {
+        formData.append(
+            `project/${scheduleCode}/${filePath}/${fileType}`,
+            files[i]
+        );
+    }
+
+    formData.append("scheduleUID", scheduleUID);
+    formData.append("fileType", fileType);
+
+    http({
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        method: "POST",
+        url: "design/file",
+        data: formData,
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((_) => {
+                $("input[type=file]").val("");
+                listsSgdFecth();
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+// 공통자료 상세 리스트
+function lists(el) {
+    return `
+		<div class="d-flex justify-content-between">
+			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				${el.fileName}
+			</a>
+			<a href="#" type="button" class="btn-delete sg-corner-delete" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
+		</div>
+	`;
+}
+
+// 공통자료 리스트 업데이트
+function listsSgdFecth() {
+    GET_DESIGN_FILE(scheduleUID).then((res) => {
+        console.log(res.data);
+        $(".file-content").empty();
+
+        res.data.forEach((el) => {
+            switch (el.fileType) {
+                case "판재공장_기성":
+                    $("#content-gisung").prepend(lists(el));
+                    break;
+                default:
+                    return;
+            }
+        });
+    });
+}
+
+// 자료 삭제
+function DELETE_PROJECT_SG_CORNER(UID) {
+    http({
+        method: "DELETE",
+        url: "design/" + UID,
+    })
+        .then((res) => {
+            listsSgdFecth();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -115,11 +213,12 @@ $(function () {
         $("#pjInputDate").datepicker();
 
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
-            // const data = res.data[0];
+            const data = res.data[0];
             const today = moment(new Date()).format("YYYY-MM-DD");
 
-            // TODO: 판재공장 입고일(data.pjInputDate)이 필요한가? 지금은 new Date()로 처리
-            $("#pjInputDate").datepicker().datepicker("setDate", today);
+            $("#pjInputDate")
+                .datepicker()
+                .datepicker("setDate", data.pjInputDate || today);
         });
     });
 
@@ -128,5 +227,48 @@ $(function () {
         const pjInputDate = $("#pjInputDate").val();
 
         PUT_FACTORY(pjInputDate);
+    });
+
+    // 공장-판재공장 기성 팝업
+    $(document).on("click", ".handleProjectGisungPop", function () {
+        const name = $(this).data("name");
+        const code = $(this).data("code");
+
+        scheduleCode = code;
+
+        listsSgdFecth();
+
+        $(".gisung-title").text(name);
+    });
+
+    // 공장-판재공장 기성 업로드
+    $("#handleFileGisung").click(function () {
+        const file = $("#file-gisung")[0];
+
+        if (file.files.length === 0) return alertError("파일을 첨부하세요.");
+
+        POST_SGD_FILE("공장", "판재공장_기성", file.files);
+    });
+
+    // 자료 삭제
+    $(document).on("click", ".sg-corner-delete", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_SG_CORNER(uid);
+        });
     });
 });
