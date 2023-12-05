@@ -517,9 +517,16 @@ $(function () {
                 confirm: {
                     className: "btn btn-warning",
                 },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
             },
         }).then((res) => {
-            PUT_PASSWORD(PARAM_UID, pw);
+            if (res) {
+                PUT_PASSWORD(PARAM_UID, pw);
+            }
         });
     });
 });

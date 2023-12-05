@@ -506,7 +506,7 @@ $(function () {
         POST_SGD_FILE("설계", "승인요청서", file.files);
     });
 
-    Kakao.init("ec0f051073badccef5ffb3dee53acf4e"); // 사용하려는 앱의 JavaScript 키 입력
+    Kakao.init("24523c2e081a1bcaa9cfed95ce009faf"); // 사용하려는 앱의 JavaScript 키 입력
     Kakao.Share.createDefaultButton({
         container: "#kakaotalk-sharing-btn",
         objectType: "text",

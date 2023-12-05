@@ -45,30 +45,25 @@
 						</div>
 						<div class="card-body">
 							<div class="user-profile text-center">
-								<div class="name">홍길동</div>
-								<div class="job">설계팀</div>
-								<div class="desc">010-1234-1234</div>
+								<div class="name header-name"></div>
+								<div class="job header-position"></div>
+								<div class="desc header-tel" style="color: #444"></div>
 							</div>
 						</div>
 						<div class="card-footer">
 							<div class="form-group d-flex align-items-center form-label-width">
-								<label for="companyName" class="placeholder">현재 비밀번호</label>
-								<input id="companyName" type="text" class="form-control" style="width: 400px;"
-									placeholder="비밀번호를 입력하세요.">
-							</div>
-							<div class="form-group d-flex align-items-center form-label-width">
-								<label for="companyName1" class="placeholder">새 비밀번호</label>
-								<input id="companyName1" type="text" class="form-control" style="width: 400px;"
+								<label for="header-newPw" class="placeholder">새 비밀번호</label>
+								<input id="header-newPw" type="password" class="form-control" style="width: 400px;"
 									placeholder="새 비밀번호를 입력하세요.">
 							</div>
 							<div class="form-group d-flex align-items-center form-label-width">
-								<label for="companyName2" class="placeholder">새 비밀번호 확인</label>
-								<input id="companyName2" type="text" class="form-control" style="width: 400px;"
+								<label for="header-confirmPw" class="placeholder">새 비밀번호 확인</label>
+								<input id="header-confirmPw" type="password" class="form-control" style="width: 400px;"
 									placeholder="새 비밀번호를 입력하세요.">
 							</div>
 
 							<div class="text-center my-4">
-								<button type="button" class="btn btn-primary">변경하기</button>
+								<button type="button" class="btn btn-primary" id="headerHandleChangePw">변경하기</button>
 							</div>
 						</div>
 					</div>
@@ -88,10 +83,13 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/profile.js"></script>
 
 </body>
 <script>

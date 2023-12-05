@@ -170,21 +170,21 @@ $(function () {
                 return alertError("비밀번호 재확인 하세요.");
             }
 
-            // POST_PARTNER(
-            //     ptUID,
-            //     partnerName,
-            //     manager,
-            //     partnerTel,
-            //     bank,
-            //     bankNum,
-            //     postNum,
-            //     addr1,
-            //     addr2,
-            //     memo
-            // );
-
             POST_PARTNER_ID(ptUID, userId, pw).then((res) => {
-                console.log(res);
+                if (res.status === 200) {
+                    POST_PARTNER(
+                        ptUID,
+                        partnerName,
+                        manager,
+                        partnerTel,
+                        bank,
+                        bankNum,
+                        postNum,
+                        addr1,
+                        addr2,
+                        memo
+                    );
+                }
             });
         } else {
             POST_PARTNER(
@@ -201,6 +201,4 @@ $(function () {
             );
         }
     });
-
-    // 옵션 계정
 });

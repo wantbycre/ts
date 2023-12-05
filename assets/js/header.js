@@ -1,3 +1,14 @@
+const getUserID = sessionStorage.getItem("userUID");
+
+// 유저정보 상세
+async function GET_MY_USER_DETAIL(UID) {
+    const res = await http({
+        method: "GET",
+        url: "user/" + UID,
+    });
+    return res.data;
+}
+
 $(function () {
     // 로그아웃
     // $("#handleLogout").click(function () {
@@ -8,6 +19,7 @@ $(function () {
 
     const path = $(location).attr("pathname");
 
+    // console.log("userUID", getUserID);
     // console.log(path);
 
     switch (path) {
@@ -18,18 +30,7 @@ $(function () {
         case "/dashboard.html":
             $("#nav-list > li").eq(2).addClass("active");
             break;
-        case "/account1.html":
-        case "/account2.html":
-        case "/account3.html":
-        case "/account4.html":
-        case "/account5.html":
-        case "/account6.html":
-        case "/account7.html":
-        case "/account8.html":
-        case "/account9.html":
-        case "/account10.html":
-        case "/account11.html":
-        case "/account12.html":
+        case "/account.html":
         case "/account-form.html":
         case "/account-form-detail.html":
             $("#nav-list > li").eq(2).addClass("active");
@@ -53,6 +54,16 @@ $(function () {
             $("#nav-list > li").eq(6).addClass("active");
             break;
         default:
-            return;
+            null;
     }
+
+    // 마이페이지 개인정보
+    GET_MY_USER_DETAIL(getUserID).then((data) => {
+        const { userName, position, telNum } = data.data[0];
+
+        // console.log(data.data[0]);
+        $(".header-name").text(userName);
+        $(".header-position").text(position);
+        $(".header-tel").text(telNum);
+    });
 });
