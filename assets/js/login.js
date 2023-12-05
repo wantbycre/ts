@@ -77,7 +77,14 @@ $(function () {
                 sessionStorage.setItem("userUID", data.userUID);
             })
             .catch((res) => {
-                console.log(res);
+                swal(res.response.data.message, {
+                    icon: "error",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-danger",
+                        },
+                    },
+                });
             });
     });
 

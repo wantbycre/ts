@@ -390,6 +390,9 @@ function setUniqueObj(DATAS) {
 						href="#"
 						data-toggle="modal"
 						data-target=".modal-seolchi"
+						data-uid="${el.UID}" 
+						data-name="${el.scName}"
+						data-code="${el.projectCode}"
 						data-schedule-uid="${el.scheduleUID}" 
 						class="handleProjectSeolchi"
 					>

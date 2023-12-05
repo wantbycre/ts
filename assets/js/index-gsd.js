@@ -1,4 +1,4 @@
-// let projectUID = 0;
+let gsdProjectUID = 0;
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
@@ -84,7 +84,7 @@ function POST_DESIGN(
         method: "POST",
         url: "design",
         data: {
-            projectUID,
+            projectUID: gsdProjectUID,
             dkbDesignDate, // 설계일
             floor, // 구간정보 입력 - 층
             section, // 구간정보 입력 - 구간
@@ -155,20 +155,6 @@ function PUT_DESIGN(
         });
 }
 
-// 자료 삭제
-function DELETE_PROJECT_GSD(UID) {
-    http({
-        method: "DELETE",
-        url: "design/" + UID,
-    })
-        .then((res) => {
-            listsGsdFecth();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 // 히스토리 조회
 async function GET_CONSTRUCTION(scheduleUID) {
     const res = await http({
@@ -222,6 +208,16 @@ async function GET_DESIGN_FILE(scheduleUID) {
     return res.data;
 }
 
+// 기성 자료 조회
+async function GET_PROJECT_FILE(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/file/" + projectUID,
+    });
+
+    return res.data;
+}
+
 // 공사 자료 업로드
 async function POST_SGD_FILE(filePath, fileType, files, memo) {
     const formData = new FormData();
@@ -229,7 +225,7 @@ async function POST_SGD_FILE(filePath, fileType, files, memo) {
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
         formData.append(
-            `project/${scheduleCode}/${filePath}/${fileType}`,
+            `design/${scheduleCode}/${filePath}/${fileType}`,
             files[i]
         );
     }
@@ -256,7 +252,49 @@ async function POST_SGD_FILE(filePath, fileType, files, memo) {
                 },
             }).then((_) => {
                 $("input[type=file]").val("");
-                listsGsdFecth();
+                listsFecth();
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+// 기성 자료 업로드
+async function POST_PROJECT_FILE(filePath, fileType, files, memo) {
+    const formData = new FormData();
+
+    // 다중 파일
+    for (let i = 0; i < files.length; i++) {
+        formData.append(
+            `project/${scheduleCode}/${filePath}/${fileType}`,
+            files[i]
+        );
+    }
+
+    formData.append("projectUID", gsdProjectUID);
+    formData.append("fileType", fileType);
+    formData.append("memo", memo);
+
+    http({
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        method: "POST",
+        url: "project/file",
+        data: formData,
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((_) => {
+                $("input[type=file]").val("");
+                listsFecthGisung();
             });
         })
         .catch((error) => {
@@ -295,7 +333,7 @@ function tbodys(el) {
 				
 			</td>
 			<td style="border-left: 1px solid #000;">
-				<a href="#" type="button" class="btn-delete gsd-delete">
+				<a href="#" type="button" class="btn-delete gsd-delete" data-uid="${el.UID}">
 					<i class="fas fa-plus text-danger ml-1"></i>
 				</a>
 			</td>
@@ -304,7 +342,7 @@ function tbodys(el) {
 }
 
 // 공통자료 리스트 업데이트
-function listsGsdFecth() {
+function listsFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
         console.log(res.data);
         $(
@@ -322,6 +360,21 @@ function listsGsdFecth() {
                 case "송장_색도면_상차사진":
                     $("#content-gsd-song").append(lists(el));
                     break;
+                default:
+                    return;
+            }
+        });
+    });
+}
+
+// 기성 리스트 업데이트
+function listsFecthGisung() {
+    GET_PROJECT_FILE(gsdProjectUID).then((res) => {
+        console.log(res.data);
+        $("#content-gsd-sulchi tbody").empty();
+
+        res.data.forEach((el) => {
+            switch (el.fileType) {
                 case "난간대_설치팀":
                     $("#content-gsd-sulchi tbody").append(tbodys(el));
                     break;
@@ -431,6 +484,20 @@ async function GET_TOTAL_AREA(projectUID) {
     return res.data;
 }
 
+// 자료 삭제
+function DELETE_PROJECT_GSD_GISUNG(UID) {
+    http({
+        method: "DELETE",
+        url: "project/" + UID,
+    })
+        .then((res) => {
+            listsFecthGisung();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -450,7 +517,7 @@ $(function () {
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");
 
-        projectUID = productUid;
+        gsdProjectUID = productUid;
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = date;
@@ -500,22 +567,13 @@ $(function () {
         });
 
         // 파일리스트
-        listsGsdFecth();
+        listsFecth();
 
         // 누적면적
-        GET_TOTAL_AREA(projectUID).then((res) => {
+        GET_TOTAL_AREA(gsdProjectUID).then((res) => {
             totalArea = Number(res.data[0].totalArea);
             $("#totalArea").val(totalArea);
         });
-    });
-
-    // 난간대/설치팀
-    $(document).on("click", ".handleProjectSeolchi", function () {
-        const scheduleUid = $(this).data("schedule-uid");
-        scheduleUID = scheduleUid;
-
-        // 파일리스트
-        listsGsdFecth(scheduleUID);
     });
 
     $("#handleAddCalendar").click(function () {
@@ -622,7 +680,7 @@ $(function () {
                 },
             },
         }).then((res) => {
-            if (res) DELETE_PROJECT_GSD(uid);
+            if (res) DELETE_PROJECT_GSD_GISUNG(uid);
         });
     });
 
@@ -654,6 +712,20 @@ $(function () {
     // });
 
     // 난간대/설치팀
+    $(document).on("click", ".handleProjectSeolchi", function () {
+        const productUid = $(this).data("uid");
+        const name = $(this).data("name");
+        const code = $(this).data("code");
+
+        gsdProjectUID = productUid;
+        scheduleCode = code;
+
+        listsFecthGisung();
+
+        $(".nomu-title").text(name);
+    });
+
+    // 난간대/설치팀
     $("#handleFileSeolchi").click(function () {
         const file = $("#file-sul-nan")[0];
         const val = $("#file-sul-nan-memo").val();
@@ -661,6 +733,6 @@ $(function () {
         if (file.files.length === 0 && !val)
             return alertError("메모 또는 파일첨부 하세요.");
 
-        POST_SGD_FILE("공사", "난간대_설치팀", file.files, val);
+        POST_PROJECT_FILE("공사", "난간대_설치팀", file.files, val);
     });
 });

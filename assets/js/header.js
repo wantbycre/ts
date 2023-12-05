@@ -1,5 +1,3 @@
-const getUserID = sessionStorage.getItem("userUID");
-
 // 유저정보 상세
 async function GET_MY_USER_DETAIL(UID) {
     const res = await http({
@@ -17,6 +15,7 @@ $(function () {
     //     location.href = "/login.html";
     // });
 
+    let getUserID = sessionStorage.getItem("userUID");
     const path = $(location).attr("pathname");
 
     // console.log("userUID", getUserID);
@@ -24,7 +23,15 @@ $(function () {
 
     switch (path) {
         case "/":
-        case "/index.html":
+        case "/index-gj-corner.html":
+        case "/index-gj-deck.html":
+        case "/index-gj-jr.html":
+        case "/index-gpj.html":
+        case "/index-gsd.html":
+        case "/index-master.html":
+        case "/index-sc-team.html":
+        case "/index-sg-corner.html":
+        case "/index-sgd.html":
             $("#nav-list > li").eq(1).addClass("active");
             break;
         case "/dashboard.html":
@@ -41,10 +48,12 @@ $(function () {
             $("#nav-list > li").eq(3).addClass("active");
             break;
         case "/accounting.html":
+        case "/accounting-detail.html":
             $("#nav-list > li").eq(4).addClass("active");
             break;
         case "/notice.html":
         case "/notice-form.html":
+        case "/notice-detail.html":
             $("#nav-list > li").eq(5).addClass("active");
             break;
         case "/folder.html":

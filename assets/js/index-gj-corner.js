@@ -1,4 +1,4 @@
-// let projectUID = 0;
+let projectUID = 0;
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
@@ -107,8 +107,18 @@ async function GET_DESIGN_FILE(scheduleUID) {
     return res.data;
 }
 
+// 기성 자료 조회
+async function GET_PROJECT_FILE(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/file/" + projectUID,
+    });
+
+    return res.data;
+}
+
 // 기성 자료 업로드
-async function POST_SGD_FILE(filePath, fileType, files) {
+async function POST_PROJECT_FILE(filePath, fileType, files) {
     const formData = new FormData();
 
     // 다중 파일
@@ -119,7 +129,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
         );
     }
 
-    formData.append("scheduleUID", scheduleUID);
+    formData.append("projectUID", projectUID);
     formData.append("fileType", fileType);
 
     http({
@@ -127,7 +137,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
             "Content-Type": "multipart/form-data",
         },
         method: "POST",
-        url: "design/file",
+        url: "project/file",
         data: formData,
     })
         .then((res) => {
@@ -140,7 +150,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
                 },
             }).then((_) => {
                 $("input[type=file]").val("");
-                listsSgdFecth();
+                listsFecthGisung();
             });
         })
         .catch((error) => {
@@ -167,15 +177,15 @@ function lists2(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete sg-corner-delete" data-uid="${el.UID}">
+			<a href="#" type="button" class="btn-delete sg-corner-delete-gisung" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
 	`;
 }
 
-// 공통자료 리스트 업데이트
-function listsSgdFecth() {
+// DESIGN FILE 리스트 업데이트
+function listsFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
         // console.log(res.data);
         $(".file-content").empty();
@@ -188,6 +198,21 @@ function listsSgdFecth() {
                 case "코너철판_변경설계도면":
                     $("#content-sgd-bsul").append(lists(el));
                     break;
+                default:
+                    return;
+            }
+        });
+    });
+}
+
+// 기성 리스트 업데이트
+function listsFecthGisung() {
+    GET_PROJECT_FILE(projectUID).then((res) => {
+        console.log(res.data);
+        $(".file-content").empty();
+
+        res.data.forEach((el) => {
+            switch (el.fileType) {
                 case "코너철판_기성":
                     $("#content-gisung").append(lists2(el));
                     break;
@@ -198,14 +223,14 @@ function listsSgdFecth() {
     });
 }
 
-// 자료 삭제
-function DELETE_PROJECT_SG_CORNER(UID) {
+// 기성 자료 삭제
+function DELETE_PROJECT_GJ_CORNER_GISUNG(UID) {
     http({
         method: "DELETE",
-        url: "design/" + UID,
+        url: "project/" + UID,
     })
         .then((res) => {
-            listsSgdFecth();
+            listsFecthGisung();
         })
         .catch(function (error) {
             console.log(error);
@@ -226,7 +251,7 @@ function alertError(text) {
 $(function () {
     // 공장-코너철판 입력 팝업
     $(document).on("click", ".aps-button.active", function () {
-        // const productUid = $(this).parents("tr").data("uid");
+        const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");
@@ -239,7 +264,7 @@ $(function () {
         $(".modal-panjea").modal();
         $("#cnOutputDate").datepicker();
 
-        listsSgdFecth();
+        listsFecth();
 
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
             const data = res.data[0];
@@ -260,12 +285,14 @@ $(function () {
 
     // 공장-코너철판 기성 팝업
     $(document).on("click", ".handleProjectGisungPop", function () {
+        const productUid = $(this).data("uid");
         const name = $(this).data("name");
         const code = $(this).data("code");
 
+        projectUID = productUid;
         scheduleCode = code;
 
-        listsSgdFecth();
+        listsFecthGisung();
 
         $(".gisung-title").text(name);
     });
@@ -276,11 +303,11 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공장", "코너철판_기성", file.files);
+        POST_PROJECT_FILE("공장", "코너철판_기성", file.files);
     });
 
-    // 자료 삭제
-    $(document).on("click", ".sg-corner-delete", function () {
+    // 기성 자료 삭제
+    $(document).on("click", ".sg-corner-delete-gisung", function () {
         const uid = $(this).data("uid");
 
         swal("삭제하시겠습니까?", {
@@ -297,7 +324,7 @@ $(function () {
                 },
             },
         }).then((res) => {
-            if (res) DELETE_PROJECT_SG_CORNER(uid);
+            if (res) DELETE_PROJECT_GJ_CORNER_GISUNG(uid);
         });
     });
 });

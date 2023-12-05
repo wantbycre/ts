@@ -1,4 +1,4 @@
-// let projectUID = 0;
+let projectUID = 0;
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
@@ -66,7 +66,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     });
 }
 
-// 코너철판 자료 조회
+// design 자료 조회
 async function GET_DESIGN_FILE(scheduleUID) {
     const res = await http({
         method: "GET",
@@ -76,8 +76,18 @@ async function GET_DESIGN_FILE(scheduleUID) {
     return res.data;
 }
 
+// 기성 자료 조회
+async function GET_PROJECT_FILE(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/file/" + projectUID,
+    });
+
+    return res.data;
+}
+
 // 기성 자료 업로드
-async function POST_SGD_FILE(filePath, fileType, files) {
+async function POST_PROJECT_FILE(filePath, fileType, files) {
     const formData = new FormData();
 
     // 다중 파일
@@ -88,7 +98,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
         );
     }
 
-    formData.append("scheduleUID", scheduleUID);
+    formData.append("projectUID", projectUID);
     formData.append("fileType", fileType);
 
     http({
@@ -96,7 +106,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
             "Content-Type": "multipart/form-data",
         },
         method: "POST",
-        url: "design/file",
+        url: "project/file",
         data: formData,
     })
         .then((res) => {
@@ -109,7 +119,7 @@ async function POST_SGD_FILE(filePath, fileType, files) {
                 },
             }).then((_) => {
                 $("input[type=file]").val("");
-                listsSgdFecth();
+                listsFecthGisung();
             });
         })
         .catch((error) => {
@@ -124,7 +134,18 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete sg-corner-delete" data-uid="${el.UID}">
+		</div>
+	`;
+}
+
+function lists2(el) {
+    return `
+		<div class="d-flex justify-content-between">
+			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				${el.fileName}
+			</a>
+			<a href="#" type="button" class="btn-delete sg-team-delete-gisung" data-uid="${el.UID}">
 				<i class="fas fa-plus text-danger"></i>
 			</a>
 		</div>
@@ -132,7 +153,7 @@ function lists(el) {
 }
 
 // 공통자료 리스트 업데이트
-function listsSgdFecth() {
+function listsFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
         console.log(res.data);
         $(".file-content").empty();
@@ -145,8 +166,23 @@ function listsSgdFecth() {
                 case "코너철판_변경설계도면":
                     $("#content-gsd-corner").append(lists(el));
                     break;
+                default:
+                    return;
+            }
+        });
+    });
+}
+
+// 기성 리스트 업데이트
+function listsFecthGisung() {
+    GET_PROJECT_FILE(projectUID).then((res) => {
+        console.log(res.data);
+        $(".file-content").empty();
+
+        res.data.forEach((el) => {
+            switch (el.fileType) {
                 case "설치팀_노무비":
-                    $("#content-nomu").append(lists(el));
+                    $("#content-nomu").append(lists2(el));
                     break;
                 default:
                     return;
@@ -156,13 +192,13 @@ function listsSgdFecth() {
 }
 
 // 자료 삭제
-function DELETE_PROJECT_SG_CORNER(UID) {
+function DELETE_PROJECT_SC_TEAM_GISUNG(UID) {
     http({
         method: "DELETE",
-        url: "design/" + UID,
+        url: "project/" + UID,
     })
         .then((res) => {
-            listsSgdFecth();
+            listsFecth();
         })
         .catch(function (error) {
             console.log(error);
@@ -183,12 +219,12 @@ function alertError(text) {
 $(function () {
     // 설치팀 입력 팝업
     $(document).on("click", ".aps-button.active", function () {
-        // const productUid = $(this).parents("tr").data("uid");
+        const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");
 
-        // projectUID = productUid;
+        projectUID = productUid;
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = date;
@@ -196,20 +232,19 @@ $(function () {
         $(".modal-sc-team").modal();
 
         console.log("?", scheduleUID);
-        listsSgdFecth();
+        listsFecth();
     });
 
     // 설치팀 노무비 팝업
     $(document).on("click", ".handleProjectGisungPop", function () {
-        const scheduleUid = $(this).data("schedule-uid");
+        const productUid = $(this).data("uid");
         const name = $(this).data("name");
         const code = $(this).data("code");
 
+        projectUID = productUid;
         scheduleCode = code;
-        scheduleUID = scheduleUid;
-        listsSgdFecth();
 
-        console.log("?!", scheduleUID);
+        listsFecthGisung();
 
         $(".gisung-title").text(name);
     });
@@ -220,11 +255,11 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설치", "설치팀_노무비", file.files);
+        POST_PROJECT_FILE("설치", "설치팀_노무비", file.files);
     });
 
     // 자료 삭제
-    $(document).on("click", ".sg-corner-delete", function () {
+    $(document).on("click", ".sg-team-delete-gisung", function () {
         const uid = $(this).data("uid");
 
         swal("삭제하시겠습니까?", {
@@ -241,7 +276,7 @@ $(function () {
                 },
             },
         }).then((res) => {
-            if (res) DELETE_PROJECT_SG_CORNER(uid);
+            if (res) DELETE_PROJECT_SC_TEAM_GISUNG(uid);
         });
     });
 });

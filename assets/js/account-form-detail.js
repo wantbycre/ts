@@ -183,6 +183,7 @@ $(function () {
         $("#addr1").val(data.addr1);
         $("#addr2").val(data.addr2);
         $("#memo").val(data.memo);
+        $("#userId").val(data.userId);
     });
 
     // 등록/수정

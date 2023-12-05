@@ -12,7 +12,7 @@ async function GET_PROJECT_FILE(projectUID) {
 }
 
 // 공통자료 업로드
-async function POST_PROJECT_FILE(filePath, fileType, files, memo) {
+async function POST_PROJECT_FILE_COMMON(filePath, fileType, files, memo) {
     const formData = new FormData();
 
     // 다중 파일
@@ -45,7 +45,7 @@ async function POST_PROJECT_FILE(filePath, fileType, files, memo) {
                 },
             }).then((_) => {
                 $("input[type=file], textarea").val("");
-                listsFecth();
+                commonListsFecth();
             });
         })
         .catch((error) => {
@@ -54,13 +54,13 @@ async function POST_PROJECT_FILE(filePath, fileType, files, memo) {
 }
 
 // 자료 삭제
-function DELETE_PROJECT(UID) {
+function DELETE_PROJECT_COMMON(UID) {
     http({
         method: "DELETE",
         url: "project/" + UID,
     })
         .then((res) => {
-            listsFecth();
+            commonListsFecth();
         })
         .catch(function (error) {
             console.log(error);
@@ -110,9 +110,9 @@ function commonTbodys(el) {
 }
 
 // 공통자료 리스트 업데이트
-function listsFecth() {
+function commonListsFecth() {
     GET_PROJECT_FILE(projectUID).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         $(".file-empty, .file-content tbody").empty();
 
         res.data.forEach((el) => {
@@ -165,7 +165,7 @@ $(function () {
         projectUID = uid;
         projectCode = code;
 
-        listsFecth();
+        commonListsFecth();
     });
 
     // 자료 삭제
@@ -186,7 +186,7 @@ $(function () {
                 },
             },
         }).then((res) => {
-            if (res) DELETE_PROJECT(uid);
+            if (res) DELETE_PROJECT_COMMON(uid);
         });
     });
 
@@ -196,7 +196,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PROJECT_FILE("공무", "견적자료", file.files);
+        POST_PROJECT_FILE_COMMON("공무", "견적자료", file.files);
     });
 
     // 공무 계약서 업로드
@@ -205,7 +205,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PROJECT_FILE("공무", "계약서", file.files);
+        POST_PROJECT_FILE_COMMON("공무", "계약서", file.files);
     });
 
     // 설계도면 업로드
@@ -214,7 +214,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PROJECT_FILE("설계", "설계도면", file.files);
+        POST_PROJECT_FILE_COMMON("설계", "설계도면", file.files);
     });
 
     // 공사 구조검토서 업로드
@@ -223,7 +223,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PROJECT_FILE("공사", "구조검토서", file.files);
+        POST_PROJECT_FILE_COMMON("공사", "구조검토서", file.files);
     });
 
     // 공사 DECK도면 업로드
@@ -232,7 +232,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_PROJECT_FILE("공사", "DECK도면", file.files);
+        POST_PROJECT_FILE_COMMON("공사", "DECK도면", file.files);
     });
 
     // 공장 업로드
@@ -243,7 +243,7 @@ $(function () {
         if (file.files.length === 0 && !val)
             return alertError("메모 또는 파일첨부 하세요.");
 
-        POST_PROJECT_FILE("공장", "공장", file.files, val);
+        POST_PROJECT_FILE_COMMON("공장", "공장", file.files, val);
     });
 
     // 설치 업로드
@@ -254,6 +254,6 @@ $(function () {
         if (file.files.length === 0 && !val)
             return alertError("메모 또는 파일첨부 하세요.");
 
-        POST_PROJECT_FILE("설치", "설치", file.files, val);
+        POST_PROJECT_FILE_COMMON("설치", "설치", file.files, val);
     });
 });

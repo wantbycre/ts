@@ -172,13 +172,13 @@ async function GET_DESIGN_FILE(scheduleUID) {
 }
 
 // 설계 자료 업로드
-async function POST_SGD_FILE(filePath, fileType, files) {
+async function POST_DESIGN_FILE(filePath, fileType, files) {
     const formData = new FormData();
 
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
         formData.append(
-            `project/${scheduleCode}/${filePath}/${fileType}`,
+            `design/${scheduleCode}/${filePath}/${fileType}`,
             files[i]
         );
     }
@@ -485,7 +485,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "승인도면_BOM_CP_스트럽", file.files);
+        POST_DESIGN_FILE("설계", "승인도면_BOM_CP_스트럽", file.files);
     });
 
     // 변경승인도면 업로드
@@ -494,7 +494,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "변경승인도면_BOM_CP_스트럽", file.files);
+        POST_DESIGN_FILE("설계", "변경승인도면_BOM_CP_스트럽", file.files);
     });
 
     // 승인요청서 업로드
@@ -503,7 +503,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "승인요청서", file.files);
+        POST_DESIGN_FILE("설계", "승인요청서", file.files);
     });
 
     Kakao.init("24523c2e081a1bcaa9cfed95ce009faf"); // 사용하려는 앱의 JavaScript 키 입력

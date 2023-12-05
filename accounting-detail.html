@@ -42,52 +42,16 @@
 							<div class="text-right mb-4 mt-4">
 								<a href="/accounting.html" class="btn btn-default btn-border">돌아가기</a>
 							</div>
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="table-list">
 								<thead>
 									<tr>
 										<th scope="col">No</th>
-										<th scope="col">분류</th>
-										<th scope="col">물량</th>
-										<th scope="col">외주단가</th>
-										<th scope="col">총 금액</th>
+										<th scope="col">파일이름</th>
+										<th scope="col">등록일</th>
+										<th scope="col">다운로드</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>5</td>
-										<td class="text-left">홍길동 팀 월별 시공내역</td>
-										<td>8,945</td>
-										<td>7,000</td>
-										<td>62,678,000</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td class="text-left">홍길동 팀 월별 시공내역</td>
-										<td>8,945</td>
-										<td>7,000</td>
-										<td>62,678,000</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td class="text-left">홍길동 팀 월별 시공내역</td>
-										<td>8,945</td>
-										<td>7,000</td>
-										<td>62,678,000</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td class="text-left">홍길동 팀 월별 시공내역</td>
-										<td>8,945</td>
-										<td>7,000</td>
-										<td>62,678,000</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td class="text-left">홍길동 팀 월별 시공내역</td>
-										<td>8,945</td>
-										<td>7,000</td>
-										<td>62,678,000</td>
-									</tr>
 								</tbody>
 							</table>
 
@@ -115,23 +79,14 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
 	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
-
-	<script>
-		// 페이징처리
-		$("#pagination").twbsPagination({
-			totalPages: 100,
-			visiblePages: 10,
-			onPageClick: function (event, page) {
-				window.scrollTo(0, 0);
-			},
-		});
-	</script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/accounting-detail.js"></script>
 </body>
 
 </html>

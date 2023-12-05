@@ -103,7 +103,7 @@ function DELETE_PROJECT_DECK(UID) {
         url: "design/" + UID,
     })
         .then((res) => {
-            listsSgdFecth();
+            listsFecth();
         })
         .catch(function (error) {
             console.log(error);
@@ -130,6 +130,16 @@ async function GET_DESIGN_FILE(scheduleUID) {
     return res.data;
 }
 
+// 기성 자료 조회
+async function GET_PROJECT_FILE(projectUID) {
+    const res = await http({
+        method: "GET",
+        url: "project/file/" + projectUID,
+    });
+
+    return res.data;
+}
+
 // DECK 상세 리스트
 function lists(el) {
     return `
@@ -145,8 +155,23 @@ function lists(el) {
 	`;
 }
 
+// 기성 상세 리스트
+function lists2(el) {
+    return `
+		<div class="d-flex justify-content-between">
+			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				${el.fileName}
+			</a>
+			<a href="#" type="button" class="btn-delete gj-deck-delete-gisung" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
+		</div>
+	`;
+}
+
 // DECK 리스트 업데이트
-function listsSgdFecth() {
+function listsFecth() {
     GET_DESIGN_FILE(scheduleUID).then((res) => {
         // console.log(res.data);
         $(".file-content").empty();
@@ -156,9 +181,6 @@ function listsSgdFecth() {
                 case "DECK_파일":
                     $("#content-deck").append(lists(el));
                     break;
-                case "DECK_기성":
-                    $("#content-gisung").prepend(lists(el));
-                    break;
                 default:
                     return;
             }
@@ -167,13 +189,13 @@ function listsSgdFecth() {
 }
 
 // DECK 자료 업로드
-async function POST_SGD_FILE(filePath, fileType, files) {
+async function POST_DESIGN_FILE(filePath, fileType, files) {
     const formData = new FormData();
 
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
         formData.append(
-            `project/${scheduleCode}/${filePath}/${fileType}`,
+            `design/${scheduleCode}/${filePath}/${fileType}`,
             files[i]
         );
     }
@@ -199,7 +221,66 @@ async function POST_SGD_FILE(filePath, fileType, files) {
                 },
             }).then((_) => {
                 $("input[type=file]").val("");
-                listsSgdFecth();
+                listsFecth();
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+// 기성 리스트 업데이트
+function listsFecthGisung() {
+    GET_PROJECT_FILE(projectUID).then((res) => {
+        console.log(res.data);
+        $(".file-content").empty();
+
+        res.data.forEach((el) => {
+            switch (el.fileType) {
+                case "DECK_기성":
+                    $("#content-gisung").append(lists2(el));
+                    break;
+                default:
+                    return;
+            }
+        });
+    });
+}
+
+// 기성 자료 업로드
+async function POST_PROJECT_FILE(filePath, fileType, files) {
+    const formData = new FormData();
+
+    // 다중 파일
+    for (let i = 0; i < files.length; i++) {
+        formData.append(
+            `project/${scheduleCode}/${filePath}/${fileType}`,
+            files[i]
+        );
+    }
+
+    formData.append("projectUID", projectUID);
+    formData.append("fileType", fileType);
+
+    http({
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        method: "POST",
+        url: "project/file",
+        data: formData,
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((_) => {
+                $("input[type=file]").val("");
+                listsFecthGisung();
             });
         })
         .catch((error) => {
@@ -215,6 +296,20 @@ async function GET_TOTAL_AREA(projectUID) {
     });
 
     return res.data;
+}
+
+// 기성 자료 삭제
+function DELETE_PROJECT_GJ_DECK_GISUNG(UID) {
+    http({
+        method: "DELETE",
+        url: "project/" + UID,
+    })
+        .then((res) => {
+            listsFecthGisung();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 function alertError(text) {
@@ -244,7 +339,7 @@ $(function () {
         $(".modal-deck").modal();
         $("#deckInputDate").datepicker();
 
-        listsSgdFecth();
+        listsFecth();
 
         // 기본 상세
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
@@ -311,17 +406,19 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공장", "DECK_파일", file.files);
+        POST_DESIGN_FILE("공장", "DECK_파일", file.files);
     });
 
     // 공장-DECK 기성 팝업
     $(document).on("click", ".handleProjectGisungPop", function () {
+        const productUid = $(this).data("uid");
         const name = $(this).data("name");
         const code = $(this).data("code");
 
+        projectUID = productUid;
         scheduleCode = code;
 
-        listsSgdFecth();
+        listsFecthGisung();
 
         $(".gisung-title").text(name);
     });
@@ -332,6 +429,28 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("공장", "DECK_기성", file.files);
+        POST_PROJECT_FILE("공장", "DECK_기성", file.files);
+    });
+
+    // 기성 자료 삭제
+    $(document).on("click", ".gj-deck-delete-gisung", function () {
+        const uid = $(this).data("uid");
+
+        swal("삭제하시겠습니까?", {
+            icon: "error",
+            buttons: {
+                confirm: {
+                    text: "네, 삭제하겠습니다.",
+                    className: "btn btn-danger",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) DELETE_PROJECT_GJ_DECK_GISUNG(uid);
+        });
     });
 });

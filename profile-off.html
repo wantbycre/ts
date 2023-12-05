@@ -52,54 +52,23 @@
 						</div>
 						<div class="card-footer">
 
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="off-list">
 								<thead>
 									<tr>
 										<th scope="col">No</th>
 										<th scope="col">이름</th>
-										<th scope="col">사용 연차</th>
-										<th scope="col">현재 연차</th>
+										<th scope="col">연차 등록수/차감수</th>
 										<th scope="col">사용일</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>5</td>
-										<td>홍길동</td>
-										<td>-1</td>
-										<td>8</td>
-										<td>2023-10-10</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>홍길동</td>
-										<td>-1</td>
-										<td>10</td>
-										<td>2023-10-10</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>홍길동</td>
-										<td>-1</td>
-										<td>11</td>
-										<td>2023-10-10</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>홍길동</td>
-										<td>-1</td>
-										<td>12</td>
-										<td>2023-10-10</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>홍길동</td>
-										<td>-1</td>
-										<td>13</td>
-										<td>2023-10-10</td>
-									</tr>
-								</tbody>
+								<tbody></tbody>
 							</table>
+
+							<div class="d-flex justify-content-center pt-3">
+								<ul id="pagination2" class="pagination-sm pagination">
+								</ul>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -118,10 +87,14 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/profile-off.js"></script>
 
 </body>
 <script>

@@ -114,13 +114,13 @@ async function GET_DESIGN_FILE(scheduleUID) {
 }
 
 // 코너철판 자료 업로드
-async function POST_SGD_FILE(filePath, fileType, files) {
+async function POST_DESIGN_FILE(filePath, fileType, files) {
     const formData = new FormData();
 
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
         formData.append(
-            `project/${scheduleCode}/${filePath}/${fileType}`,
+            `design/${scheduleCode}/${filePath}/${fileType}`,
             files[i]
         );
     }
@@ -329,7 +329,7 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "코너철판_설계도면", file.files);
+        POST_DESIGN_FILE("설계", "코너철판_설계도면", file.files);
     });
 
     // 코너철판 변경설계도면 업로드
@@ -338,6 +338,6 @@ $(function () {
 
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
-        POST_SGD_FILE("설계", "코너철판_변경설계도면", file.files);
+        POST_DESIGN_FILE("설계", "코너철판_변경설계도면", file.files);
     });
 });

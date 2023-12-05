@@ -1,33 +1,36 @@
-async function GET_PROJECT(page) {
+async function GET_PROJECT_FILE(PARAM_UID, PARAM_TYPE) {
     const res = await http({
         method: "GET",
-        url: "project",
-        params: {
-            page,
-        },
+        url: "project/file/" + PARAM_UID,
     });
 
     // const { paging, result, totalCount } = res.data.data;
     // const listCount = Math.abs((page - 1) * 10 - totalCount);
 
-    // console.log(res.data.data[0 + 1]);
-
     let setData = [];
 
-    res.data.data.forEach((n, i) => {
-        if (n.UID !== res.data.data[i + 1]?.UID) {
-            setData.push(n);
+    res.data.data.forEach((el) => {
+        if (PARAM_TYPE === "gisung") {
+            if (el.fileType.slice(-2) === "기성") {
+                setData.push(el);
+            }
+        }
+
+        if (PARAM_TYPE === "nomu") {
+            if (el.fileType.slice(-3) === "노무비") {
+                setData.push(el);
+            }
         }
     });
 
-    // console.log(res.data.data, setData);
+    // console.log(setData);
 
     $("#table-list tbody").empty();
 
     if (setData.length === 0) {
         $("#table-list tbody").append(`
 			<tr>
-				<td colspan="4">조회된 페이지가 없습니다.</td>
+				<td colspan="5">조회된 페이지가 없습니다.</td>
 			</tr>
 		`);
     } else {
@@ -35,18 +38,11 @@ async function GET_PROJECT(page) {
             $("#table-list tbody").append(`
 				<tr>
 					<td>${setData.length - i}</td>
-					<td class="text-left">${el.projectCode}</td>
-					<td>${el.dkbDesignDate}</td>
+					<td class="text-left">${el.fileName}</td>
+					<td>${el.regDate}</td>
 					<td>
-						<a href="/accounting-detail.html?uid=${
-                            el.UID
-                        }&type=gisung" class="btn btn-dark btn-sm">
-							기성
-						</a>
-						<a href="/accounting-detail.html?uid=${
-                            el.UID
-                        }&type=nomu" class="btn btn-secondary btn-sm ml-1">
-							노무비
+						<a href="${el.filePath}" class="btn btn-dark btn-sm" download="${el.fileName}">
+							다운로드
 						</a>
 					</td>
 				</tr>
@@ -67,5 +63,8 @@ async function GET_PROJECT(page) {
 }
 
 $(function () {
-    GET_PROJECT(1);
+    const PARAM_UID = new URL(window.location.href).searchParams.get("uid");
+    const PARAM_TYPE = new URL(window.location.href).searchParams.get("type");
+
+    GET_PROJECT_FILE(PARAM_UID, PARAM_TYPE);
 });

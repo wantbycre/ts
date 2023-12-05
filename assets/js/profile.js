@@ -43,9 +43,9 @@ $(function () {
         const cPw = $("#header-confirmPw").val();
 
         if (!pw) return alertError("패스워드를 입력하세요");
-        // if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-        //     return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
-        // }
+        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        }
         if (pw !== cPw) {
             return alertError("비밀번호 재확인 하세요.");
         }

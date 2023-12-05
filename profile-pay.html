@@ -52,7 +52,7 @@
 						</div>
 						<div class="card-footer">
 
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="pay-list">
 								<thead>
 									<tr>
 										<th scope="col">No</th>
@@ -63,59 +63,13 @@
 										<th scope="col">다운로드</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>5</td>
-										<td>홍길동</td>
-										<td>2023</td>
-										<td>5</td>
-										<td>2023-05-25</td>
-										<td>
-											<a href="#" class="btn btn-dark btn-sm">다운로드</a>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>홍길동</td>
-										<td>2023</td>
-										<td>4</td>
-										<td>2023-04-25</td>
-										<td>
-											<a href="#" class="btn btn-dark btn-sm">다운로드</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>홍길동</td>
-										<td>2023</td>
-										<td>3</td>
-										<td>2023-03-25</td>
-										<td>
-											<a href="#" class="btn btn-dark btn-sm">다운로드</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>홍길동</td>
-										<td>2023</td>
-										<td>2</td>
-										<td>2023-02-25</td>
-										<td>
-											<a href="#" class="btn btn-dark btn-sm">다운로드</a>
-										</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>홍길동</td>
-										<td>2023</td>
-										<td>1</td>
-										<td>2023-01-25</td>
-										<td>
-											<a href="#" class="btn btn-dark btn-sm">다운로드</a>
-										</td>
-									</tr>
-								</tbody>
+								<tbody></tbody>
 							</table>
+
+							<div class="d-flex justify-content-center pt-3">
+								<ul id="pagination" class="pagination-sm pagination">
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -134,10 +88,14 @@
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<script src="./assets/js/plugin/pagination/jquery.twbsPagination.js"></script>
 
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/profile-pay.js"></script>
 
 </body>
 <script>

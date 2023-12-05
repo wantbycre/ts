@@ -52,7 +52,7 @@ function sample6_execDaumPostcode() {
 }
 
 // 거래처 등록
-function POST_PARTNER(
+async function POST_PARTNER(
     ptUID,
     partnerName,
     manager,
@@ -64,7 +64,7 @@ function POST_PARTNER(
     addr2,
     memo
 ) {
-    http({
+    const res = await http({
         method: "POST",
         url: "partner",
         data: {
@@ -79,22 +79,9 @@ function POST_PARTNER(
             addr2,
             memo,
         },
-    })
-        .then((res) => {
-            swal(res.data.message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((res) => {
-                location.href = "/account.html";
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    });
+
+    return res;
 }
 
 // 거래처 항목
@@ -170,21 +157,32 @@ $(function () {
                 return alertError("비밀번호 재확인 하세요.");
             }
 
-            POST_PARTNER_ID(ptUID, userId, pw).then((res) => {
-                if (res.status === 200) {
-                    POST_PARTNER(
-                        ptUID,
-                        partnerName,
-                        manager,
-                        partnerTel,
-                        bank,
-                        bankNum,
-                        postNum,
-                        addr1,
-                        addr2,
-                        memo
-                    );
-                }
+            POST_PARTNER(
+                ptUID,
+                partnerName,
+                manager,
+                partnerTel,
+                bank,
+                bankNum,
+                postNum,
+                addr1,
+                addr2,
+                memo
+            ).then((res) => {
+                POST_PARTNER_ID(res.data.data, userId, pw).then((res) => {
+                    if (res.status === 200) {
+                        swal(res.data.message, {
+                            icon: "success",
+                            buttons: {
+                                confirm: {
+                                    className: "btn btn-success",
+                                },
+                            },
+                        }).then((res) => {
+                            location.href = "/account.html";
+                        });
+                    }
+                });
             });
         } else {
             POST_PARTNER(
@@ -198,7 +196,22 @@ $(function () {
                 addr1,
                 addr2,
                 memo
-            );
+            )
+                .then((res) => {
+                    swal(res.data.message, {
+                        icon: "success",
+                        buttons: {
+                            confirm: {
+                                className: "btn btn-success",
+                            },
+                        },
+                    }).then((res) => {
+                        location.href = "/account.html";
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     });
 });
