@@ -452,12 +452,7 @@ function setUniqueObj(DATAS) {
 
         // 우측 합계 적용
         $("#chart-sum table tbody").append(`
-			<tr data-uid="${el.UID}">
-				<td>123</td>
-				<td>123</td>
-				<td>123</td>
-				<td>333</td>
-			</tr>
+			<tr data-uid="${el.UID}"></tr>
 		`);
     });
 
