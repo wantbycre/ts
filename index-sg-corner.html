@@ -213,12 +213,13 @@
 						</div>
 						<div class="card-footer d-flex justify-content-between pt-3">
 							<div>
-								<button type="button" class="btn btn-default btn-border" data-dismiss="modal"
-									style="width: 100px;">카톡방
+								<button type="button" class="btn btn-default btn-border" style="width: 100px;"
+									id="kakaotalk-sharing-btn">카톡방
 									공지</button>
-								<button type="button" class="btn btn-default btn-border ml-3" data-dismiss="modal"
-									style="width: 100px;">이메일
-									공유</button>
+								<button type="button" class="btn btn-default btn-border ml-3" id="share-email"
+									style="width: 100px;" data-toggle="modal" data-target=".modal-email">
+									이메일 공유
+								</button>
 							</div>
 
 							<button type="button" class="btn btn-warning fw-bold" id="handleSgdSubmit"
@@ -287,33 +288,29 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="comment">보내는사람</label>
-						<select name="" id="" class="form-control">
-							<option value="">abc@gmail.com</option>
-							<option value="">abc2@gmail.com</option>
-						</select>
+						<label for="sender">보내는사람</label>
+						<input type="text" id="sender" class="form-control" value="contact@decodeit.com" readonly>
 					</div>
 
 					<div class="form-group">
-						<label for="comment">받는사람</label>
-						<textarea class="form-control" id="comment" rows="3"
-							placeholder="콤마(,)를 구분으로 입력하세요."></textarea>
+						<label for="email">받는사람</label>
+						<textarea class="form-control" id="email" rows="3" placeholder="콤마(,)를 구분으로 입력하세요."></textarea>
+						<small class="text-danger">*email 구분은 콤마(,)를 사용하세요</small>
 					</div>
 
 					<div class="form-group">
-						<label for="comment">내용</label>
-						<textarea class="form-control" id="comment" rows="3">"설계 - 데크보 설계정보가 입력되었습니다."</textarea>
+						<label for="subject">제목</label>
+						<input type="text" id="subject" class="form-control" value="설계 - 코너철판 설계정보가 입력되었습니다." readonly>
 					</div>
 
-					<div class="form-group" style="width: 100%;">
-						<label for="comment">파일첨부</label>
-						<input id="file" type="file" class="form-control" multiple>
+					<div class="form-group">
+						<label for="content">내용</label>
+						<textarea class="form-control" id="content" rows="3">"설계 - 코너철판 설계정보가 입력되었습니다."</textarea>
 					</div>
-
 
 				</div>
 				<div class="modal-footer justify-content-center">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100px;">이메일
+					<button type="button" class="btn btn-primary" style="width: 100px;" id="handleEmailSend">이메일
 						보내기</button>
 				</div>
 			</div>
@@ -336,6 +333,10 @@
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
 	<!-- <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script> -->
+
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+		integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+		crossorigin="anonymous"></script>
 
 	<!-- moment -->
 	<script src="./assets/js/plugin/moment/moment.min.js"></script>

@@ -3,6 +3,7 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 let isSubmitType = true; // t = 신규, f = 수정
+let emailFile = [];
 
 /**
  *
@@ -236,6 +237,7 @@ function listsSgdFecth() {
         res.data.forEach((el) => {
             switch (el.fileType) {
                 case "승인도면_BOM_CP_스트럽":
+                    emailFile.push(el);
                     $("#content-sgd-seung").append(lists(el));
                     break;
                 case "변경승인도면_BOM_CP_스트럽":
@@ -311,6 +313,45 @@ async function GET_DESIGN_DETAIL(scheduleUID) {
     });
 
     return res.data;
+}
+
+function POST_MAIL(email, subject, content, fileData) {
+    http({
+        method: "POST",
+        url: "mail",
+        data: {
+            email,
+            subject,
+            content,
+            fileData,
+        },
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((_) => {
+                $(".modal-email").modal("hide");
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function alertError(text) {
+    swal(text, {
+        icon: "error",
+        buttons: {
+            confirm: {
+                className: "btn btn-danger",
+            },
+        },
+    });
 }
 
 $(function () {
@@ -506,7 +547,7 @@ $(function () {
         POST_DESIGN_FILE("설계", "승인요청서", file.files);
     });
 
-    Kakao.init("24523c2e081a1bcaa9cfed95ce009faf"); // 사용하려는 앱의 JavaScript 키 입력
+    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
     Kakao.Share.createDefaultButton({
         container: "#kakaotalk-sharing-btn",
         objectType: "text",
@@ -516,5 +557,27 @@ $(function () {
             mobileWebUrl: "https://developers.kakao.com",
             webUrl: "https://developers.kakao.com",
         },
+    });
+
+    // 이메일 보내기
+    $("#handleEmailSend").click(function () {
+        const emailVal = $("#email").val();
+        const subject = $("#subject").val();
+        const content = $("#content").val();
+        let fileData = [];
+
+        if (!emailVal) return alertError("받는사람을 입력하세요.");
+        if (!content) return alertError("내용을 입력하세요.");
+
+        emailFile.forEach((n) => {
+            fileData.push({
+                fileName: n.fileName,
+                filePath: `${domain}/${n.filePath}`,
+            });
+        });
+
+        const email = emailVal.replace(/\n\s*/g, "").split(",");
+
+        POST_MAIL(email, subject, content, fileData);
     });
 });

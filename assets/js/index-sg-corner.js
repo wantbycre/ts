@@ -200,6 +200,34 @@ async function GET_DESIGN_DETAIL(scheduleUID) {
     return res.data;
 }
 
+function POST_MAIL(email, subject, content, fileData) {
+    http({
+        method: "POST",
+        url: "mail",
+        data: {
+            email,
+            subject,
+            content,
+            fileData,
+        },
+    })
+        .then((res) => {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((_) => {
+                $(".modal-email").modal("hide");
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -339,5 +367,39 @@ $(function () {
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         POST_DESIGN_FILE("설계", "코너철판_변경설계도면", file.files);
+    });
+
+    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
+    Kakao.Share.createDefaultButton({
+        container: "#kakaotalk-sharing-btn",
+        objectType: "text",
+        text: "[프로젝트1번] 이 생성 되었습니다. 날짜를 확정 하세요",
+        link: {
+            // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+            mobileWebUrl: "https://developers.kakao.com",
+            webUrl: "https://developers.kakao.com",
+        },
+    });
+
+    // 이메일 보내기
+    $("#handleEmailSend").click(function () {
+        const emailVal = $("#email").val();
+        const subject = $("#subject").val();
+        const content = $("#content").val();
+        let fileData = [];
+
+        if (!emailVal) return alertError("받는사람을 입력하세요.");
+        if (!content) return alertError("내용을 입력하세요.");
+
+        emailFile.forEach((n) => {
+            fileData.push({
+                fileName: n.fileName,
+                filePath: `${domain}/${n.filePath}`,
+            });
+        });
+
+        const email = emailVal.replace(/\n\s*/g, "").split(",");
+
+        POST_MAIL(email, subject, content, fileData);
     });
 });
