@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>태성건업</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -34,34 +35,39 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">공사현황</h4>
+						<h4 class="page-title">공사현황 (마스터 : 입고일정,구간분할,구간이력사항,다운,Note,DECK 정보) - 추후 제거요망</h4>
 					</div>
 
 					<div class="card">
 						<div class="card-header d-flex align-items-end justify-content-between">
 							<div class="d-flex align-items-center m-flex-none">
-								<div class="form-group">
-									<label for="squareSelect">진행단계</label>
-									<select class="form-control form-control-sm" id="squareSelect"
-										style="width: 120px;">
-										<option>전체</option>
-									</select>
-								</div>
-								<div class="mt-4">
-									<button type="button" class="btn btn-dark btn-sm">조회</button>
-								</div>
 							</div>
 							<div class="mb-2">
-								<span class="badge step1">설계</span>
-								<span class="badge step2">공사</span>
-								<span class="badge step3">공장</span>
-								<span class="badge step4">공장-코너철판</span>
+								<div class="mb-2">
+									<!-- 노랑 -->
+									<span class="badge step1">설계-데크보</span>
+									<!-- 회색 -->
+									<span class="badge step5">공장-판재공장</span>
+									<!-- 보라 -->
+									<span class="badge step3">공장-조립공장</span>
+									<!-- 초록 -->
+									<span class="badge step2">공사-데크보</span>
+								</div>
+								<div style="margin-left: -29px;">
+									<span>옵션: </span>
+									<!-- 연갈색 -->
+									<span class="badge step1">설계-코너철판</span>
+									<!-- 진갈색 -->
+									<span class="badge step7">공장-코너철판</span>
+									<!-- 분홍 -->
+									<span class="badge step8">공장-DECK</span>
+								</div>
 							</div>
 						</div>
 						<div class="card-body">
 							<div class="d-flex">
 								<div style="flex-shrink: 0;">
-									<table class="table v2 left-table">
+									<table class="table v2 left-table" id="chart-title">
 										<colgroup>
 											<col style="width: 60px">
 											<col style="width: 60px">
@@ -74,399 +80,17 @@
 											<tr>
 												<th>코드명</th>
 												<th>현장명</th>
-												<th>데크보생산처<span class="table-sm">조립/판재/설계</span></th>
+												<th>데크보생산처<span class="table-sm">판재/조립/설계</span></th>
 												<th>코너철판<span class="table-sm">공장/설계</span></th>
 												<th>난간대<span class="table-sm">설치팀</span></th>
 												<th>조닝도</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>
-													<a href="#" data-toggle="modal" data-target=".modal-code">
-														#원영-현대<br />230804
-													</a>
-												</td>
-												<td>원영<br />현앤</td>
-												<td>음성<br />원하이텍<br />이지디테일</td>
-												<td>삼호<br />마하나임</td>
-												<td><a href="#" data-toggle="modal"
-														data-target=".modal-seolchi">삼호정공</a></td>
-												<td>
-													<a href="#" data-toggle="modal" data-target=".modal-joning">
-														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>#원영-현대2<br />230804</td>
-												<td>원영/현앤2</td>
-												<td>음성<br />원하이텍2<br />이지디테일2</td>
-												<td>삼호/마하나임2</td>
-												<td>삼호정공2</td>
-												<td>
-													<a href="#">
-														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<a href="#" data-toggle="modal" data-target=".modal-code">
-														#원영-현대<br />230804
-													</a>
-												</td>
-												<td>원영<br />현앤</td>
-												<td>음성<br />원하이텍<br />이지디테일</td>
-												<td>삼호<br />마하나임</td>
-												<td>삼호정공</td>
-												<td>
-													<a href="#" data-toggle="modal" data-target=".modal-joning">
-														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>#원영-현대<br />230804</td>
-												<td>원영/현앤</td>
-												<td>음성<br />원하이텍<br />이지디테일</td>
-												<td>삼호/마하나임</td>
-												<td>삼호정공</td>
-												<td>
-													<a href="#">
-														<i class="fas fa-file-alt" style="font-size: 18px;"></i>
-													</a>
-												</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 
-								<div class="table-scroll-section" style="flex-grow: 1; ">
-									<table class="table v2">
-										<thead>
-											<tr>
-												<th colspan="14" style="width: 80px;">10월</th>
-											</tr>
-											<tr>
-												<th>2</th>
-												<th>3</th>
-												<th>4</th>
-												<th>5</th>
-												<th>6</th>
-												<th>7</th>
-												<th>8</th>
-												<th>9</th>
-												<th>10</th>
-												<th>11</th>
-												<th>12</th>
-												<th>13</th>
-												<th>14</th>
-												<th>15</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active green"
-														data-toggle="modal" data-target=".modal-gongsa">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>&nbsp;</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active purple">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>&nbsp;</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<!-- 공사 데크보 [초록] -->
-													<button type="button" class="aps-button v2 active green">
-														<div class="d-flex">
-															<div class="aps-content">
-																<div class="aps-top">1F 5구간</div>
-																<div class="d-flex aps-middle">
-																	<div>512</div>
-																	<div>5.4</div>
-																</div>
-																<div class="d-flex aps-bottom">
-																	<div>53</div>
-																	<div>&nbsp;</div>
-																</div>
-															</div>
-															<div class="aps-side">
-																<div>
-																	<span>메모</span>
-																</div>
-																<div>
-																	<span>1-2</span>
-																</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active brown">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>123</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>&nbsp;</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td>
-													<button type="button" class="aps-button active green">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>&nbsp;</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active green">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>123</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td>
-													<button type="button" class="aps-button active green">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>123</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td>
-													<button type="button" class="aps-button active green">
-														<div class="aps-content">
-															<div class="aps-top">1F 5구간</div>
-															<div class="d-flex aps-middle">
-																<div>512</div>
-																<div>5.4</div>
-															</div>
-															<div class="d-flex aps-bottom">
-																<div>53</div>
-																<div>123</div>
-															</div>
-														</div>
-													</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-										</tbody>
-									</table>
-									<table class="table v2">
-										<thead>
-											<tr>
-												<th colspan="14" style="width: 80px;">11월</th>
-											</tr>
-											<tr>
-												<th>2</th>
-												<th>3</th>
-												<th>4</th>
-												<th>5</th>
-												<th>6</th>
-												<th>7</th>
-												<th>8</th>
-												<th>9</th>
-												<th>10</th>
-												<th>11</th>
-												<th>12</th>
-												<th>13</th>
-												<th>14</th>
-												<th>15</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>
-													<button type="button" class="aps-button">&nbsp;</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td>
-													<button type="button" class="aps-button">&nbsp;</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td>
-													<button type="button" class="aps-button">&nbsp;</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-											<tr>
-												<td>
-													<button type="button" class="aps-button">&nbsp;</button>
-												</td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-												<td><button type="button" class="aps-button">&nbsp;</button></td>
-											</tr>
-										</tbody>
-									</table>
+								<div class="table-scroll-section" style="flex-grow: 1; " id="chart-content">
 								</div>
 							</div>
 						</div>
@@ -495,53 +119,16 @@
 									<h2>1. 공무</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>견적자료 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gong-geun">견적자료 파일 업로드</label>
+											<input id="file-gong-geun" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGongGeun">업로드</button>
 									</div>
 
 									<div class="file-box mt-4">
 										<div class="file-title">견적자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-													견적자료1.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger"></i>
-												</a>
-											</div>
-
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													견적자료2견적자료2견적자료2견적자료2견적자료2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													견적자료3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													견적자료4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger"></i>
-												</a>
-											</div>
-										</div>
+										<div class="file-content file-empty" id="content-gong-geun"></div>
 									</div>
 								</div>
 
@@ -549,57 +136,16 @@
 									<h2>&nbsp;</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>계약서 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gong-gue">계약서 파일 업로드</label>
+											<input id="file-gong-gue" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGongGue">업로드</button>
 									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-																<div>AA.pdf</div>
-																<div class="ml-2">BB.png</div>
-															</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">계약서자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-													계약서자료1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-													계약서자료2계약서자료2계약서자료2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-													계약서자료3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt" style="font-size: 14px;"></i>
-													계약서자료4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-										</div>
+										<div class="file-content file-empty" id="content-gong-gue"></div>
 									</div>
 								</div>
 
@@ -607,57 +153,16 @@
 									<h2>2. 설계</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>설계베이지 도면 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-sul">설계도면 파일 업로드</label>
+											<input id="file-sul" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileSul">업로드</button>
 									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-																<div>AA.pdf</div>
-																<div class="ml-2">BB.png</div>
-															</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">견적자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													건축도면1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													건축도면2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조도면1.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조도면2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-										</div>
+										<div class="file-content file-empty" id="content-sul"></div>
 									</div>
 								</div>
 							</div>
@@ -672,57 +177,16 @@
 									<h2>3. 공사</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>구조검토서 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gong-gu">구조검토서 파일 업로드</label>
+											<input id="file-gong-gu" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGongGu">업로드</button>
 									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-															<div>AA.pdf</div>
-															<div class="ml-2">BB.png</div>
-														</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">견적자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조검토서1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조검토서2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조검토서3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													구조검토서4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-										</div>
+										<div class="file-content file-empty" id="content-gong-gu"></div>
 									</div>
 								</div>
 
@@ -730,58 +194,16 @@
 									<h2>&nbsp;</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>DECK 도면 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gong-deck">DECK 도면 업로드</label>
+											<input id="file-gong-deck" type="file" class="form-control" multiple>
 										</div>
-										<!-- <input type="file" class="form-control" multiple style="width: 100%;"> -->
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGongDeck">업로드</button>
 									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-																					<div>AA.pdf</div>
-																					<div class="ml-2">BB.png</div>
-																				</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">계약서자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													DECK 도면1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													DECK 도면2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													DECK 도면3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													DECK 도면4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-										</div>
+										<div class="file-content file-empty" id="content-gong-deck"></div>
 									</div>
 								</div>
 
@@ -798,15 +220,17 @@
 									<h2>4. 공장</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0" style="flex:1.5;width: auto;">
-											<label>메모</label>
-											<textarea id="" cols="30" rows="3" class="form-control"></textarea>
+											<label for="file-gongjang-memo">메모</label>
+											<textarea id="file-gongjang-memo" cols="30" rows="3"
+												class="form-control"></textarea>
 										</div>
 										<div class="form-group form-group-default mb-0 ml-1"
 											style="flex:1;width: auto;">
-											<label>구조검토서 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gongjang">공장 파일 업로드</label>
+											<input id="file-gongjang" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1 px-4">업로드</button>
+										<button type="button" class="btn btn-primary ml-1 px-4"
+											id="handleFileGonjang">업로드</button>
 									</div>
 
 
@@ -816,67 +240,14 @@
 											<div style="width: 42%;">파일</div>
 											<div style="width: 6%;">삭제</div>
 										</div>
-										<div class="file-content">
+										<div class="file-content" id="content-gongjang">
 											<table class="table">
 												<colgroup>
 													<col style="width: 53%;">
 													<col style="width: 43%;">
 													<col>
 												</colgroup>
-												<tbody>
-													<tr>
-														<td>
-															1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															음성우미 2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															음성우미 2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-												</tbody>
+												<tbody></tbody>
 											</table>
 										</div>
 									</div>
@@ -893,15 +264,17 @@
 									<h2>5. 설치</h2>
 									<div class="d-flex">
 										<div class="form-group form-group-default mb-0" style="flex:1.5;width: auto;">
-											<label>메모</label>
-											<textarea id="" cols="30" rows="3" class="form-control"></textarea>
+											<label for="file-sulchi-memo">메모</label>
+											<textarea id="file-sulchi-memo" cols="30" rows="3"
+												class="form-control"></textarea>
 										</div>
 										<div class="form-group form-group-default mb-0 ml-1"
 											style="flex:1;width: auto;">
-											<label>설치 파일 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-sulchi">설치 파일 업로드</label>
+											<input id="file-sulchi" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1 px-4">업로드</button>
+										<button type="button" class="btn btn-primary ml-1 px-4"
+											id="handleFileSulchi">업로드</button>
 									</div>
 
 
@@ -911,67 +284,14 @@
 											<div style="width: 42%;">파일</div>
 											<div style="width: 6%;">삭제</div>
 										</div>
-										<div class="file-content">
+										<div class="file-content" id="content-sulchi">
 											<table class="table">
 												<colgroup>
 													<col style="width: 53%;">
 													<col style="width: 43%;">
 													<col>
 												</colgroup>
-												<tbody>
-													<tr>
-														<td>
-															1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															음성우미 2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															음성우미 2차 입고 7월 20일 100EA
-														</td>
-														<td class="text-center" style="border-left: 1px solid #000;">
-															<a href="#">230720-입고 송장.excel</a>
-														</td>
-														<td style="border-left: 1px solid #000;">
-															<a href="#" type="button" class="btn-delete">
-																<i class="fas fa-plus text-danger ml-1"></i>
-															</a>
-														</td>
-													</tr>
-												</tbody>
+												<tbody></tbody>
 											</table>
 										</div>
 									</div>
@@ -1002,52 +322,15 @@
 				<div class="modal-body">
 					<div class="d-flex">
 						<div class="form-group form-group-default mb-0">
-							<label>조닝도 파일 업로드</label>
-							<input id="Name" type="file" class="form-control" multiple>
+							<label for="file-joning">조닝도 파일 업로드</label>
+							<input id="file-joning" type="file" class="form-control" multiple>
 						</div>
-						<button type="button" class="btn btn-primary px-4 ml-2">업로드</button>
+						<button type="button" class="btn btn-primary px-4 ml-2" id="handleFileJoningdo">업로드</button>
 					</div>
 
 					<div class="file-box mt-4">
 						<div class="file-title">조닝도 자료</div>
-						<div class="file-content">
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									조닝도 자료 1.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									조닝도 자료 2.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									조닝도 자료 3.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<a href="#" class="file-list">
-									<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-									조닝도 자료 4.pdf
-								</a>
-								<a href="#" type="button" class="btn-delete">
-									<i class="fas fa-plus text-danger ml-1"></i>
-								</a>
-							</div>
-						</div>
+						<div class="file-content file-empty" id="content-joning"></div>
 					</div>
 
 				</div>
@@ -1064,7 +347,7 @@
 		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="modal-title" id="exampleModalLongTitle">난간대/설치팀</h2>
+					<h2 class="modal-title" id="exampleModalLongTitle">난간대/설치팀 (<span class="nomu-title"></span>)</h2>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -1075,14 +358,14 @@
 							<div class="d-flex">
 								<div class="form-group form-group-default mb-0" style="flex:1.5;width: auto;">
 									<label>메모</label>
-									<textarea id="" cols="30" rows="3"
-										class="form-control">1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미 2차 입고 7월 20일 100EA</textarea>
+									<textarea id="file-sul-nan-memo" cols="30" rows="3" class="form-control"></textarea>
 								</div>
 								<div class="form-group form-group-default mb-0 ml-1" style="flex:1;width: auto;">
-									<label>구조검토서 파일 업로드</label>
-									<input id="Name" type="file" class="form-control" multiple>
+									<label for="file-sul-nan">구조검토서 파일 업로드</label>
+									<input id="file-sul-nan" type="file" class="form-control" multiple>
 								</div>
-								<button type="button" class="btn btn-primary ml-1 px-4">업로드</button>
+								<button type="button" class="btn btn-primary ml-1 px-4"
+									id="handleFileSeolchi">업로드</button>
 							</div>
 
 
@@ -1093,66 +376,13 @@
 									<div style="width: 6%;">삭제</div>
 								</div>
 								<div class="file-content">
-									<table class="table">
+									<table class="table" id="content-gsd-sulchi">
 										<colgroup>
 											<col style="width: 53%;">
 											<col style="width: 43%;">
 											<col>
 										</colgroup>
-										<tbody>
-											<tr>
-												<td>
-													1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-												</td>
-												<td class="text-center" style="border-left: 1px solid #000;">
-													<a href="#">230720-입고 송장.excel</a>
-												</td>
-												<td style="border-left: 1px solid #000;">
-													<a href="#" type="button" class="btn-delete">
-														<i class="fas fa-plus text-danger ml-1"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													음성우미 2차 입고 7월 20일 100EA
-												</td>
-												<td class="text-center" style="border-left: 1px solid #000;">
-													<a href="#">230720-입고 송장.excel</a>
-												</td>
-												<td style="border-left: 1px solid #000;">
-													<a href="#" type="button" class="btn-delete">
-														<i class="fas fa-plus text-danger ml-1"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													1차 입고 5월 15일 100EA - 용인 롯데 -> 음성우미<br />2차 입고 7월 20일 100EA
-												</td>
-												<td class="text-center" style="border-left: 1px solid #000;">
-													<a href="#">230720-입고 송장.excel</a>
-												</td>
-												<td style="border-left: 1px solid #000;">
-													<a href="#" type="button" class="btn-delete">
-														<i class="fas fa-plus text-danger ml-1"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													음성우미 2차 입고 7월 20일 100EA
-												</td>
-												<td class="text-center" style="border-left: 1px solid #000;">
-													<a href="#">230720-입고 송장.excel</a>
-												</td>
-												<td style="border-left: 1px solid #000;">
-													<a href="#" type="button" class="btn-delete">
-														<i class="fas fa-plus text-danger ml-1"></i>
-													</a>
-												</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 							</div>
@@ -1179,30 +409,44 @@
 				</div>
 				<div class="modal-body v2">
 					<div class="card">
-						<div class="card-body d-flex flex-column text-center">
-							<h3>1. DECK 정보</h3>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									<h3>2. DECK 정보</h3>
 
-							<h4 class="mt-3">입고일 : <strong>10</strong>월 <strong>03</strong>일</h4>
-							<h5 class="mt-2">수량정보입력</h5>
+									<h4 class="mt-3">입고일 : <strong class="deck-month"></strong>월 <strong
+											class="deck-day"></strong>일</h4>
+									<h5 class="mt-2">수량정보입력</h5>
 
-							<div class="d-flex mt-2 justify-content-center">
-								<div>
-									<label>입고면적</label>
-									<div class="input-group" style="width: 150px;">
-										<input type="text" class="form-control" placeholder="55" style="width: 60px;">
-										<div class="input-group-append">
-											<span class="input-group-text">m2</span>
+									<div class="d-flex mt-2">
+										<div>
+											<label>입고면적</label>
+											<div class="input-group" style="width: 150px;">
+												<input type="text" class="form-control" id="deckArea"
+													style="width: 60px;" readonly>
+												<div class="input-group-append">
+													<span class="input-group-text">m2</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="ml-2">
+											<label>프로젝트 누적면적</label>
+											<div class="input-group" style="width: 150px;">
+												<input type="text" class="form-control" style="width: 60px;"
+													id="totalArea" readonly>
+												<div class="input-group-append">
+													<span class="input-group-text">m2</span>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-
-								<div class="ml-2">
-									<label>프로젝트 누적면적</label>
-									<div class="input-group" style="width: 150px;">
-										<input type="text" class="form-control" placeholder="2355" style="width: 60px;">
-										<div class="input-group-append">
-											<span class="input-group-text">m2</span>
-										</div>
+								<div class="col-md-6">
+									<h3>3. 특이사항 NOTE 및 입고확정</h3>
+									<div class="d-flex">
+										<textarea name="" class="form-control" id="etcNote" cols="30" rows="6"
+											readonly></textarea>
 									</div>
 								</div>
 							</div>
@@ -1212,35 +456,29 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-6">
-									<h3>3. 특이사항 NOTE 및 입고확정</h3>
-									<div class="section-history mb-2" style="height: 120px;">
-										9월15일<br />
-										- 1F5구간 G4819 부재 오작으로 인한<br />
-										현장수작업 보수및 운송비 30만원 발생
-									</div>
-									<div class="d-flex">
-										<textarea name="" class="form-control" id="" cols="30" rows="4"></textarea>
-										<button type="button" class="btn btn-primary ml-1"
-											style="width: 70px;">등록</button>
-									</div>
-								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<h3>4. 구간이력사항</h3>
-									<div class="section-history" style="height: 220px;">
-										<div class="text-danger">데크보 설계이력</div>
-										설 계 일 : 8월 22일<br />
-										설계 변경일 1차 : 8월 25일<br />
-										설계 변경일 2차 : 8월 25일<br /><br />
-										<div class="text-danger">데크보 입고이력</div>
-										입 고 일 : 9월 15일<br />
-										입고일 변경 1차 : 9월 20일<br />
-										입고일 변경 2차 : 9월 22일<br />
-										데크보 분할입고이력<br />
-										구간분할입고 1회차 :<br /><br />
-										<div class="text-danger">4. 코너철판이력</div>
-										코너 철판 설계일 : 8월 30일<br />
-										코너 철판 입고일 : 9월 10일
+									<div class="section-history d-flex" id="gsd-history" style="height: 220px;">
+										<div class="history1" style="flex: 1">
+											<div class="text-danger">데크보 설계이력</div>
+											설 계 일 :<br />
+										</div>
+										<div class="history2" style="flex: 1">
+											<div class="text-danger">데크보 입고이력</div>
+											입 고 일 :<br />
+										</div>
+										<div class="history3" style="flex: 1">
+											<div class="text-danger">코너철판 설계이력</div>
+											코너 철판 설계일 :<br />
+										</div>
+										<div class="history4" style="flex: 1">
+											<div class="text-danger">코너철판 입고이력</div>
+											코너 철판 입고일 :<br />
+										</div>
+										<div class="history5" style="flex: 1">
+											<div class="text-danger">구간분할 입고이력</div>
+											구간 분할 입고 :<br />
+										</div>
 									</div>
 
 								</div>
@@ -1253,169 +491,55 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-4">
-									<h2>5. 파일다운로드</h2>
-									<div class="d-flex">
+									<h2>5. 파일업로드</h2>
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>승인도면 [BOM/CP/스트럽] 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gsd-seung">승인도면 [BOM/CP/스트럽] 업로드</label>
+											<input id="file-gsd-seung" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
-									</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGsdSeung">업로드</button>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">승인도면 [BOM/CP/스트럽] 자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													승인도면1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													승인도면2승인도면2승인도면2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													승인도면3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													승인도면4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
+										<div class="file-content" id="content-gsd-seung">
 										</div>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<h2>&nbsp;</h2>
-									<div class="d-flex">
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>코너철판 (변경) 도면 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gsd-corner">코너철판 (변경) 도면 업로드</label>
+											<input id="file-gsd-corner" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
-									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-																					<div>AA.pdf</div>
-																					<div class="ml-2">BB.png</div>
-																				</div> -->
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGsdCorner">업로드</button>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">코너철판 (변경) 도면 자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													코너철판 (변경) 도면1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													코너철판 (변경) 도면2코너철판 (변경) 도면2코너철판 (변경) 도면2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													코너철판 (변경) 도면3.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													코너철판 (변경) 도면4.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
+										<div class="file-content" id="content-gsd-corner">
 										</div>
 									</div>
 								</div>
 
 								<div class="col-md-4">
 									<h2>&nbsp;</h2>
-									<div class="d-flex">
+									<!-- <div class="d-flex">
 										<div class="form-group form-group-default mb-0">
-											<label>송장,색도면,상차사진 업로드</label>
-											<input id="Name" type="file" class="form-control" multiple>
+											<label for="file-gsd-song">송장,색도면,상차사진 업로드</label>
+											<input id="file-gsd-song" type="file" class="form-control" multiple>
 										</div>
-										<button type="button" class="btn btn-primary ml-1">업로드</button>
-									</div>
-
-
-									<!-- <div class="d-flex mt-2">
-																					<div>AA.pdf</div>
-																					<div class="ml-2">BB.png</div>
-																				</div> -->
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileGsdSong">업로드</button>
+									</div> -->
 
 									<div class="file-box mt-4">
 										<div class="file-title">송장,색도면,상차사진 자료</div>
-										<div class="file-content">
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													송장,색도면,상차사진1.pdf </a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													송장,색도면,상차사진2.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													송장,색도면,상차사진.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
-											<div class="d-flex justify-content-between">
-												<a href="#" class="file-list">
-													<i class="fas fa-file-alt mt-1" style="font-size: 14px;"></i>
-													송장,색도면,상차사진.pdf
-												</a>
-												<a href="#" type="button" class="btn-delete">
-													<i class="fas fa-plus text-danger ml-1"></i>
-												</a>
-											</div>
+										<div class="file-content" id="content-gsd-song">
 										</div>
 									</div>
 								</div>
@@ -1437,8 +561,23 @@
 	<script src="./assets/js/core/bootstrap.min.js"></script>
 
 	<!-- jQuery UI -->
-	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/i18n.js"></script>
 	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<!-- <script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script> -->
+
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+		integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+		crossorigin="anonymous"></script>
+
+	<!-- moment -->
+	<script src="./assets/js/plugin/moment/moment.min.js"></script>
 
 	<!-- jQuery Scrollbar -->
 	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
@@ -1446,10 +585,12 @@
 	<!-- Azzara JS -->
 	<script src="./assets/js/include.js"></script>
 	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/common-project.js"></script>
+	<script src="./assets/js/common-project-file.js"></script>
+	<script src="./assets/js/common-project-joningdo.js"></script>
+	<script src="./assets/js/index-master.js"></script>
 
 </body>
-<script>
-
-</script>
 
 </html>

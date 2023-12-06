@@ -175,6 +175,16 @@ table.table .complate-tr td button {
     background-color: #dad9d9 !important;
 }
 
+table.table.v2.table-sum thead th {
+    font-size: 10px;
+    line-height: 11px;
+}
+
+table.table.v2.table-sum tbody tr td {
+    border-left: 1px solid #000;
+    font-weight: normal;
+}
+
 .badge {
     border-radius: 5px;
     width: 83px;
@@ -334,7 +344,7 @@ table.table .complate-tr td button {
 }
 
 .aps-button.v3 {
-    width: 120px;
+    width: auto;
 }
 
 .aps-button.v2 .aps-content {
@@ -342,7 +352,7 @@ table.table .complate-tr td button {
 }
 
 .aps-button.v3 .aps-content {
-    width: 120px;
+    width: 60px;
 }
 
 .aps-button.v2 .aps-side {
@@ -350,7 +360,7 @@ table.table .complate-tr td button {
 }
 
 .aps-button.v3 .aps-side {
-    width: 90px;
+    /* width: 90px; */
 }
 
 .aps-side {
@@ -363,21 +373,30 @@ table.table .complate-tr td button {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    flex-wrap: nowrap;
+    font-size: 12px;
     font-weight: bold;
+    word-break: break-all;
 }
 
 .aps-side div span {
     display: flex;
+    width: 50px;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    flex-wrap: nowrap;
     height: 100%;
+    word-break: break-all;
 }
 
 .aps-side div span {
     background-color: #0b8b28;
     color: #fff;
+    line-height: 11px;
+}
+
+.aps-side div.aps-memo {
+    width: 30px;
 }
 
 .aps-side div.aps-memo span {
@@ -396,7 +415,7 @@ table.table .complate-tr td button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
+    width: 30px;
     height: 100%;
     border: 1px solid #000;
     background-color: #eee;
@@ -465,7 +484,7 @@ table.table .complate-tr td button {
     transform: rotate(45deg);
 }
 
-.delete-calendar {
+/* .delete-calendar {
     position: absolute;
     right: -1px;
     top: -4px;
@@ -479,7 +498,7 @@ table.table .complate-tr td button {
 
 .delete-calendar i {
     font-size: 16px;
-}
+} */
 
 #common-loading {
     /* display: none; */

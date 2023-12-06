@@ -14,14 +14,7 @@ let divData = [];
  * @param {Array} thisMonth - 해당 월
  */
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    const sttsData = DATAS.filter(
-        (n) =>
-            n.stts === 3 ||
-            n.stts === 4 ||
-            n.stts === 5 ||
-            n.stts === 6 ||
-            n.stts === 7
-    ); //.filter((n) => n.UID === 12);
+    const sttsData = DATAS.filter((n) => n.stts === 6 || n.stts === 7); //.filter((n) => n.UID === 12);
 
     let divCount = 1;
 
@@ -611,6 +604,7 @@ $(function () {
 
                 $(".deck-month").text(dkbDateMonth);
                 $(".deck-day").text(dkbDateDay);
+                $("#deckArea").val(data.deckArea);
             }
 
             // 특이 사항 NOTE
@@ -622,7 +616,7 @@ $(function () {
                 $("#handleGsdSubmit").attr("disabled", false);
             }
 
-            // console.log(data.stts);
+            console.log(data.stts);
         });
 
         const uniqueObjArr = [

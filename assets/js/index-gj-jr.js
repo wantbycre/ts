@@ -18,7 +18,9 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
     console.log(sttsData);
 
-    sttsData.forEach((data) => {
+    let divCount = 1;
+
+    sttsData.forEach((data, i) => {
         let sttsColor = ``;
 
         if (data.stts === 5) {
@@ -31,48 +33,161 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
             }
         }
 
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "] .add-section .nbsp"
-        ).remove();
+        if (
+            data.scheduleUID === sttsData[i + 1]?.scheduleUID ||
+            data.scheduleUID === sttsData[i - 1]?.scheduleUID
+        ) {
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section .nbsp"
+            ).remove();
 
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "] .add-section"
-        ).append(`
-			<div class="d-flex">
-    			<button 
-					type="button" 
-					class="aps-button active ${sttsColor}"
-					data-product-uid="${data.UID}"
-					data-schedule-uid="${data.scheduleUID}"
-					data-div-uid="${data.divUID}"
-					data-stts="${data.stts}"
-				>
-    				<div class="aps-content">
-    					<div class="aps-top">${data.floor}F ${data.section}구간</div>
-    					<div class="d-flex aps-middle">
-    						<div>${data.area}</div>
-    						<div>${data.strup}</div>
-    					</div>
-    					<div class="d-flex aps-bottom">
-    						<div>${data.dkbCnt}</div>
-    						<div>${data.cnCnt || ``}</div>
-    					</div>
-    				</div>
-    			</button>
-			</div>
-    	`);
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section"
+            ).append(`
+				<div class="d-flex">
+					<button 
+						type="button" 
+						class="aps-button v3 active ${sttsColor}"
+						data-product-uid="${data.UID}"
+						data-schedule-uid="${data.scheduleUID}"
+						data-div-uid="${data.divUID}"
+					>
+						<div class="d-flex">
+							<div class="aps-content">
+								<div class="aps-top">${data.floor}F ${data.section}구간</div>
+								<div class="d-flex aps-middle">
+									<div>${data.area}</div>
+									<div>${data.strup}</div>
+								</div>
+								<div class="d-flex aps-bottom">
+									<div>${data.dkbCnt}</div>
+									<div>${data.cnCnt || ``}</div>
+								</div>
+							</div>
+							<div class="aps-side">
+								${
+                                    data.etcNote
+                                        ? `
+											<div class="aps-memo">
+												<span>메모</span>
+											</div>`
+                                        : ``
+                                }
+								<div>
+									<span>${data.scheduleUID}<br />-<br />${divCount}</span>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			`);
+
+            divCount++;
+        } else if (data.etcNote) {
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section .nbsp"
+            ).remove();
+
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section"
+            ).append(`
+				<div class="d-flex">
+					<button 
+						type="button" 
+						class="aps-button v3 active ${sttsColor}"
+						data-product-uid="${data.UID}"
+						data-schedule-uid="${data.scheduleUID}"
+						data-div-uid="${data.divUID}"
+					>
+						<div class="d-flex">
+							<div class="aps-content">
+								<div class="aps-top">${data.floor}F ${data.section}구간</div>
+								<div class="d-flex aps-middle">
+									<div>${data.area}</div>
+									<div>${data.strup}</div>
+								</div>
+								<div class="d-flex aps-bottom">
+									<div>${data.dkbCnt}</div>
+									<div>${data.cnCnt || ``}</div>
+								</div>
+							</div>
+							<div class="aps-side">
+								<div class="aps-memo">
+									<span>메모</span>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			`);
+        } else {
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section .nbsp"
+            ).remove();
+
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section"
+            ).append(`
+				<div class="d-flex">
+					<button 
+						type="button" 
+						class="aps-button active ${sttsColor}"
+						data-product-uid="${data.UID}"
+						data-schedule-uid="${data.scheduleUID}"
+						data-div-uid="${data.divUID}"
+						data-stts="${data.stts}"
+					>
+						<div class="aps-content">
+							<div class="aps-top">${data.floor}F ${data.section}구간</div>
+							<div class="d-flex aps-middle">
+								<div>${data.area}</div>
+								<div>${data.strup}</div>
+							</div>
+							<div class="d-flex aps-bottom">
+								<div>${data.dkbCnt}</div>
+								<div>${data.cnCnt || ``}</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			`);
+        }
     });
 }
 

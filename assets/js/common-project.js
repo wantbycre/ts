@@ -356,8 +356,8 @@ function setUniqueObj(DATAS) {
 
     console.log(currentPath);
 
-    // 좌측 타이틀 적용
     uniqueObjArr.forEach((el, i) => {
+        // 좌측 타이틀 적용
         $("#chart-title tbody").append(`
 			<tr>
 				<td>
@@ -449,6 +449,16 @@ function setUniqueObj(DATAS) {
                 }
 			</tr>
 		`);
+
+        // 우측 합계 적용
+        $("#chart-sum table tbody").append(`
+			<tr data-uid="${el.UID}">
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+				<td>333</td>
+			</tr>
+		`);
     });
 
     return uniqueObjArr;
@@ -519,87 +529,6 @@ function setChartTable(DATAS, calendar, uniqueObjArr, thisYear, thisMonth) {
     });
 
     SET_CLASS_PROJECT(DATAS, thisYear, thisMonth);
-
-    // let num = 0;
-
-    // 실제 데이터 오버라이딩
-    // TODO: 모든 데이터 다온다. 그중에 로그인시 LEVEL에 따라 filter해서 써야한다
-    // TODO: LEVEL에 따라 입고/확정/출고 보이는게 다르다
-    // TODO: 10-1 + 10 + 5 모든 날짜가 확정된 일정이 보이는 데이터 inputDate (설계제외)
-    // DATAS.forEach((data, i) => {
-    //     // 일반
-    //     if (data.duplicate === 0) {
-    //         $(
-    //             "#chart-content table[data-index=" +
-    //                 (thisYear + thisMonth) +
-    //                 "] tbody tr[data-uid=" +
-    //                 data.UID +
-    //                 "] td[data-date=" +
-    //                 data.inputDate +
-    //                 "]"
-    //         ).empty().append(`
-    // 			<button type="button" class="aps-button active">
-    // 				<div class="aps-content">
-    // 					<div class="aps-top">1F 5구간</div>
-    // 					<div class="d-flex aps-middle">
-    // 						<div>512</div>
-    // 						<div>5.4</div>
-    // 					</div>
-    // 					<div class="d-flex aps-bottom">
-    // 						<div>53</div>
-    // 						<div>&nbsp;</div>
-    // 					</div>
-    // 				</div>
-    // 			</button>
-    // 		`);
-    //         // 다중/분할
-    //     } else {
-    //         if (
-    //             data.scheduleUID !== DATAS[i - 1]?.scheduleUID &&
-    //             data.scheduleUID === DATAS[i + 1]?.scheduleUID
-    //         ) {
-    //             num += 1;
-    //         } else if (data.scheduleUID === DATAS[i - 1]?.scheduleUID) {
-    //             num += 1;
-    //         } else {
-    //             num = 0;
-    //         }
-
-    //         $(
-    //             "#chart-content table[data-index=" +
-    //                 (thisYear + thisMonth) +
-    //                 "] tbody tr[data-uid=" +
-    //                 data.UID +
-    //                 "] td[data-date=" +
-    //                 data.inputDate +
-    //                 "]"
-    //         ).empty().append(`
-    // 			<button type="button" class="aps-button v2 active green">
-    // 				<div class="d-flex">
-    // 					<div class="aps-content">
-    // 						<div class="aps-top">1F 5구간</div>
-    // 						<div class="d-flex aps-middle">
-    // 							<div>512</div>
-    // 							<div>5.4</div>
-    // 						</div>
-    // 						<div class="d-flex aps-bottom">
-    // 							<div>53</div>
-    // 							<div>&nbsp;</div>
-    // 						</div>
-    // 					</div>
-    // 					<div class="aps-side">
-    // 						<div>
-    // 							&nbsp;
-    // 						</div>
-    // 						<div>
-    // 							<span>${data.scheduleUID}${num > 0 ? `-${num}` : ``}</span>
-    // 						</div>
-    // 					</div>
-    // 				</div>
-    // 			</button>
-    // 		`);
-    //     }
-    // });
 }
 
 async function GET_PROJECT(projectStts) {
