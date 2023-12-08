@@ -63,7 +63,7 @@ function alertError(text) {
 }
 
 $(function () {
-    const getUserID = sessionStorage.getItem("userUID");
+    const sessionUserUID = sessionStorage.getItem("userUID");
     // 급여명세서 리스트
-    GET_PAY(1, getUserID);
+    GET_PAY(1, sessionUserUID);
 });

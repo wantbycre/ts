@@ -171,9 +171,9 @@ $(function () {
         if (!userId) return alertError("아이디를 입력하세요");
         if (!position) return alertError("직급을 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
-        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
-        }
+        // if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+        //     return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        // }
         if (!confirmPw) return alertError("패스워드 재확인 하세요");
 
         if (pw !== confirmPw) {

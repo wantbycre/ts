@@ -64,7 +64,7 @@ $(function () {
             },
         }).then((res) => {
             if (res) {
-                PUT_PASSWORD(getUserID, pw);
+                PUT_PASSWORD(sessionUserUID, pw);
             }
         });
     });

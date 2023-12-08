@@ -54,7 +54,7 @@ function alertError(text) {
 }
 
 $(function () {
-    const getUserID = sessionStorage.getItem("userUID");
+    const sessionUserUID = sessionStorage.getItem("userUID");
     // 연차 리스트
-    GET_OFF_DAY(1, getUserID);
+    GET_OFF_DAY(1, sessionUserUID);
 });

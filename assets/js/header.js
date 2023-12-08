@@ -9,20 +9,42 @@ async function GET_MY_USER_DETAIL(UID) {
 
 $(function () {
     // 로그아웃
-    // $("#handleLogout").click(function () {
-    //     sessionStorage.removeItem("token");
-    //     sessionStorage.removeItem("level");
-    //     location.href = "/login.html";
-    // });
+    $("#handleLogout").click(function () {
+        sessionStorage.removeItem("level");
+        sessionStorage.removeItem("partnerUID");
+        sessionStorage.removeItem("ptKey");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userUID");
+        sessionStorage.removeItem("href");
 
-    let getUserID = sessionStorage.getItem("userUID");
+        location.href = "/login.html";
+    });
+
+    let sessionLevel = sessionStorage.getItem("level");
+    let sessionPartnerUID = sessionStorage.getItem("partnerUID");
+    let sessionPtKey = sessionStorage.getItem("ptKey");
+    let sessionToken = sessionStorage.getItem("token");
+    let sessionUserUID = sessionStorage.getItem("userUID");
+
     const path = $(location).attr("pathname");
 
-    // console.log("userUID", getUserID);
+    console.log(
+        "sessionLevel:",
+        sessionLevel,
+        "sessionPartnerUID:",
+        sessionPartnerUID,
+        "sessionPtKey:",
+        sessionPtKey,
+        "sessionToken:",
+        sessionToken ? "true" : "false",
+        "sessionUserUID:",
+        sessionUserUID
+    );
     // console.log(path);
 
     switch (path) {
         case "/":
+        case "/index.html":
         case "/index-gj-corner.html":
         case "/index-gj-deck.html":
         case "/index-gj-jr.html":
@@ -67,12 +89,17 @@ $(function () {
     }
 
     // 마이페이지 개인정보
-    GET_MY_USER_DETAIL(getUserID).then((data) => {
+    GET_MY_USER_DETAIL(sessionUserUID).then((data) => {
         const { userName, position, telNum } = data.data[0];
 
         // console.log(data.data[0]);
         $(".header-name").text(userName);
         $(".header-position").text(position);
         $(".header-tel").text(telNum);
+    });
+
+    // 공사현황 클릭
+    $("#handleLevelHref").click(function () {
+        location.href = sessionStorage.getItem("href");
     });
 });
