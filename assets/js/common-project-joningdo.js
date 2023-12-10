@@ -66,17 +66,32 @@ function DELETE_PROJECT_JONING(UID) {
 }
 
 // 공통자료 리스트
-// TODO: 조닝도는 설계/공사 권한만 삭제 가능!
 function listsJoning(el) {
+    // 옵저버 설정
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+    const sessionLevel = sessionStorage.getItem("level");
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete joning-delete" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
+			${
+                sessionPtKey === "null"
+                    ? sessionLevel === "2" ||
+                      sessionLevel === "3" ||
+                      sessionLevel === "4" ||
+                      sessionLevel === "5"
+                        ? `
+							<a href="#" type="button" class="btn-delete joning-delete" data-uid="${el.UID}">
+								<i class="fas fa-plus text-danger"></i>
+							</a>				
+							`
+                        : ``
+                    : ``
+            }
+			
 		</div>
 	`;
 }
@@ -107,6 +122,12 @@ $(function () {
         joningProjectUID = uid;
 
         listsJoningFecth();
+
+        // 옵저버 설정
+        const sessionPtKey = sessionStorage.getItem("ptKey");
+        if (sessionPtKey === "null") {
+            $(".auth-display").attr("style", "display: flex !important");
+        }
     });
 
     // 자료 삭제

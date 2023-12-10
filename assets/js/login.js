@@ -101,7 +101,7 @@ $(function () {
                     }
                 } else {
                     // 거래처
-                    switch (level) {
+                    switch (ptKey) {
                         case "jhPartner":
                         case "jmPartner":
                         case "cmPartner":

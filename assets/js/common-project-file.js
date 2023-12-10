@@ -69,20 +69,31 @@ function DELETE_PROJECT_COMMON(UID) {
 
 // 공통자료 리스트
 function commonLists(el) {
+    // 옵저버 설정
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
+			${
+                sessionPtKey === "null"
+                    ? `<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
+							<i class="fas fa-plus text-danger"></i>
+						</a>`
+                    : ``
+            }
+			
 		</div>
 	`;
 }
 
 function commonTbodys(el) {
+    // 옵저버 설정
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+
     return `
 		<tr>
 			<td>${el.memo}</td>
@@ -100,11 +111,16 @@ function commonTbodys(el) {
                 }
 				
 			</td>
-			<td style="border-left: 1px solid #000;">
-				<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
-					<i class="fas fa-plus text-danger ml-1"></i>
-				</a>
-			</td>
+			${
+                sessionPtKey === "null"
+                    ? `<td style="border-left: 1px solid #000;">
+							<a href="#" type="button" class="btn-delete common-delete" data-uid="${el.UID}">
+								<i class="fas fa-plus text-danger ml-1"></i>
+							</a>
+						</td>`
+                    : ``
+            }
+			
 		</tr>
 	`;
 }
@@ -166,6 +182,12 @@ $(function () {
         projectCode = code;
 
         commonListsFecth();
+
+        // 옵저버 설정
+        const sessionPtKey = sessionStorage.getItem("ptKey");
+        if (sessionPtKey === "null") {
+            $(".auth-display").attr("style", "display: flex !important");
+        }
     });
 
     // 자료 삭제

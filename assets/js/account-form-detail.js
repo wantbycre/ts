@@ -127,6 +127,32 @@ function DELETE_PARTNER(UID, PARAM_TAB) {
         });
 }
 
+// 거래처 아이디 등록
+async function POST_PARTNER_ID(partnerUID, userId, pw) {
+    http({
+        method: "POST",
+        url: "partner/partnerId",
+        data: {
+            partnerUID,
+            userId,
+            pw,
+        },
+    }).then((res) => {
+        if (res.status === 200) {
+            swal(res.data.message, {
+                icon: "success",
+                buttons: {
+                    confirm: {
+                        className: "btn btn-success",
+                    },
+                },
+            }).then((res) => {
+                location.reload();
+            });
+        }
+    });
+}
+
 // 패스워드 변경
 function PUT_PASSWORD(userUID, pw) {
     http({
@@ -146,8 +172,7 @@ function PUT_PASSWORD(userUID, pw) {
                     },
                 },
             }).then((res) => {
-                location.href = "/account.html";
-                // $("#newPw").val("");
+                location.reload();
             });
         })
         .catch(function (error) {
@@ -183,7 +208,17 @@ $(function () {
         $("#addr1").val(data.addr1);
         $("#addr2").val(data.addr2);
         $("#memo").val(data.memo);
-        $("#userId").val(data.userId);
+
+        if (data.userId) {
+            $("#userId").attr("readonly", true);
+            $("#userId").val(data.userId);
+            $("#handleNewPw").hide();
+            $("#handleChangePw").show();
+        } else {
+            $("#userId").attr("readonly", false);
+            $("#handleNewPw").show();
+            $("#handleChangePw").hide();
+        }
     });
 
     // 등록/수정
@@ -230,16 +265,48 @@ $(function () {
         });
     });
 
-    // 비밀번호 변경
-    $("#handleChangePw").click(function () {
+    // 비밀번호 신규
+    $("#handleNewPw").click(function () {
+        const userId = $("#userId").val();
         const pw = $("#newPw").val();
 
+        if (!userId) return alertError("아이디를 입력하세요");
+        if (!pw) return alertError("패스워드를 입력하세요");
+        // if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+        //     return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        // }
+
+        swal("신규 거래처 계정을 생성 하시겠습니까?", {
+            icon: "warning",
+            buttons: {
+                confirm: {
+                    className: "btn btn-warning",
+                },
+                cancel: {
+                    text: "아니요",
+                    visible: true,
+                    className: "btn btn-default btn-border",
+                },
+            },
+        }).then((res) => {
+            if (res) {
+                POST_PARTNER_ID(PARAM_UID, userId, pw);
+            }
+        });
+    });
+
+    // 비밀번호 변경
+    $("#handleChangePw").click(function () {
+        const userId = $("#userId").val();
+        const pw = $("#newPw").val();
+
+        if (!userId) return alertError("아이디를 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
         if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
             return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
         }
 
-        swal("비밀번호를 변경하시겠습니까?", {
+        swal("비밀번호를 변경 하시겠습니까?", {
             icon: "warning",
             buttons: {
                 confirm: {

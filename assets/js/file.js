@@ -43,7 +43,7 @@ async function GET_FILE(page) {
 						<a
 							href="#"
 							data-uid="${el.UID}" 
-							class="btn btn-danger btn-sm ml-2 handleDelete"
+							class="btn btn-danger btn-sm ml-2 handleDelete auth-display"
 						>
 							파일 삭제
 						</a>
@@ -82,7 +82,16 @@ $(function () {
     $(".page-title").text(`${PARAM_NAME} 파일 관리`);
     $(".page-new").text(`${PARAM_NAME} 파일 등록`);
 
-    GET_FILE(1);
+    GET_FILE(1).then((res) => {
+        const sessionLevel = sessionStorage.getItem("level");
+
+        if (sessionLevel === "2") {
+            $(".handleDelete.auth-display").attr(
+                "style",
+                "display: inline-block !important"
+            );
+        }
+    });
 
     // 파일 신규등록
     $(".page-new").click(function () {

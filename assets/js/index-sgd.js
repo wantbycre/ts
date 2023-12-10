@@ -221,9 +221,13 @@ function lists(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete sgd-delete" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
+			${
+                sessionPtKey === "null"
+                    ? `<a href="#" type="button" class="btn-delete sgd-delete" data-uid="${el.UID}">
+							<i class="fas fa-plus text-danger"></i>
+						</a>`
+                    : ``
+            }
 		</div>
 	`;
 }
@@ -419,6 +423,15 @@ $(function () {
             $("#dkbDesignDate")
                 .datepicker()
                 .datepicker("setDate", scheduleDate);
+        }
+
+        // 옵저버 설정
+        const sessionPtKey = sessionStorage.getItem("ptKey");
+        if (sessionPtKey !== "null") {
+            $("#kakaotalk-sharing-btn, #share-email, #handleSgdSubmit").hide();
+            $("input[type=text], textarea").attr("readonly", true);
+        } else {
+            $(".auth-display").attr("style", "display: flex !important");
         }
     });
 

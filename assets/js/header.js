@@ -8,6 +8,13 @@ async function GET_MY_USER_DETAIL(UID) {
 }
 
 $(function () {
+    const sessionLevel = sessionStorage.getItem("level");
+    const sessionPartnerUID = sessionStorage.getItem("partnerUID");
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+    const sessionToken = sessionStorage.getItem("token");
+    const sessionUserUID = sessionStorage.getItem("userUID");
+    const path = $(location).attr("pathname");
+
     // 로그아웃
     $("#handleLogout").click(function () {
         sessionStorage.removeItem("level");
@@ -19,14 +26,6 @@ $(function () {
 
         location.href = "/login.html";
     });
-
-    let sessionLevel = sessionStorage.getItem("level");
-    let sessionPartnerUID = sessionStorage.getItem("partnerUID");
-    let sessionPtKey = sessionStorage.getItem("ptKey");
-    let sessionToken = sessionStorage.getItem("token");
-    let sessionUserUID = sessionStorage.getItem("userUID");
-
-    const path = $(location).attr("pathname");
 
     console.log(
         "sessionLevel:",
@@ -41,6 +40,11 @@ $(function () {
         sessionUserUID
     );
     // console.log(path);
+
+    // 권한
+    if (sessionLevel === "2") {
+        $(".auth-display").attr("style", "display: list-item !important");
+    }
 
     switch (path) {
         case "/":
@@ -92,10 +96,15 @@ $(function () {
     GET_MY_USER_DETAIL(sessionUserUID).then((data) => {
         const { userName, position, telNum } = data.data[0];
 
-        // console.log(data.data[0]);
-        $(".header-name").text(userName);
-        $(".header-position").text(position);
-        $(".header-tel").text(telNum);
+        // console.log("마이페이지", sessionPtKey);
+
+        if (sessionPtKey !== "null") {
+            $(".user").hide();
+        } else {
+            $(".header-name").text(userName);
+            $(".header-position").text(position);
+            $(".header-tel").text(telNum);
+        }
     });
 
     // 공사현황 클릭

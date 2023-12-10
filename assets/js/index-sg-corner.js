@@ -283,6 +283,13 @@ $(function () {
 
             $("#cnOutputDate").val(cnOutputDate || 10);
         });
+
+        // 옵저버 설정
+        const sessionPtKey = sessionStorage.getItem("ptKey");
+        if (sessionPtKey !== "null") {
+            $("#kakaotalk-sharing-btn, #share-email, #handleSgdSubmit").hide();
+            $("input[type=text], textarea, select").attr("readonly", true);
+        }
     });
 
     // 설계 - 코너철판 등록/저장

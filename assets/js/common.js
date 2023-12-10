@@ -5,3 +5,11 @@ const emailSender = "";
 function comma(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+$(function () {
+    const sessionLevel = sessionStorage.getItem("level");
+
+    if (sessionLevel === "2") {
+        $(".auth-display").attr("style", "display: block !important");
+    }
+});

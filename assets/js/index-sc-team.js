@@ -139,15 +139,21 @@ function lists(el) {
 }
 
 function lists2(el) {
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			<a href="#" type="button" class="btn-delete sg-team-delete-gisung" data-uid="${el.UID}">
-				<i class="fas fa-plus text-danger"></i>
-			</a>
+			${
+                sessionPtKey === "null"
+                    ? `<a href="#" type="button" class="btn-delete sg-team-delete-gisung" data-uid="${el.UID}">
+							<i class="fas fa-plus text-danger"></i>
+						</a>`
+                    : ``
+            }
 		</div>
 	`;
 }
@@ -247,6 +253,12 @@ $(function () {
         listsFecthGisung();
 
         $(".gisung-title").text(name);
+
+        // 옵저버 설정
+        const sessionPtKey = sessionStorage.getItem("ptKey");
+        if (sessionPtKey === "null") {
+            $(".auth-display").attr("style", "display: flex !important");
+        }
     });
 
     // 설치팀 기성 업로드

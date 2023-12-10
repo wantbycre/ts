@@ -45,5 +45,7 @@ function GET_TOTAL() {
 
 $(function () {
     // 합계
-    GET_TOTAL();
+    setTimeout(() => {
+        GET_TOTAL();
+    }, 300);
 });

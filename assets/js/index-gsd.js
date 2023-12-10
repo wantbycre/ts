@@ -623,6 +623,15 @@ $(function () {
             }
 
             // console.log(data.stts);
+
+            // 옵저버 설정
+            const sessionPtKey = sessionStorage.getItem("ptKey");
+            if (sessionPtKey !== "null") {
+                $(
+                    ".handleDateChange, #handleAddCalendar, #handleGsdSubmit, #handleFileMemo"
+                ).hide();
+                $("input[type=text], textarea").attr("readonly", true);
+            }
         });
 
         const uniqueObjArr = [

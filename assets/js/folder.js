@@ -24,7 +24,7 @@ async function GET_FILE_FOLDER(PARAM_UID) {
 						<i class="la flaticon-folder"></i>
 						<div>${el.folderName}</div>
 					</a>
-					<button type="button" class="handleDelete" data-uid="${el.UID}">
+					<button type="button" class="handleDelete auth-display" data-uid="${el.UID}">
 						<i class="fas fa-window-close"></i>
 					</button>
 				</div>
@@ -75,7 +75,13 @@ function DELETE_FOLDER(UID) {
 
 $(function () {
     GET_FILE_BOARD(1);
-    GET_FILE_FOLDER(1);
+    GET_FILE_FOLDER(1).then((res) => {
+        const sessionLevel = sessionStorage.getItem("level");
+
+        if (sessionLevel === "2") {
+            $(".auth-display").attr("style", "display: block !important");
+        }
+    });
 
     // 폴더 탭 변경
     $(document).on("click", ".account-tab a", function () {
