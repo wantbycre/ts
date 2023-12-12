@@ -38,7 +38,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 			<div class="d-flex">
     			<button 
 					type="button" 
-					class="aps-button active ${data.cnStts === 8 ? `gray blur` : `gray`}"
+					class="aps-button active ${data.cnStts === 4 ? `gray blur` : `gray`}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
