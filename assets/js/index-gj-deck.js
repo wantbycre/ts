@@ -22,26 +22,27 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
     console.log(sttsData);
 
-    sttsData.forEach((data) => {
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "] .add-section .nbsp"
-        ).remove();
+    sttsData.forEach((data, i) => {
+        if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section .nbsp"
+            ).remove();
 
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.inputDate +
-                "] .add-section"
-        ).append(`
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.inputDate +
+                    "] .add-section"
+            ).append(`
 			<div class="d-flex">
     			<button 
 					type="button" 
@@ -64,6 +65,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     			</button>
 			</div>
     	`);
+        }
     });
 }
 

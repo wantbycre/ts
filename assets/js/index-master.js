@@ -14,97 +14,41 @@ let divData = [];
  * @param {Array} thisMonth - 해당 월
  */
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
-    const sttsData = DATAS.filter((n) => n.stts === 6 || n.stts === 7); //.filter((n) => n.UID === 12);
+    const sttsData = DATAS.filter(
+        (n) =>
+            n.stts === 3 ||
+            n.stts === 4 ||
+            n.stts === 5 ||
+            n.stts === 6 ||
+            n.stts === 7
+    ); //.filter((n) => n.UID === 12);
 
-    let divCount = 1;
+    // let divCount = 1;
 
     console.log(sttsData);
 
     sttsData.forEach((data, i) => {
-        if (
-            data.scheduleUID === sttsData[i + 1]?.scheduleUID ||
-            data.scheduleUID === sttsData[i - 1]?.scheduleUID
-        ) {
-            divData.push(data);
+        if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
+            if (data.etcNote) {
+                $(
+                    "#chart-content table[data-index=" +
+                        (thisYear + thisMonth) +
+                        "] tbody tr[data-uid=" +
+                        data.UID +
+                        "] td[data-date=" +
+                        data.inputDate +
+                        "] .add-section .nbsp"
+                ).remove();
 
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section .nbsp"
-            ).remove();
-
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section"
-            ).append(`
-				<div class="d-flex">
-					<button 
-						type="button" 
-						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
-						data-product-uid="${data.UID}"
-						data-schedule-uid="${data.scheduleUID}"
-						data-div-uid="${data.divUID}"
-					>
-						<div class="d-flex">
-							<div class="aps-content">
-								<div class="aps-top">${data.floor}F ${data.section}구간</div>
-								<div class="d-flex aps-middle">
-									<div>${data.area}</div>
-									<div>${data.strup}</div>
-								</div>
-								<div class="d-flex aps-bottom">
-									<div>${data.dkbCnt}</div>
-									<div>${data.cnCnt || ``}</div>
-								</div>
-							</div>
-							<div class="aps-side">
-								${
-                                    data.etcNote
-                                        ? `
-											<div class="aps-memo">
-												<span>메모</span>
-											</div>`
-                                        : ``
-                                }
-								<div>
-									<span>${data.scheduleUID}<br />-<br />${divCount}</span>
-								</div>
-							</div>
-						</div>
-					</button>
-				</div>
-			`);
-
-            divCount++;
-        } else if (data.etcNote) {
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section .nbsp"
-            ).remove();
-
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section"
-            ).append(`
+                $(
+                    "#chart-content table[data-index=" +
+                        (thisYear + thisMonth) +
+                        "] tbody tr[data-uid=" +
+                        data.UID +
+                        "] td[data-date=" +
+                        data.inputDate +
+                        "] .add-section"
+                ).append(`
 				<div class="d-flex">
 					<button 
 						type="button" 
@@ -134,50 +78,51 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 					</button>
 				</div>
 			`);
-        } else {
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section .nbsp"
-            ).remove();
+            } else {
+                $(
+                    "#chart-content table[data-index=" +
+                        (thisYear + thisMonth) +
+                        "] tbody tr[data-uid=" +
+                        data.UID +
+                        "] td[data-date=" +
+                        data.inputDate +
+                        "] .add-section .nbsp"
+                ).remove();
 
-            $(
-                "#chart-content table[data-index=" +
-                    (thisYear + thisMonth) +
-                    "] tbody tr[data-uid=" +
-                    data.UID +
-                    "] td[data-date=" +
-                    data.inputDate +
-                    "] .add-section"
-            ).append(`
-			<div class="d-flex">
-    			<button 
-					type="button" 
-					class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
-					data-product-uid="${data.UID}"
-					data-schedule-uid="${data.scheduleUID}"
-					data-div-uid="${data.divUID}"
-				>
-    				<div class="aps-content">
-    					<div class="aps-top">${data.floor}F ${data.section}구간</div>
-    					<div class="d-flex aps-middle">
-    						<div>${data.area}</div>
-    						<div>${data.strup}</div>
-    					</div>
-    					<div class="d-flex aps-bottom">
-    						<div>${data.dkbCnt}</div>
-    						<div>${data.cnCnt || ``}</div>
-    					</div>
-    				</div>
-    			</button>
-			</div>
-    	`);
+                $(
+                    "#chart-content table[data-index=" +
+                        (thisYear + thisMonth) +
+                        "] tbody tr[data-uid=" +
+                        data.UID +
+                        "] td[data-date=" +
+                        data.inputDate +
+                        "] .add-section"
+                ).append(`
+					<div class="d-flex">
+						<button 
+							type="button" 
+							class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
+							data-product-uid="${data.UID}"
+							data-schedule-uid="${data.scheduleUID}"
+							data-div-uid="${data.divUID}"
+						>
+							<div class="aps-content">
+								<div class="aps-top">${data.floor}F ${data.section}구간</div>
+								<div class="d-flex aps-middle">
+									<div>${data.area}</div>
+									<div>${data.strup}</div>
+								</div>
+								<div class="d-flex aps-bottom">
+									<div>${data.dkbCnt}</div>
+									<div>${data.cnCnt || ``}</div>
+								</div>
+							</div>
+						</button>
+					</div>
+				`);
 
-            divCount = 1;
+                // divCount = 1;
+            }
         }
     });
 }

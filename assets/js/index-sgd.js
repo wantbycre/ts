@@ -15,28 +15,33 @@ let emailFile = [];
 function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     const sttsData = DATAS.filter((n) => n.stts === 3 || n.stts === 4);
 
-    console.log(sttsData);
+    // const uniqueScheduleUID = [
+    //     ...new Map(sttsData.map((obj) => [obj.scheduleUID, obj])).values(),
+    // ];
 
-    sttsData.forEach((data) => {
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.dkbDesignDate +
-                "] .add-section .nbsp"
-        ).remove();
+    // console.log(sttsData);
 
-        $(
-            "#chart-content table[data-index=" +
-                (thisYear + thisMonth) +
-                "] tbody tr[data-uid=" +
-                data.UID +
-                "] td[data-date=" +
-                data.dkbDesignDate +
-                "] .add-section"
-        ).append(`
+    sttsData.forEach((data, i) => {
+        if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.dkbDesignDate +
+                    "] .add-section .nbsp"
+            ).remove();
+
+            $(
+                "#chart-content table[data-index=" +
+                    (thisYear + thisMonth) +
+                    "] tbody tr[data-uid=" +
+                    data.UID +
+                    "] td[data-date=" +
+                    data.dkbDesignDate +
+                    "] .add-section"
+            ).append(`
 			<div class="d-flex">
 				<button 
 					type="button" 
@@ -59,6 +64,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 				</button>
 			</div>
 		`);
+        }
     });
 }
 
@@ -215,6 +221,8 @@ async function POST_DESIGN_FILE(filePath, fileType, files) {
 
 // 공통자료 상세 리스트
 function lists(el) {
+    const sessionPtKey = sessionStorage.getItem("ptKey");
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
@@ -564,7 +572,10 @@ $(function () {
     Kakao.Share.createDefaultButton({
         container: "#kakaotalk-sharing-btn",
         objectType: "text",
-        text: "[프로젝트1번] 이 생성 되었습니다. 날짜를 확정 하세요",
+        text: `●태성건업 설계도면 발송공지●
+현장명: ${scheduleCode}
+구간명: 설계-데크보
+발송일: ${moment().format("YYYY-MM-DD")}`,
         link: {
             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: "https://developers.kakao.com",

@@ -11,15 +11,34 @@ function GET_TOTAL() {
             totalCnCnt: 0,
         };
 
-        // console.log(data);
+        const projectLength = $("#chart-content table:eq(0) tbody tr");
+        let stateProject = [];
 
-        data.forEach((el) => {
+        $.each(projectLength, (i, el) => {
+            const uid = $(el).data("uid");
+
+            if (data.some((n) => n.projectUID === uid)) {
+                stateProject.push(data.filter((n) => n.projectUID === uid)[0]);
+            } else {
+                stateProject.push({
+                    projectUID: uid,
+                    totalArea: null,
+                    totalDkbCnt: null,
+                    totalStrup: null,
+                    totalCnCnt: null,
+                });
+            }
+        });
+
+        // console.log(stateProject);
+
+        stateProject.forEach((el) => {
             // 차트 삽입
             $("#chart-sum table tbody  tr[data-uid=" + el.projectUID + "] ")
                 .append(`
-					<td>${comma(String(el.totalArea))}</td>
-            		<td>${comma(String(el.totalDkbCnt))}</td>
-            		<td>${comma(String(el.totalStrup))}</td>
+					<td>${comma(String(el.totalArea || 0))}</td>
+            		<td>${comma(String(el.totalDkbCnt || 0))}</td>
+            		<td>${comma(String(el.totalStrup || 0))}</td>
             		<td>${comma(String(el.totalCnCnt || 0))}</td>
 				`);
 
