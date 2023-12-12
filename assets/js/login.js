@@ -186,7 +186,7 @@ $(function () {
             });
     });
 
-    $("#id, #password").on("keypress", function (e) {
+    $("#userId, #password").on("keypress", function (e) {
         if (e.keyCode == "13") {
             $("#handleSubmit").click();
         }

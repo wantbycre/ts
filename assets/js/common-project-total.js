@@ -11,14 +11,16 @@ function GET_TOTAL() {
             totalCnCnt: 0,
         };
 
+        // console.log(data);
+
         data.forEach((el) => {
             // 차트 삽입
             $("#chart-sum table tbody  tr[data-uid=" + el.projectUID + "] ")
                 .append(`
 					<td>${comma(String(el.totalArea))}</td>
-					<td>${comma(String(el.totalDkbCnt))}</td>
-					<td>${comma(String(el.totalStrup))}</td>
-					<td>${comma(String(el.totalCnCnt || 0))}</td>
+            		<td>${comma(String(el.totalDkbCnt))}</td>
+            		<td>${comma(String(el.totalStrup))}</td>
+            		<td>${comma(String(el.totalCnCnt || 0))}</td>
 				`);
 
             // 합계
@@ -30,16 +32,16 @@ function GET_TOTAL() {
 
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(0)
-            .text(sum.totalArea);
+            .text(comma(sum.totalArea));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(1)
-            .text(sum.totalDkbCnt);
+            .text(comma(sum.totalDkbCnt));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(2)
-            .text(sum.totalStrup.toFixed(2));
+            .text(comma(sum.totalStrup.toFixed(2)));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(3)
-            .text(sum.totalCnCnt);
+            .text(comma(sum.totalCnCnt));
     });
 }
 
