@@ -132,6 +132,8 @@ $(function () {
                         className: "btn btn-success",
                     },
                 },
+            }).then(() => {
+                location.reload();
             });
         });
     });

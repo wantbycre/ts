@@ -354,8 +354,6 @@ function setUniqueObj(DATAS) {
 
     const currentPath = window.location.pathname;
 
-    console.log(currentPath);
-
     uniqueObjArr.forEach((el, i) => {
         // 좌측 타이틀 적용
         $("#chart-title tbody").append(`

@@ -272,9 +272,9 @@ $(function () {
 
         if (!userId) return alertError("아이디를 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
-        // if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-        //     return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
-        // }
+        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        }
 
         swal("신규 거래처 계정을 생성 하시겠습니까?", {
             icon: "warning",
