@@ -5,6 +5,9 @@ let scheduleDate = "";
 let isSubmitType = true; // t = 신규, f = 수정
 let emailFile = [];
 
+let currentDkbDesignDate = "";
+let currentPjInputDate = "";
+let currentInputDate = "";
 /**
  *
  * common-project 호출하는 함수
@@ -120,8 +123,11 @@ function PUT_DESIGN(
     strup,
     dkbCnt,
     pjInputDate,
-    inputDate
+    inputDate,
+    dkbChangeType,
+    sgChangeType
 ) {
+    console.log(dkbChangeType, sgChangeType);
     http({
         method: "PUT",
         url: "design",
@@ -135,6 +141,8 @@ function PUT_DESIGN(
             dkbCnt, // 수량정보 입력 - 부재수
             pjInputDate, // 판재공장 입고일
             inputDate, // 현장납품 예정일
+            dkbChangeType,
+            sgChangeType,
         },
     })
         .then((res) => {
@@ -253,9 +261,11 @@ function listsSgdFecth() {
                     $("#content-sgd-seung").append(lists(el));
                     break;
                 case "변경승인도면_BOM_CP_스트럽":
+                    emailFile.push(el);
                     $("#content-sgd-byon").append(lists(el));
                     break;
                 case "승인요청서":
+                    emailFile.push(el);
                     $("#content-sgd-yo").append(lists(el));
                     break;
                 default:
@@ -339,7 +349,7 @@ function POST_MAIL(email, subject, content, fileData) {
         },
     })
         .then((res) => {
-            swal(res.data.message, {
+            swal("이메일 전송이 완료되었습니다.", {
                 icon: "success",
                 buttons: {
                     confirm: {
@@ -347,6 +357,7 @@ function POST_MAIL(email, subject, content, fileData) {
                     },
                 },
             }).then((_) => {
+                emailFile = [];
                 $(".modal-email").modal("hide");
             });
         })
@@ -389,6 +400,13 @@ $(function () {
         scheduleCode = code;
         scheduleDate = tdDate || date;
 
+        // 이메일 보내기 문구
+        const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-데크보\n발송일: ${moment().format(
+            "YYYY-MM-DD"
+        )}`;
+
+        $("#content").val(emailText);
+
         $(".modal-seol").modal();
         listsSgdFecth();
 
@@ -406,6 +424,10 @@ $(function () {
                     "days"
                 );
                 const inputDate = moment(ipDate).diff(moment(pjDate), "days");
+
+                currentDkbDesignDate = dkbDate;
+                currentPjInputDate = pjDate;
+                currentInputDate = ipDate;
 
                 $("#floor").val(data.floor);
                 $("#section").val(data.section);
@@ -467,6 +489,13 @@ $(function () {
             .add(standardInputDate, "d")
             .format("YYYY-MM-DD");
 
+        const dkbChangeType = currentDkbDesignDate === dkbDesignDate ? 0 : 1;
+
+        const sgChangeType =
+            currentPjInputDate === pjInputDate && currentInputDate === inputDate
+                ? 0
+                : 1;
+
         if (isSubmitType) {
             POST_DESIGN(
                 dkbDesignDate,
@@ -487,7 +516,9 @@ $(function () {
                 strup,
                 dkbCnt,
                 pjInputDate,
-                inputDate
+                inputDate,
+                sgChangeType,
+                dkbChangeType
             );
         }
     });
@@ -545,6 +576,8 @@ $(function () {
     $("#handleFileSgdSeung").click(function () {
         const file = $("#file-sgd-seung")[0];
 
+        if (!scheduleUID)
+            return alertError("설계일 등록 후 파일첨부 가능합니다.");
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         POST_DESIGN_FILE("설계", "승인도면_BOM_CP_스트럽", file.files);
@@ -554,6 +587,8 @@ $(function () {
     $("#handleFileSgdByon").click(function () {
         const file = $("#file-sgd-byon")[0];
 
+        if (!scheduleUID)
+            return alertError("설계일 등록 후 파일첨부 가능합니다.");
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         POST_DESIGN_FILE("설계", "변경승인도면_BOM_CP_스트럽", file.files);
@@ -563,6 +598,8 @@ $(function () {
     $("#handleFileSgdYo").click(function () {
         const file = $("#file-sgd-yo")[0];
 
+        if (!scheduleUID)
+            return alertError("설계일 등록 후 파일첨부 가능합니다.");
         if (file.files.length === 0) return alertError("파일을 첨부하세요.");
 
         POST_DESIGN_FILE("설계", "승인요청서", file.files);
@@ -593,7 +630,12 @@ $(function () {
         if (!emailVal) return alertError("받는사람을 입력하세요.");
         if (!content) return alertError("내용을 입력하세요.");
 
-        emailFile.forEach((n) => {
+        // sort ㄱ~ㅎ
+        const sortEmail = emailFile.sort((a, b) =>
+            a.fileName.localeCompare(b.fileName)
+        );
+
+        sortEmail.forEach((n) => {
             fileData.push({
                 fileName: n.fileName,
                 filePath: `${domain}/${n.filePath}`,
@@ -602,6 +644,6 @@ $(function () {
 
         const email = emailVal.replace(/\n\s*/g, "").split(",");
 
-        POST_MAIL(email, subject, content, fileData);
+        POST_MAIL(email, subject, content.replace(/\n/g, "<br>"), fileData);
     });
 });

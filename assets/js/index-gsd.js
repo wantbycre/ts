@@ -6,6 +6,7 @@ let scheduleDate = "";
 let isSubmitType = true; // t = 신규, f = 수정
 let totalArea = 0;
 let divData = [];
+let currentStts = 0;
 /**
  *
  * common-project 호출하는 함수
@@ -604,6 +605,8 @@ $(function () {
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
             const data = res.data[0];
 
+            currentStts = data.stts;
+
             // DECK 정보
             if (data.deckInputDate) {
                 const dkbDateMonth = moment(data.deckInputDate).format("MM");
@@ -622,7 +625,7 @@ $(function () {
                 $("#handleGsdSubmit").attr("disabled", false);
             }
 
-            // console.log(data.stts);
+            console.log(data.stts);
 
             // 옵저버 설정
             const sessionPtKey = sessionStorage.getItem("ptKey");
@@ -654,7 +657,7 @@ $(function () {
                                 }">
 							</div>
 
-							<button type="button" class="btn btn-primary fw-bold ml-2 handleDateDivChange"
+							<button type="button" class="btn btn-primary fw-bold ml-2 handleDateChangeDiv"
 								style="height: 60px;">일정등록</button>
 							<button type="button" class="btn btn-danger fw-bold ml-2 delete-calendar-data"
 								style="height: 60px;">제거</button>
@@ -697,6 +700,11 @@ $(function () {
 
     // 구간분할 추가
     $("#handleAddCalendar").click(function () {
+        console.log(currentStts);
+
+        if (currentStts !== 3)
+            return alertError("설계완료 상태에서만 구간분할이 가능합니다.");
+
         $(".add-calendar").append(`
 				<div class="d-flex calendar-delete-section empty-add-section">
 					<div class="form-group form-group-default ml-2" style="width: 150px;">
@@ -760,6 +768,14 @@ $(function () {
     $(document).on("click", ".handleDateDivChange", function () {
         const inputDate = $(this).prev("div").find("input").val();
         POST_CONSTRUCTION(inputDate);
+    });
+
+    // 공사 - 분할 컨텐츠 일정변경
+    $(document).on("click", ".handleDateChangeDiv", function () {
+        const inputDate = $(this).prev("div").find("input").val();
+        divUid = $(this).parents(".calendar-delete-section").data("div-uid");
+
+        PUT_CONSTRUCTION(inputDate);
     });
 
     // 입고면적 자동계산

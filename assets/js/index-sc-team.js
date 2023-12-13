@@ -19,7 +19,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
             n.stts === 7
     );
 
-    console.log(sttsData);
+    // console.log(sttsData);
 
     sttsData.forEach((data, i) => {
         if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
@@ -45,7 +45,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 			<div class="d-flex">
     			<button 
 					type="button" 
-					class="aps-button active ${data.cnStts === 9 ? `green` : ``}"
+					class="aps-button active ${data.stts === 7 ? `green` : ``}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
@@ -239,7 +239,6 @@ $(function () {
 
         $(".modal-sc-team").modal();
 
-        console.log("?", scheduleUID);
         listsFecth();
     });
 

@@ -63,6 +63,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
 						data-div-uid="${data.divUID}"
+						data-stts="${data.stts}"
 					>
 						<div class="d-flex">
 							<div class="aps-content">
@@ -122,6 +123,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
 						data-div-uid="${data.divUID}"
+						data-stts="${data.stts}"
 					>
 						<div class="d-flex">
 							<div class="aps-content">
@@ -454,32 +456,23 @@ $(function () {
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");
-
         const stts = $(this).data("stts");
 
-        console.log(stts);
-
-        // 입고확정
-        if (stts >= 6) {
-            $("#handlePurpleSubmit").attr("disabled", true);
-            $("#handleGreenSubmit").attr("disabled", true);
-        } else {
-            // 판재입고 될 경우
-            if (stts >= 4) {
+        switch (stts) {
+            case 4:
                 $("#handlePurpleSubmit").attr("disabled", false);
                 $("#handleGreenSubmit").attr("disabled", true);
-            } else {
-                $("#handlePurpleSubmit").attr("disabled", true);
-                $("#handleGreenSubmit").attr("disabled", true);
-            }
-
-            // 조립제작 완료일 경우
-            if (stts >= 5) {
+                break;
+            case 5:
                 $("#handlePurpleSubmit").attr("disabled", true);
                 $("#handleGreenSubmit").attr("disabled", false);
-            } else {
+                break;
+            case 6:
+                $("#handlePurpleSubmit").attr("disabled", true);
                 $("#handleGreenSubmit").attr("disabled", true);
-            }
+                break;
+            default:
+                null;
         }
 
         projectUID = productUid;
@@ -600,7 +593,10 @@ $(function () {
     Kakao.Share.createDefaultButton({
         container: "#kakaotalk-sharing-btn",
         objectType: "text",
-        text: "[프로젝트1번] 이 생성 되었습니다. 날짜를 확정 하세요",
+        text: `●태성건업 설계도면 발송공지●
+현장명: ${scheduleCode}
+구간명: 설계-데크보
+발송일: ${moment().format("YYYY-MM-DD")}`,
         link: {
             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: "https://developers.kakao.com",

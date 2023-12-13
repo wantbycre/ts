@@ -359,7 +359,7 @@ function setUniqueObj(DATAS) {
     uniqueObjArr.forEach((el, i) => {
         // 좌측 타이틀 적용
         $("#chart-title tbody").append(`
-			<tr>
+			<tr data-uid="${el.UID}">
 				<td>
 					<a
 						href="#"

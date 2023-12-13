@@ -54,7 +54,20 @@
 
 					<div class="card set-project">
 						<div class="card-header d-flex align-items-end justify-content-between">
-							<div class="d-flex align-items-center m-flex-none"></div>
+							<div class="d-flex align-items-center m-flex-none">
+								<div class="form-group">
+									<label for="select-to-project">진행단계</label>
+									<select class="form-control form-control-sm" id="select-to-project"
+										style="width: 120px;">
+										<option value="1">진행중</option>
+										<option value="2">종료</option>
+									</select>
+								</div>
+								<div class="mt-4">
+									<button type="button" class="btn btn-dark btn-sm"
+										id="handleSearchProject">조회</button>
+								</div>
+							</div>
 							<div class="mb-2">
 								<div class="mb-2">
 									<!-- 노랑 -->
@@ -134,6 +147,61 @@
 					</button>
 				</div>
 				<div class="modal-body v2">
+					<div class="card final-section after-final">
+						<div class="card-body">
+							<div class="d-flex justify-content-center align-items-center">
+								<div style="font-size: 20px;">
+									<i class="far fa-check-circle"></i>
+									프로젝트를 종료 하시겠습니까?
+								</div>
+								<a href="#" class="btn btn-success ml-5" style="width: 100px;"
+									id="handleFinalSuc"><strong>확인</strong></a>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="card final-section">
+						<div class="card-body">
+							<div class="d-flex justify-content-center">
+								<div class="" style="width: 350px;">
+									<h2>[<span class="project-name"></span>] 자재비 기성집계</h2>
+									<div class="d-flex">
+										<div class="form-group form-group-default mb-0">
+											<label for="file-final-gisung">기성집계 파일 업로드</label>
+											<input id="file-final-gisung" type="file" class="form-control" multiple>
+										</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileFinalGisung">업로드</button>
+									</div>
+
+									<div class="file-box mt-4">
+										<div class="file-title">견적자료</div>
+										<div class="file-content file-empty" id="content-final-gisung"></div>
+									</div>
+								</div>
+
+								<div class="ml-3" style="width: 350px;">
+									<h2>[<span class="project-name"></span>] 노무비 집계</h2>
+									<div class="d-flex">
+										<div class="form-group form-group-default mb-0">
+											<label for="file-final-nomu">노무비집계 파일 업로드</label>
+											<input id="file-final-nomu" type="file" class="form-control" multiple>
+										</div>
+										<button type="button" class="btn btn-primary ml-1"
+											id="handleFileFinalNomu">업로드</button>
+									</div>
+
+									<div class="file-box mt-4">
+										<div class="file-title">견적자료</div>
+										<div class="file-content file-empty" id="content-final-nomu"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
 					<!-- 1. 공무 / 2. 설계 -->
 					<div class="card">
 						<div class="card-body">

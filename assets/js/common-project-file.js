@@ -154,6 +154,12 @@ function commonListsFecth() {
                 case "설치":
                     $("#content-sulchi tbody").append(commonTbodys(el));
                     break;
+                case "자재비_기성집계":
+                    $("#content-final-gisung").append(commonLists(el));
+                    break;
+                case "노무비_기성집계":
+                    $("#content-final-nomu").append(commonLists(el));
+                    break;
                 default:
                     return;
             }
@@ -277,5 +283,25 @@ $(function () {
             return alertError("메모 또는 파일첨부 하세요.");
 
         POST_PROJECT_FILE_COMMON("설치", "설치", file.files, val);
+    });
+
+    // 자재비 기성집계
+    $("#handleFileFinalGisung").click(function () {
+        const file = $("#file-final-gisung")[0];
+
+        if (file.files.length === 0 && !val)
+            return alertError("메모 또는 파일첨부 하세요.");
+
+        POST_PROJECT_FILE_COMMON("공무", "자재비_기성집계", file.files);
+    });
+
+    // 노무비 집계
+    $("#handleFileFinalNomu").click(function () {
+        const file = $("#file-final-nomu")[0];
+
+        if (file.files.length === 0 && !val)
+            return alertError("메모 또는 파일첨부 하세요.");
+
+        POST_PROJECT_FILE_COMMON("공무", "노무비_기성집계", file.files);
     });
 });

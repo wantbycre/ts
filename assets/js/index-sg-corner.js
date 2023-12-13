@@ -1,7 +1,7 @@
 let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
-
+let emailFile = [];
 /**
  *
  * common-project 호출하는 함수
@@ -180,9 +180,11 @@ function listsSgdFecth() {
         res.data.forEach((el) => {
             switch (el.fileType) {
                 case "코너철판_설계도면":
+                    emailFile.push(el);
                     $("#content-sgd-sul").append(lists(el));
                     break;
                 case "코너철판_변경설계도면":
+                    emailFile.push(el);
                     $("#content-sgd-bsul").append(lists(el));
                     break;
                 default:
@@ -214,7 +216,7 @@ function POST_MAIL(email, subject, content, fileData) {
         },
     })
         .then((res) => {
-            swal(res.data.message, {
+            swal("이메일 전송이 완료되었습니다.", {
                 icon: "success",
                 buttons: {
                     confirm: {
@@ -251,6 +253,13 @@ $(function () {
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = date;
+
+        // 이메일 보내기 문구
+        const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-코너철판\n발송일: ${moment().format(
+            "YYYY-MM-DD"
+        )}`;
+
+        $("#content").val(emailText);
 
         $(".modal-seol").modal();
 
@@ -384,7 +393,10 @@ $(function () {
     Kakao.Share.createDefaultButton({
         container: "#kakaotalk-sharing-btn",
         objectType: "text",
-        text: "[프로젝트1번] 이 생성 되었습니다. 날짜를 확정 하세요",
+        text: `●태성건업 설계도면 발송공지●
+현장명: ${scheduleCode}
+구간명: 설계-코너철판
+발송일: ${moment().format("YYYY-MM-DD")}`,
         link: {
             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
             mobileWebUrl: "https://developers.kakao.com",
@@ -402,7 +414,12 @@ $(function () {
         if (!emailVal) return alertError("받는사람을 입력하세요.");
         if (!content) return alertError("내용을 입력하세요.");
 
-        emailFile.forEach((n) => {
+        // sort ㄱ~ㅎ
+        const sortEmail = emailFile.sort((a, b) =>
+            a.fileName.localeCompare(b.fileName)
+        );
+
+        sortEmail.forEach((n) => {
             fileData.push({
                 fileName: n.fileName,
                 filePath: `${domain}/${n.filePath}`,
@@ -411,6 +428,6 @@ $(function () {
 
         const email = emailVal.replace(/\n\s*/g, "").split(",");
 
-        POST_MAIL(email, subject, content, fileData);
+        POST_MAIL(email, subject, content.replace(/\n/g, "<br>"), fileData);
     });
 });
