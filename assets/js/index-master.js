@@ -424,7 +424,7 @@ async function PUT_ETC_NOTE(etcNote) {
 async function GET_TOTAL_AREA(projectUID) {
     const res = await http({
         method: "GET",
-        url: "project/totalArea/" + projectUID,
+        url: "project/totalDeckArea/" + projectUID,
     });
 
     return res.data;

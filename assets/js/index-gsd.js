@@ -58,6 +58,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 					<button 
 						type="button" 
 						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
+						data-stts="${data.stts}"
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
 						data-div-uid="${data.divUID}"
@@ -117,6 +118,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 					<button 
 						type="button" 
 						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
+						data-stts="${data.stts}"
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
 						data-div-uid="${data.divUID}"
@@ -166,6 +168,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     			<button 
 					type="button" 
 					class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
+					data-stts="${data.stts}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
@@ -487,7 +490,7 @@ async function PUT_ETC_NOTE(etcNote) {
 async function GET_TOTAL_AREA(projectUID) {
     const res = await http({
         method: "GET",
-        url: "project/totalArea/" + projectUID,
+        url: "project/totalDeckArea/" + projectUID,
     });
 
     return res.data;
@@ -590,22 +593,28 @@ $(function () {
         const divUid = $(this).data("div-uid");
         const code = $(this).parents("tr").data("code");
         const date = $(this).parent().data("date");
+        const stts = $(this).data("stts");
 
         gsdProjectUID = productUid;
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = date;
         divUID = divUid;
+        currentStts = stts;
 
         $(".modal-gongsa").modal();
         $(".add-calendar .empty-add-section").remove();
+
+        // stts 6번일 경우만 입고확정 가능
+        // stts 7번일 경우 수정 불가
+        if (stts === 6) {
+            $("#handleGsdSubmit").attr("disabled", false);
+        }
 
         // # inputDate 기준 무조건
         // 구간 분할 입고 내용출력
         GET_DESIGN_DETAIL(scheduleUID).then((res) => {
             const data = res.data[0];
-
-            currentStts = data.stts;
 
             // DECK 정보
             if (data.deckInputDate) {
@@ -616,16 +625,10 @@ $(function () {
                 $(".deck-day").text(dkbDateDay);
             }
 
+            $("#deckArea").val(data.deckArea);
+
             // 특이 사항 NOTE
             $("#etcNote").val(data.etcNote);
-
-            // stts 6번일 경우만 입고확정 가능
-            // stts 7번일 경우 수정 불가
-            if (data.stts === 6) {
-                $("#handleGsdSubmit").attr("disabled", false);
-            }
-
-            console.log(data.stts);
 
             // 옵저버 설정
             const sessionPtKey = sessionStorage.getItem("ptKey");
@@ -700,7 +703,7 @@ $(function () {
 
     // 구간분할 추가
     $("#handleAddCalendar").click(function () {
-        console.log(currentStts);
+        // console.log(currentStts);
 
         if (currentStts !== 3)
             return alertError("설계완료 상태에서만 구간분할이 가능합니다.");

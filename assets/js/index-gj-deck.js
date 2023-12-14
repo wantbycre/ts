@@ -71,6 +71,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 
 // 공장 - DECK 입력
 function PUT_FACTORY(deckArea, deckInputDate) {
+    console.log(deckArea, deckInputDate, scheduleUID, projectUID);
     http({
         method: "PUT",
         url: "factory/deck",
@@ -307,7 +308,7 @@ async function POST_PROJECT_FILE(filePath, fileType, files) {
 async function GET_TOTAL_AREA(projectUID) {
     const res = await http({
         method: "GET",
-        url: "project/totalArea/" + projectUID,
+        url: "project/totalDeckArea/" + projectUID,
     });
 
     return res.data;
@@ -371,6 +372,7 @@ $(function () {
 
         // 누적면적
         GET_TOTAL_AREA(projectUID).then((res) => {
+            console.log("누적면적", res.data);
             totalArea = Number(res.data[0].totalArea);
             $("#totalArea").val(totalArea);
         });

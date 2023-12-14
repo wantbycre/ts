@@ -1,9 +1,9 @@
-async function GET_PROJECT(page) {
+async function GET_PROJECT(projectStts) {
     const res = await http({
         method: "GET",
         url: "project",
         params: {
-            page,
+            projectStts,
         },
     });
 
@@ -20,7 +20,7 @@ async function GET_PROJECT(page) {
         }
     });
 
-    // console.log(res.data.data, setData);
+    console.log("회계관리", res.data.data);
 
     $("#table-list tbody").empty();
 
@@ -67,5 +67,5 @@ async function GET_PROJECT(page) {
 }
 
 $(function () {
-    GET_PROJECT(1);
+    GET_PROJECT(0);
 });

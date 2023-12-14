@@ -595,7 +595,7 @@ $(function () {
         objectType: "text",
         text: `●태성건업 설계도면 발송공지●
 현장명: ${scheduleCode}
-구간명: 설계-데크보
+구간명: 설계-조립공장
 발송일: ${moment().format("YYYY-MM-DD")}`,
         link: {
             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함

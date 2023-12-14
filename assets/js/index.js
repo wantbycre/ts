@@ -151,7 +151,7 @@ $(function () {
 
             if (currentSuc === "2") {
                 $(
-                    "#chart-title tbody tr td, #chart-content table tbody .aps-button"
+                    "#chart-title tbody tr td, #chart-content table tbody .aps-button, #chart-title tbody tr td, #chart-content table tbody td"
                 ).css({
                     background: "rgb(194 194 194)",
                 });

@@ -128,7 +128,7 @@ function commonTbodys(el) {
 // 공통자료 리스트 업데이트
 function commonListsFecth() {
     GET_PROJECT_FILE(projectUID).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         $(".file-empty, .file-content tbody").empty();
 
         res.data.forEach((el) => {
