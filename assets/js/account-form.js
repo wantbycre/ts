@@ -125,6 +125,16 @@ function alertError(text) {
 $(function () {
     GET_PARTNER_MASTER();
 
+    $("#ptUID").change(function () {
+        const val = $(this).val();
+
+        if (val === "1" || val === "2") {
+            $(".project-id-pw").hide();
+        } else {
+            $(".project-id-pw").show();
+        }
+    });
+
     // 등록
     $("#handleSubmit").click(function () {
         const ptUID = $("#ptUID").val();

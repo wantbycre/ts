@@ -195,6 +195,12 @@ $(function () {
     const PARAM_UID = new URL(window.location.href).searchParams.get("uid");
     const PARAM_TAB = new URL(window.location.href).searchParams.get("tab");
 
+    if (PARAM_TAB === "1" || PARAM_TAB === "2") {
+        $(".project-id-pw").hide();
+    } else {
+        $(".project-id-pw").show();
+    }
+
     GET_PARTNER_DETAIL(PARAM_UID).then((res) => {
         const { data } = res;
         console.log(data);

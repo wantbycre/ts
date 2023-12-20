@@ -83,6 +83,7 @@ function PUT_DESIGN(cnDesignDate, cnCnt, cnInputDate, cnOutputDate) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-sg-corner.html";
             });
         })
@@ -253,6 +254,8 @@ $(function () {
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = date;
+
+        // console.log("scheduleDate", scheduleDate);
 
         // 이메일 보내기 문구
         const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-코너철판\n발송일: ${moment().format(

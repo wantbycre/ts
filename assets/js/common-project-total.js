@@ -1,9 +1,49 @@
-function GET_TOTAL() {
+function GET_TOTAL(projectStts, startDate, endDate) {
     http({
         method: "GET",
         url: "project/total",
+        params: { projectStts, startDate, endDate },
     }).then((res) => {
         const data = res.data.data;
+
+        let uniqueData = [];
+
+        // console.log(data);
+
+        $("#chart-sum table thead tr.table-sum-thead th").empty();
+        $("#chart-sum table tbody tr").empty();
+
+        data.forEach((el, i) => {
+            if (el.UID === data[i - 1]?.UID) {
+                if (el.scheduleUID !== data[i - 1]?.scheduleUID) {
+                    const addData = uniqueData.map((n) => {
+                        if (
+                            n?.UID === el.UID &&
+                            n?.scheduleUID !== el.scheduleUID
+                        ) {
+                            return {
+                                ...n,
+                                area: n.area + el.area,
+                                cnCnt: n.cnCnt + el.cnCnt,
+                                dkbCnt: n.dkbCnt + el.dkbCnt,
+                                strup: n.strup + el.strup,
+                            };
+                        } else {
+                            return {
+                                ...n,
+                            };
+                        }
+                    });
+
+                    uniqueData = [...addData];
+                }
+            } else {
+                uniqueData.push(el);
+            }
+        });
+
+        // console.log("uniqueData", uniqueData);
+
         const sum = {
             totalArea: 0,
             totalDkbCnt: 0,
@@ -12,16 +52,25 @@ function GET_TOTAL() {
         };
 
         const projectLength = $("#chart-content table:eq(0) tbody tr");
+
         let stateProject = [];
 
         $.each(projectLength, (i, el) => {
             const uid = $(el).data("uid");
 
-            if (data.some((n) => n.projectUID === uid)) {
-                stateProject.push(data.filter((n) => n.projectUID === uid)[0]);
+            if (uniqueData.some((n) => n.UID === uid)) {
+                const filter = uniqueData.filter((n) => n.UID === uid)[0];
+
+                stateProject.push({
+                    UID: uid,
+                    totalArea: filter.area,
+                    totalDkbCnt: filter.dkbCnt,
+                    totalStrup: filter.strup,
+                    totalCnCnt: filter.cnCnt,
+                });
             } else {
                 stateProject.push({
-                    projectUID: uid,
+                    UID: uid,
                     totalArea: null,
                     totalDkbCnt: null,
                     totalStrup: null,
@@ -30,12 +79,12 @@ function GET_TOTAL() {
             }
         });
 
-        // console.log(stateProject);
+        // console.log("stateProject", stateProject);
 
         stateProject.forEach((el) => {
+            // console.log("el", el);
             // 차트 삽입
-            $("#chart-sum table tbody  tr[data-uid=" + el.projectUID + "] ")
-                .append(`
+            $("#chart-sum table tbody  tr[data-uid=" + el.UID + "] ").append(`
 					<td>${comma(String(el.totalArea || 0))}</td>
             		<td>${comma(String(el.totalDkbCnt || 0))}</td>
             		<td>${comma(String(el.totalStrup || 0))}</td>
@@ -64,11 +113,32 @@ function GET_TOTAL() {
     });
 }
 
+function alertError(text) {
+    swal(text, {
+        icon: "error",
+        buttons: {
+            confirm: {
+                className: "btn btn-danger",
+            },
+        },
+    });
+}
+
 $(function () {
     // 합계
     setTimeout(() => {
-        GET_TOTAL();
+        GET_TOTAL(1, null, null);
     }, 300);
 
     $(".calendar-ico").datepicker();
+
+    $("#handleSearchTotals").click(function () {
+        const startDate = $("#total-start-date").val();
+        const endDate = $("#total-end-date").val();
+
+        if (!startDate) alertError("검색 시작날짜를 선택하세요");
+        if (!endDate) alertError("검색 종료날짜를 선택하세요");
+
+        GET_TOTAL(1, startDate, endDate);
+    });
 });

@@ -211,6 +211,7 @@ function PUT_CONSTRUCTION_SUC() {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gsd.html";
             });
         })
@@ -478,6 +479,7 @@ async function PUT_ETC_NOTE(etcNote) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gsd.html";
             });
         })
@@ -530,6 +532,7 @@ function PUT_CONSTRUCTION(inputDate) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gsd.html";
             });
         })
@@ -557,6 +560,7 @@ function POST_CONSTRUCTION(inputDate) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gsd.html";
             });
         })
@@ -592,7 +596,7 @@ $(function () {
         const scheduleUid = $(this).data("schedule-uid");
         const divUid = $(this).data("div-uid");
         const code = $(this).parents("tr").data("code");
-        const date = $(this).parent().data("date");
+        const date = $(this).parents("td").data("date");
         const stts = $(this).data("stts");
 
         gsdProjectUID = productUid;

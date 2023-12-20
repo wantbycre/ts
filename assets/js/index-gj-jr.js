@@ -212,6 +212,7 @@ function PUT_FACTORY(stts) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gj-jr.html";
             });
         })
@@ -455,7 +456,7 @@ $(function () {
         const divUid = $(this).data("div-uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
-        const date = $(this).parent().data("date");
+        const date = $(this).parents("td").data("date");
         const stts = $(this).data("stts");
 
         switch (stts) {

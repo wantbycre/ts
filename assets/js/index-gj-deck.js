@@ -91,6 +91,7 @@ function PUT_FACTORY(deckArea, deckInputDate) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", scheduleDate);
                 location.href = "/index-gj-deck.html";
             });
         })
@@ -345,7 +346,7 @@ $(function () {
         const productUid = $(this).parents("tr").data("uid");
         const scheduleUid = $(this).data("schedule-uid");
         const code = $(this).parents("tr").data("code");
-        const date = $(this).parent().data("date");
+        const date = $(this).parents("td").data("date");
 
         projectUID = productUid;
         scheduleUID = scheduleUid;

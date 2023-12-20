@@ -55,7 +55,7 @@ async function GET_PARTNER(page) {
 }
 
 // 신규 프로젝트 생성
-function POST_PROJECT(
+async function POST_PROJECT(
     projectCode,
     projectName,
     jhPartner,
@@ -70,7 +70,7 @@ function POST_PROJECT(
     tablePartner,
     scPartner
 ) {
-    http({
+    const res = await http({
         method: "POST",
         url: "project",
         data: {
@@ -89,22 +89,24 @@ function POST_PROJECT(
             tablePartner,
             scPartner,
         },
-    })
-        .then((res) => {
-            swal(res.data.message, {
-                icon: "success",
-                buttons: {
-                    confirm: {
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((res) => {
-                location.href = "/index.html";
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    });
+
+    return res;
+}
+
+// 프로젝트 ID 등록
+async function POST_PROJECT_ID(projectUID, userId, pw) {
+    const res = await http({
+        method: "POST",
+        url: "project/projectId",
+        data: {
+            projectUID,
+            userId,
+            pw,
+        },
+    });
+
+    return res;
 }
 
 function alertError(text) {
@@ -162,6 +164,21 @@ $(function () {
             return alertError("코너철판 항목을 선택하세요");
         if (scPartner === "default") return alertError("설치팀을 선택하세요");
 
+        const userId = $("#jp-jm-userId").val();
+        const pw = $("#jp-jm-pw").val();
+        const confirmPw = $("#jp-jm-confirm-pw").val();
+
+        if (!userId) return alertError("아이디를 입력하세요");
+        if (!pw) return alertError("패스워드를 입력하세요");
+        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
+            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        }
+        if (!confirmPw) return alertError("패스워드 재확인 하세요");
+
+        if (pw !== confirmPw) {
+            return alertError("비밀번호 재확인 하세요.");
+        }
+
         POST_PROJECT(
             projectCode,
             projectName,
@@ -176,6 +193,40 @@ $(function () {
             Number(deckPartner),
             Number(tablePartner),
             Number(scPartner)
-        );
+        )
+            .then((res) => {
+                if (res.data.status === 200) {
+                    // console.log("res", res);
+                    POST_PROJECT_ID(res.data.data, userId, pw).then(
+                        (finalRes) => {
+                            // console.log("finalRes", finalRes);
+
+                            swal(finalRes.data.message, {
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        className: "btn btn-success",
+                                    },
+                                },
+                            }).then((res) => {
+                                location.href = "/index.html";
+                            });
+                        }
+                    );
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                // swal(res.data.message, {
+                //     icon: "success",
+                //     buttons: {
+                //         confirm: {
+                //             className: "btn btn-success",
+                //         },
+                //     },
+                // }).then((res) => {
+                //     location.href = "/index.html";
+                // });
+            });
     });
 });

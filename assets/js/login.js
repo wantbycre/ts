@@ -40,6 +40,12 @@ $(function () {
 
                 // 직원
                 if (partnerUID === 0) {
+                    if (ptKey === "projectId") {
+                        location.href = "/index-gsd.html";
+                        sessionStorage.setItem("href", "/index-gsd.html");
+                        return;
+                    }
+
                     switch (level) {
                         case 1:
                             location.href = "/index-master.html";
@@ -107,7 +113,6 @@ $(function () {
                         case "cmPartner":
                         case "tablePartner":
                         case "jhPartner":
-                        case "projectId":
                             location.href = "/index-gsd.html";
                             sessionStorage.setItem("href", "/index-gsd.html");
                             break;
