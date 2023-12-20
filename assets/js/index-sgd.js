@@ -127,7 +127,7 @@ function PUT_DESIGN(
     dkbChangeType,
     sgChangeType
 ) {
-    console.log(dkbChangeType, sgChangeType);
+    // console.log(dkbChangeType, sgChangeType);
     http({
         method: "PUT",
         url: "design",
@@ -154,6 +154,7 @@ function PUT_DESIGN(
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", dkbDesignDate);
                 location.href = "/index-sgd.html";
             });
         })
@@ -385,7 +386,7 @@ $(function () {
 				<span><i class="fas fa-plus"></i></span>
 			</button>
 		`);
-    }, 100);
+    }, 300);
 
     // 설계-데크보 입력 팝업
     $(document).on("click", ".aps-button, .aps-plus", function () {

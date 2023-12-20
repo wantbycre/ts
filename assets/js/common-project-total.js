@@ -69,4 +69,6 @@ $(function () {
     setTimeout(() => {
         GET_TOTAL();
     }, 300);
+
+    $(".calendar-ico").datepicker();
 });

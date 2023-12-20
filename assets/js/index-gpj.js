@@ -81,6 +81,7 @@ function PUT_FACTORY(pjInputDate) {
                     },
                 },
             }).then((res) => {
+                sessionStorage.setItem("left", pjInputDate);
                 location.href = "/index-gpj.html";
             });
         })

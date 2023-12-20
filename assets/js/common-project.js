@@ -4,6 +4,8 @@ let _UNIQUE_OBJ_ARR = [];
 let _THIS_YEAR = [];
 let _THIS_MONTH = [];
 
+let scrollDate = moment().format("YYYY-MM-DD");
+
 function setChart(DATAS) {
     // 최소 월 / 최대 월 배열 (inputDate가 있는 항목만)
     const dateRange = DATAS.filter((n) => n.inputDate).map((n) =>
@@ -535,8 +537,37 @@ async function GET_PROJECT(projectStts) {
     return res.data;
 }
 
+function setOffsetPosition(letDate) {
+    setTimeout(() => {
+        const todayYear = String(moment(letDate).year());
+        const todayMonth = String(moment(letDate).month() + 1);
+        const thisTableLeft = $("#chart-content").offset().left;
+
+        // console.log("스크롤", letDate, todayYear, todayMonth, thisTableLeft);
+
+        const currentOffset = $(
+            "#chart-content table[data-index=" +
+                (todayYear + todayMonth) +
+                "] tbody tr:first-child td[data-date='" +
+                letDate +
+                "']"
+        ).offset().left;
+
+        $(".table-scroll-section").animate(
+            { scrollLeft: currentOffset - thisTableLeft },
+            100
+        );
+    }, 500);
+}
+
 $(function () {
     GET_PROJECT(null).then((res) => {
         setChart(res.data);
     });
+
+    const sessionScrollLeft = sessionStorage.getItem("left");
+
+    setOffsetPosition(
+        sessionScrollLeft ? sessionScrollLeft : moment().format("YYYY-MM-DD")
+    );
 });

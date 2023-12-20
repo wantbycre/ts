@@ -107,6 +107,7 @@ $(function () {
                         case "cmPartner":
                         case "tablePartner":
                         case "jhPartner":
+                        case "projectId":
                             location.href = "/index-gsd.html";
                             sessionStorage.setItem("href", "/index-gsd.html");
                             break;

@@ -23,6 +23,7 @@ $(function () {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("userUID");
         sessionStorage.removeItem("href");
+        sessionStorage.removeItem("left");
 
         location.href = "/login.html";
     });

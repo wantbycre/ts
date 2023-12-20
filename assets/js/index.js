@@ -21,7 +21,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     projectData = [];
     projectData.push(sttsData);
 
-    // console.log(sttsData);
+    // console.log(DATAS);
 
     sttsData.forEach((data, i) => {
         const currentDate =
