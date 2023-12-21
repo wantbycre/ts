@@ -244,7 +244,21 @@ function alertError(text) {
     });
 }
 
+function kakaoShare() {
+    Kakao.Share.sendCustom({
+        templateId: templateId,
+        templateArgs: {
+            text: `●태성건업 설계도면 발송공지●
+현장명: ${scheduleCode}
+구간명: 설계-코너철판
+발송일: ${moment().format("YYYY-MM-DD")}`,
+        },
+    });
+}
+
 $(function () {
+    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
+
     // 설계-코너철판 입력 팝업
     $(document).on("click", ".aps-button.active", function () {
         const scheduleUid = $(this).data("schedule-uid");
@@ -256,6 +270,8 @@ $(function () {
         scheduleDate = date;
 
         // console.log("scheduleDate", scheduleDate);
+
+        $("#sender").val(emailSender);
 
         // 이메일 보내기 문구
         const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-코너철판\n발송일: ${moment().format(
@@ -392,20 +408,20 @@ $(function () {
         POST_DESIGN_FILE("설계", "코너철판_변경설계도면", file.files);
     });
 
-    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
-    Kakao.Share.createDefaultButton({
-        container: "#kakaotalk-sharing-btn",
-        objectType: "text",
-        text: `●태성건업 설계도면 발송공지●
-현장명: ${scheduleCode}
-구간명: 설계-코너철판
-발송일: ${moment().format("YYYY-MM-DD")}`,
-        link: {
-            // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com",
-        },
-    });
+    //     Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
+    //     Kakao.Share.createDefaultButton({
+    //         container: "#kakaotalk-sharing-btn",
+    //         objectType: "text",
+    //         text: `●태성건업 설계도면 발송공지●
+    // 현장명: ${scheduleCode}
+    // 구간명: 설계-코너철판
+    // 발송일: ${moment().format("YYYY-MM-DD")}`,
+    //         link: {
+    //             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+    //             mobileWebUrl: "https://developers.kakao.com",
+    //             webUrl: "https://developers.kakao.com",
+    //         },
+    //     });
 
     // 이메일 보내기
     $("#handleEmailSend").click(function () {

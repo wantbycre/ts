@@ -380,7 +380,7 @@ function alertError(text) {
 
 function kakaoShare() {
     Kakao.Share.sendCustom({
-        templateId: 102118,
+        templateId: templateId,
         templateArgs: {
             text: `●태성건업 설계도면 발송공지●
 현장명: ${scheduleCode}
@@ -414,6 +414,8 @@ $(function () {
         scheduleUID = scheduleUid;
         scheduleCode = code;
         scheduleDate = tdDate || date;
+
+        $("#sender").val(emailSender);
 
         // 이메일 보내기 문구
         const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-데크보\n발송일: ${moment().format(
