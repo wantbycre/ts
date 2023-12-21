@@ -378,6 +378,18 @@ function alertError(text) {
     });
 }
 
+function kakaoShare() {
+    Kakao.Share.sendCustom({
+        templateId: 102118,
+        templateArgs: {
+            text: `●태성건업 설계도면 발송공지●
+현장명: ${scheduleCode}
+구간명: 설계-데크보
+발송일: ${moment().format("YYYY-MM-DD")}`,
+        },
+    });
+}
+
 $(function () {
     setTimeout(() => {
         $("#chart-content tbody tr td .add-section > div.d-flex:last-child")
@@ -387,6 +399,8 @@ $(function () {
 			</button>
 		`);
     }, 300);
+
+    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
 
     // 설계-데크보 입력 팝업
     $(document).on("click", ".aps-button, .aps-plus", function () {
@@ -606,20 +620,19 @@ $(function () {
         POST_DESIGN_FILE("설계", "승인요청서", file.files);
     });
 
-    Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
-    Kakao.Share.createDefaultButton({
-        container: "#kakaotalk-sharing-btn",
-        objectType: "text",
-        text: `●태성건업 설계도면 발송공지●
-현장명: ${scheduleCode}
-구간명: 설계-데크보
-발송일: ${moment().format("YYYY-MM-DD")}`,
-        link: {
-            // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-            mobileWebUrl: "https://developers.kakao.com",
-            webUrl: "https://developers.kakao.com",
-        },
-    });
+    //     Kakao.Share.createDefaultButton({
+    //         container: "#kakaotalk-sharing-btn",
+    //         objectType: "text",
+    //         text: `●태성건업 설계도면 발송공지●
+    // 현장명: ${scheduleCode}
+    // 구간명: 설계-데크보
+    // 발송일: ${moment().format("YYYY-MM-DD")}`,
+    //         link: {
+    //             // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+    //             mobileWebUrl: "https://developers.kakao.com",
+    //             webUrl: "https://developers.kakao.com",
+    //         },
+    //     });
 
     // 이메일 보내기
     $("#handleEmailSend").click(function () {
