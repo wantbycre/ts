@@ -622,6 +622,7 @@ $(function () {
         POST_DESIGN_FILE("설계", "승인요청서", file.files);
     });
 
+    //     Kakao.init(kakaoKey); // 사용하려는 앱의 JavaScript 키 입력
     //     Kakao.Share.createDefaultButton({
     //         container: "#kakaotalk-sharing-btn",
     //         objectType: "text",
