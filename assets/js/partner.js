@@ -11,6 +11,20 @@ async function GET_PARTNER(page) {
 
     const { data } = res.data;
 
+    $(
+        "#jhPartner",
+        "#jmPartner",
+        "#pjPartner",
+        "#jrPartner",
+        "#sgPartner",
+        "#cornerPartner",
+        "#ngdPartner",
+        "#cmPartner",
+        "#deckPartner",
+        "#tablePartner",
+        "#scPartner"
+    ).empty();
+
     // console.log(data);
 
     data.forEach((el) => {
@@ -170,8 +184,8 @@ $(function () {
 
         if (!userId) return alertError("아이디를 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
-        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        if (!pw.match(/^(?=.*[0-9]).{4,25}$/)) {
+            return alertError("숫자 4자리 이상 입력하세요.");
         }
         if (!confirmPw) return alertError("패스워드 재확인 하세요");
 

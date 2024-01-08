@@ -146,28 +146,39 @@ async function GET_PROJECT_FILE(projectUID) {
 
 // DECK 상세 리스트
 function lists(el) {
-    const sessionPtKey = sessionStorage.getItem("ptKey");
+    // const sessionPtKey = sessionStorage.getItem("ptKey");
+    // ${
+    // 	sessionPtKey === "null"
+    // 		? `
+    // 			<a href="#" type="button" class="btn-delete deck-delete" data-uid="${el.UID}">
+    // 				<i class="fas fa-plus text-danger"></i>
+    // 			</a>`
+    // 		: ``
+    // }
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			${
-                sessionPtKey === "null"
-                    ? `
-						<a href="#" type="button" class="btn-delete deck-delete" data-uid="${el.UID}">
-							<i class="fas fa-plus text-danger"></i>
-						</a>`
-                    : ``
-            }
+			<a href="#" type="button" class="btn-delete deck-delete" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
 		</div>
 	`;
 }
 
 // 기성 상세 리스트
 function lists2(el) {
-    const sessionPtKey = sessionStorage.getItem("ptKey");
+    // const sessionPtKey = sessionStorage.getItem("ptKey");
+    // ${
+    // 	sessionPtKey === "null"
+    // 		? `<a href="#" type="button" class="btn-delete gj-deck-delete-gisung" data-uid="${el.UID}">
+    // 				<i class="fas fa-plus text-danger"></i>
+    // 			</a>`
+    // 		: ``
+    // }
 
     return `
 		<div class="d-flex justify-content-between">
@@ -175,14 +186,9 @@ function lists2(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			${
-                sessionPtKey === "null"
-                    ? `<a href="#" type="button" class="btn-delete gj-deck-delete-gisung" data-uid="${el.UID}">
-							<i class="fas fa-plus text-danger"></i>
-						</a>`
-                    : ``
-            }
-			
+			<a href="#" type="button" class="btn-delete gj-deck-delete-gisung" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
 		</div>
 	`;
 }
@@ -375,16 +381,16 @@ $(function () {
         GET_TOTAL_AREA(projectUID).then((res) => {
             console.log("누적면적", res.data);
             totalArea = Number(res.data[0].totalArea);
-            $("#totalArea").val(totalArea);
+            $("#totalArea").val(parseFloat(totalArea.toFixed(3)));
         });
 
         // 옵저버 설정
         const sessionPtKey = sessionStorage.getItem("ptKey");
         if (sessionPtKey !== "null") {
-            $("#handleSubmit").hide();
-            $("input[type=text]").attr("readonly", true);
+            // $("#handleSubmit").hide();
+            // $("input[type=text]").attr("readonly", true);
         } else {
-            $(".auth-display").attr("style", "display: flex !important");
+            // $(".auth-display").attr("style", "display: flex !important");
         }
     });
 

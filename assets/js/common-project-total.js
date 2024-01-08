@@ -82,12 +82,14 @@ function GET_TOTAL(projectStts, startDate, endDate) {
         // console.log("stateProject", stateProject);
 
         stateProject.forEach((el) => {
-            // console.log("el", el);
+            // console.log("el", el.totalStrup);
             // 차트 삽입
             $("#chart-sum table tbody  tr[data-uid=" + el.UID + "] ").append(`
-					<td>${comma(String(el.totalArea || 0))}</td>
+					<td>${comma(String(parseFloat((el.totalArea || 0).toFixed(2))))}</td>
             		<td>${comma(String(el.totalDkbCnt || 0))}</td>
-            		<td>${comma(String(el.totalStrup || 0))}</td>
+            		<td>${comma(
+                        String(parseFloat((el.totalStrup || 0).toFixed(2)))
+                    )}</td>
             		<td>${comma(String(el.totalCnCnt || 0))}</td>
 				`);
 

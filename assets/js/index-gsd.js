@@ -629,7 +629,7 @@ $(function () {
                 $(".deck-day").text(dkbDateDay);
             }
 
-            $("#deckArea").val(data.deckArea);
+            $("#deckArea").val(parseFloat((data.deckArea || 0).toFixed(3)));
 
             // 특이 사항 NOTE
             $("#etcNote").val(data.etcNote);
@@ -637,10 +637,10 @@ $(function () {
             // 옵저버 설정
             const sessionPtKey = sessionStorage.getItem("ptKey");
             if (sessionPtKey !== "null") {
-                $(
-                    ".handleDateChange, #handleAddCalendar, #handleGsdSubmit, #handleFileMemo"
-                ).hide();
-                $("input[type=text], textarea").attr("readonly", true);
+                // $(
+                //     ".handleDateChange, #handleAddCalendar, #handleGsdSubmit, #handleFileMemo"
+                // ).hide();
+                // $("input[type=text], textarea").attr("readonly", true);
             }
         });
 
@@ -701,7 +701,7 @@ $(function () {
         // 누적면적
         GET_TOTAL_AREA(gsdProjectUID).then((res) => {
             totalArea = Number(res.data[0].totalArea);
-            $("#totalArea").val(totalArea);
+            $("#totalArea").val(parseFloat(totalArea.toFixed(3)));
         });
     });
 

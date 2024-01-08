@@ -282,7 +282,16 @@ function lists(el, bool) {
 
 // 기성 상세 리스트
 function lists2(el) {
-    const sessionPtKey = sessionStorage.getItem("ptKey");
+    // FIXME: 2024-01-04 옵저버 풀어주는 보수사항, 재사용시 아래 조건문 넣어주기
+    // const sessionPtKey = sessionStorage.getItem("ptKey");
+    // ${
+    // 	sessionPtKey === "null"
+    // 		? `
+    // 			<a href="#" type="button" class="btn-delete gj-jr-gisung" data-uid="${el.UID}">
+    // 				<i class="fas fa-plus text-danger"></i>
+    // 			</a>`
+    // 		: ``
+    // }
 
     return `
 		<div class="d-flex justify-content-between">
@@ -290,15 +299,9 @@ function lists2(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			${
-                sessionPtKey === "null"
-                    ? `
-						<a href="#" type="button" class="btn-delete gj-jr-gisung" data-uid="${el.UID}">
-							<i class="fas fa-plus text-danger"></i>
-						</a>`
-                    : ``
-            }
-			
+			<a href="#" type="button" class="btn-delete gj-jr-gisung" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
 		</div>
 	`;
 }
@@ -504,11 +507,11 @@ $(function () {
         // 옵저버 설정
         const sessionPtKey = sessionStorage.getItem("ptKey");
         if (sessionPtKey !== "null") {
-            $(
-                "#kakaotalk-sharing-btn, #handlePurpleSubmit, #handleGreenSubmit"
-            ).hide();
+            // $(
+            //     "#kakaotalk-sharing-btn, #handlePurpleSubmit, #handleGreenSubmit"
+            // ).hide();
         } else {
-            $(".auth-display").attr("style", "display: flex !important");
+            // $(".auth-display").attr("style", "display: flex !important");
         }
     });
 

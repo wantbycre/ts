@@ -51,8 +51,7 @@
 									<!-- 초록 -->
 									<span class="badge step2">공사-데크보</span>
 								</div>
-								<div style="margin-left: -29px;">
-									<span>옵션: </span>
+								<div>
 									<!-- 연갈색 -->
 									<span class="badge step1">설계-코너철판</span>
 									<!-- 진갈색 -->
@@ -78,18 +77,18 @@
 							<div class="d-flex">
 								<div style="flex-shrink: 0;">
 									<table class="table v2 left-table" id="chart-title">
-										<colgroup>
+										<!-- <colgroup>
 											<col style="width: 60px">
 											<col style="width: 60px">
 											<col style="width: 90px">
 											<col style="width: 80px">
 											<col style="width: 60px">
 											<col style="width: 50px">
-										</colgroup>
+										</colgroup> -->
 										<thead>
 											<tr>
 												<th>코드명</th>
-												<th>현장명</th>
+												<th>공사명</th>
 												<th>데크보생산처<span class="table-sm">판재/조립/설계</span></th>
 												<th>코너철판<span class="table-sm">공장/설계</span></th>
 												<th>난간대<span class="table-sm">설치팀</span></th>
@@ -428,8 +427,8 @@
 									<div class="d-flex">
 										<div>
 											<label>면적</label>
-											<div class="input-group" style="width: 110px;">
-												<input type="text" id="area" class="form-control" style="width: 60px;">
+											<div class="input-group" style="width: 130px;">
+												<input type="text" id="area" class="form-control" style="width: 80px;">
 												<div class="input-group-append">
 													<span class="input-group-text">m2</span>
 												</div>
@@ -438,8 +437,8 @@
 
 										<div class="ml-2">
 											<label>스트럽</label>
-											<div class="input-group" style="width: 120px;">
-												<input type="text" id="strup" class="form-control" style="width: 60px;">
+											<div class="input-group" style="width: 130px;">
+												<input type="text" id="strup" class="form-control" style="width: 80px;">
 												<div class="input-group-append">
 													<span class="input-group-text">ton</span>
 												</div>
@@ -595,17 +594,17 @@
 
 					<div class="form-group">
 						<label for="subject">제목</label>
-						<input type="text" id="subject" class="form-control" value="설계 - 데크보 설계정보가 입력되었습니다." readonly>
+						<input type="text" id="subject" class="form-control" value="설계 - 데크보 설계정보가 입력되었습니다.">
 					</div>
 
 					<div class="form-group">
 						<label for="content">내용</label>
-						<textarea class="form-control" id="content" rows="4" readonly></textarea>
+						<textarea class="form-control" id="content" rows="4"></textarea>
 					</div>
 
 				</div>
 				<div class="modal-footer justify-content-center">
-					<button type="button" class="btn btn-primary" style="width: 100px;" id="handleEmailSend">이메일
+					<button type="button" class="btn btn-primary" id="handleEmailSend">이메일
 						보내기</button>
 				</div>
 			</div>

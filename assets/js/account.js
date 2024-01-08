@@ -1,3 +1,6 @@
+const path = $(location).attr("pathname");
+const tabNum = path === "/account-income.html" ? 3 : 1;
+
 // 거래처 리스트
 async function GET_ACCOUNT(PARAM_UID) {
     const res = await http({
@@ -10,6 +13,8 @@ async function GET_ACCOUNT(PARAM_UID) {
     let listCount = list.length;
 
     $("#account-table tbody").empty();
+
+    // console.log(data);
 
     if (list.length === 0) {
         $("#account-table tbody").append(`
@@ -30,8 +35,18 @@ async function GET_ACCOUNT(PARAM_UID) {
 					<td>${el.addr1} ${el.addr2}</td>
 					<td>${el.regDate}</td>
 					<td>
-						<a href="/account-form-detail.html?uid=${el.UID}&tab=${PARAM_UID}"
-							class="btn btn-warning btn-sm">조회</a>
+						${
+                            tabNum === 3
+                                ? `<a href="/account-income-form-detail.html?uid=${el.UID}&tab=${PARAM_UID}"
+							class="btn btn-warning btn-sm">조회</a>`
+                                : `<a
+                                    href="/account-outcome-form-detail.html?uid=${el.UID}&tab=${PARAM_UID}"
+                                    class="btn btn-warning btn-sm"
+                                >
+                                    조회
+                                </a>`
+                        }
+						
 					</td>
 				</tr>
 			`);
@@ -48,24 +63,48 @@ async function GET_PARTNER_MASTER(PARAM_UID) {
 
     $("#pills-tab").empty();
 
+    console.log(PARAM_UID);
+
     res.data.data.forEach((el, i) => {
-        $("#pills-tab").append(`
-			<li class="nav-item submenu account-tab">
-				<a
-					class="nav-link ${PARAM_UID === i + 1 ? `active show` : ``}" 
-					href="#"
-					data-index="${el.UID}"
-				>
-					${el.ptName}
-				</a>
-			</li>
-		`);
+        if (tabNum === 3) {
+            if (el.UID > 2) {
+                $("#pills-tab").append(`
+					<li class="nav-item submenu account-tab">
+						<a
+							class="nav-link ${PARAM_UID === i + 1 ? `active show` : ``}" 
+							href="#"
+							data-index="${el.UID}"
+						>
+							${el.ptName}
+						</a>
+					</li>
+				`);
+            }
+        } else {
+            if (el.UID < 3) {
+                $("#pills-tab").append(`
+					<li class="nav-item submenu account-tab">
+						<a
+							class="nav-link ${PARAM_UID === i + 1 ? `active show` : ``}" 
+							href="#"
+							data-index="${el.UID}"
+						>
+							${el.ptName}
+						</a>
+					</li>
+				`);
+            }
+        }
     });
 }
 
 $(function () {
-    GET_PARTNER_MASTER(1);
-    GET_ACCOUNT(1);
+    const TAB_UID = new URL(window.location.href).searchParams.get("tab");
+
+    // console.log(TAB_UID);
+
+    GET_PARTNER_MASTER(TAB_UID ? Number(TAB_UID) : tabNum);
+    GET_ACCOUNT(TAB_UID ? Number(TAB_UID) : tabNum);
 
     // 거래처 탭 변경
     $(document).on("click", ".account-tab a", function () {

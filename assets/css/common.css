@@ -1,3 +1,34 @@
+/* @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css); */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body,
+.alert,
+.brand,
+.btn-simple,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.navbar,
+.td-name,
+a,
+body,
+button.close,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+td {
+    font-family: "Noto Sans KR", sans-serif, -apple-system, BlinkMacSystemFont,
+        "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo",
+        sans-serif;
+}
+
 a {
     color: #000;
 }
@@ -80,6 +111,9 @@ div {
 .pagination > li:last-child > span {
     border-radius: 0 !important;
     margin: 0 0 0 -1px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol" !important;
 }
 
 .pagination-sm .page-item:first-child .page-link {
@@ -125,7 +159,7 @@ table.table.v2 thead tr th,
 table.table.v2 tbody tr td {
     text-align: center;
     padding: 1px 0 !important;
-    line-height: 13px;
+    line-height: 14px;
     border-color: #afafaf !important;
     padding: 0 !important;
 }
@@ -172,6 +206,16 @@ table.table.v2.left-table thead th {
     height: 46px;
 }
 
+table.table.v2.left-table thead th,
+table.table.v2.left-table tbody td {
+    padding: 0 2px !important;
+}
+
+table.table.v2.left-table tbody td,
+table.table.v2.left-table tbody td a {
+    white-space: nowrap;
+}
+
 table.table .complate-tr th,
 table.table .complate-tr td,
 table.table .complate-tr th button,
@@ -191,7 +235,7 @@ table.table.v2.table-sum tbody tr td {
 
 .badge {
     border-radius: 5px;
-    width: 83px;
+    width: 100px;
 }
 
 .badge.step1 {
@@ -321,11 +365,13 @@ table.table.v2.table-sum tbody tr td {
 }
 
 .aps-middle > div {
+    padding: 0 2px;
     font-size: 11px;
     flex-grow: 1;
     width: 50%;
     line-height: 14px;
     background-color: #ffcc00;
+    white-space: nowrap;
 }
 
 .aps-middle > div:first-child {
@@ -619,9 +665,13 @@ a.ui-button:active,
     height: 100%;
 }
 
+.auth-display-menu {
+    display: none !important;
+}
+
 .auth-display,
 .final-section {
-    display: none !important;
+    /* display: none !important; */
 }
 
 .calendar-ico {

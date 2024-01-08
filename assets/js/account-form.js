@@ -1,3 +1,9 @@
+const path = $(location).attr("pathname");
+const toHref =
+    path === "/account-income-form.html"
+        ? "/account-income.html"
+        : "/account-outcome.html";
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -92,7 +98,19 @@ async function GET_PARTNER_MASTER() {
     });
 
     res.data.data.forEach((el, i) => {
-        $("#ptUID").append(`<option value="${i + 1}">${el.ptName}</option>`);
+        if (path === "/account-income-form.html") {
+            if (el.UID > 2) {
+                $("#ptUID").append(
+                    `<option value="${i + 1}">${el.ptName}</option>`
+                );
+            }
+        } else {
+            if (el.UID < 3) {
+                $("#ptUID").append(
+                    `<option value="${i + 1}">${el.ptName}</option>`
+                );
+            }
+        }
     });
 }
 
@@ -124,6 +142,8 @@ function alertError(text) {
 
 $(function () {
     GET_PARTNER_MASTER();
+
+    console.log(path);
 
     $("#ptUID").change(function () {
         const val = $(this).val();
@@ -158,8 +178,8 @@ $(function () {
         if (userId || pw || confirmPw) {
             if (!userId) return alertError("아이디를 입력하세요");
             if (!pw) return alertError("패스워드를 입력하세요");
-            if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-                return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+            if (!pw.match(/^(?=.*[0-9]).{4,25}$/)) {
+                return alertError("숫자 4자리 이상 입력하세요.");
             }
             if (!confirmPw) return alertError("패스워드 재확인 하세요");
 
@@ -189,7 +209,7 @@ $(function () {
                                 },
                             },
                         }).then((res) => {
-                            location.href = "/account.html";
+                            location.href = `${toHref}?tab=${ptUID}`;
                         });
                     }
                 });
@@ -216,7 +236,7 @@ $(function () {
                             },
                         },
                     }).then((res) => {
-                        location.href = "/account.html";
+                        location.href = `${toHref}?tab=${ptUID}`;
                     });
                 })
                 .catch(function (error) {

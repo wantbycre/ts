@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>태성건업</title>
+	<meta name="viewport" content="width=1280">
+	<link rel="icon" href="./assets/img/icon.ico" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script src="./assets/js/token.js"></script>
+	<script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Open+Sans:300,400,600,700"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['./assets/css/fonts.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/azzara.min.css">
+	<link rel="stylesheet" href="./assets/css/common.css">
+</head>
+
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div id="include-header"></div>
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">거래처 관리</h4>
+					</div>
+
+					<div class="card" style="width: 600px;">
+						<div class="card-body">
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="type" class="placeholder"><span class="c-red">* </span>분류</label>
+								<select class="form-control" id="ptUID" style="width: 400px;" disabled>
+									<option value="default">분류 선택</option>
+									<option value="1">종합건설</option>
+									<option value="2">전문건설</option>
+									<option value="3">판재판매처</option>
+									<option value="4">조립공장</option>
+									<option value="5">설계업체</option>
+									<option value="6">코너철판</option>
+									<option value="7">난간대</option>
+									<option value="8">철물업체</option>
+									<option value="9">DECK업체</option>
+									<option value="10">테이블업체</option>
+									<option value="11">설치팀</option>
+									<option value="12">기타</option>
+								</select>
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="partnerName" class="placeholder"><span class="c-red">* </span>건설사명</label>
+								<input id="partnerName" type="text" class="form-control" style="width: 400px;"
+									placeholder="건설사명을 입력하세요." readonly>
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="manager" class="placeholder">담당자</label>
+								<input id="manager" type="text" class="form-control" style="width: 400px;"
+									placeholder="담당자을 입력하세요.">
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="partnerTel" class="placeholder">전화번호</label>
+								<input id="partnerTel" type="text" class="form-control" style="width: 400px;"
+									placeholder="전화번호를 입력하세요.">
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="bank" class="placeholder">은행</label>
+								<input id="bank" type="text" class="form-control" style="width: 400px;"
+									placeholder="은행명을 입력하세요.">
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="bankNum" class="placeholder">계좌번호</label>
+								<input id="bankNum" type="text" class="form-control" style="width: 400px;"
+									placeholder="계좌번호를 입력하세요.">
+							</div>
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="postNum" class="placeholder">우편번호</label>
+								<div class="d-flex align-items-end">
+									<div>
+										<input id="postNum" type="text" class="form-control" style="width: 110px;"
+											placeholder="" readonly>
+									</div>
+									<div class="ml-2">
+										<button type="button" class="btn btn-dark"
+											onclick="sample6_execDaumPostcode();">우편번호 검색</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group d-flex align-items-center form-label-width"
+								style="margin-top: -13px;">
+								<label for="addr1" class="placeholder">&nbsp;</label>
+								<div>
+									<input id="addr1" type="text" class="form-control mb-2" style="width: 400px;"
+										placeholder="주소">
+									<input id="addr2" type="text" class="form-control" style="width: 400px;"
+										placeholder="상세주소">
+								</div>
+							</div>
+
+							<div class="form-group d-flex align-items-start form-label-width">
+								<label for="memo" class="placeholder">메모</label>
+								<textarea class="form-control" id="memo" cols="30" rows="5" placeholder="메모를 입력하세요."
+									style="width: 400px"></textarea>
+							</div>
+
+							<div class="d-flex justify-content-between mt-5 mr-3 ml-2">
+								<a href="javascript: history.back();" class="btn btn-default btn-border">뒤로가기</a>
+								<div>
+									<button type="button" class="btn btn-warning" id="handleSubmit"
+										style="width: 150px;">수정</button>
+									<button type="button" class="btn btn-danger ml-2" id="handleDelete"
+										style="width: 150px;">삭제</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="page-header project-id-pw" style="padding-top: 40px;">
+						<h4 class="page-title">계정 관리 (옵션-필요시 생성)</h4>
+					</div>
+
+					<div class="card project-id-pw" style="width: 600px;">
+						<div class="card-body">
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="userId" class="placeholder">아이디</label>
+								<input id="userId" type="text" class="form-control" style="width: 400px;"
+									placeholder="아이디를 입력하세요." readonly>
+							</div>
+
+							<div class="form-group d-flex align-items-center form-label-width">
+								<label for="newPw" class="placeholder">비밀번호</label>
+								<input id="newPw" type="password" class="form-control" style="width: 400px;"
+									placeholder="비밀번호를 입력하세요.">
+							</div>
+
+							<div class="d-flex justify-content-between mt-5 mr-3 ml-2">
+								<a href="javascript: history.back();" class="btn btn-default btn-border">뒤로가기</a>
+								<button type="button" class="btn btn-primary" style="width: 150px;"
+									id="handleNewPw">생성</button>
+								<button type="button" class="btn btn-warning" style="display:none;width: 150px;"
+									id="handleChangePw">변경</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="./assets/js/core/popper.min.js"></script>
+	<script src="./assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="./assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="./assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="./assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+	<script src="./assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<!-- Azzara JS -->
+	<script src="./assets/js/include.js"></script>
+	<script src="./assets/js/common.js"></script>
+	<script src="./assets/js/axios-interceptor.js"></script>
+	<script src="./assets/js/account-form-detail.js"></script>
+
+</body>
+
+</html>

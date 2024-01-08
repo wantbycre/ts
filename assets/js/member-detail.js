@@ -244,6 +244,7 @@ async function GET_USER_DETAIL(UID) {
 
 // 유저정보 수정
 function PUT_USER(
+    userId,
     position,
     levelUID,
     telNum,
@@ -258,6 +259,7 @@ function PUT_USER(
         method: "PUT",
         url: "user/profile",
         data: {
+            userId,
             position,
             levelUID,
             telNum,
@@ -476,6 +478,7 @@ $(function () {
     // 직원정보 수정
     $(".handleEditSubmit").click(function () {
         const position = $("#position").val();
+        const userId = $("#userId").val();
         const levelUID = $("#levelUID").val();
         const telNum = $("#telNum").val() || "";
         const postNum = $("#postNum").val() || "";
@@ -484,12 +487,14 @@ $(function () {
         const joiningDate = $("#joiningDate").val() || null;
         const quittingDate = $("#quittingDate").val() || null;
 
-        if (!position) return alertError("직급을 입력하세요.");
+        if (!userId) return alertError("아이디를 입력하세요");
+        if (!position) return alertError("직급을 입력하세요");
         if (levelUID === "default") {
             return alertError("권한을 선택하세요.");
         }
 
         PUT_USER(
+            userId,
             position,
             levelUID,
             telNum,
@@ -507,8 +512,8 @@ $(function () {
         const pw = $("#newPw").val();
 
         if (!pw) return alertError("패스워드를 입력하세요");
-        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        if (!pw.match(/^(?=.*[0-9]).{4,25}$/)) {
+            return alertError("숫자 4자리 이상 입력하세요.");
         }
 
         swal("비밀번호를 변경하시겠습니까?", {

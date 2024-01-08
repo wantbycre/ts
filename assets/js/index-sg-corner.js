@@ -159,6 +159,16 @@ async function POST_DESIGN_FILE(filePath, fileType, files) {
 
 // 공통자료 상세 리스트
 function lists(el) {
+    // FIXME: 2024-01-04 옵저버 풀어주는 보수사항, 재사용시 아래 조건문 넣어주기
+    // const sessionPtKey = sessionStorage.getItem("ptKey");
+    // ${
+    // 	sessionPtKey === "FIEXME"
+    // 		? `<a href="#" type="button" class="btn-delete sgd-delete" data-uid="${el.UID}">
+    // 				<i class="fas fa-plus text-danger"></i>
+    // 			</a>`
+    // 		: ``
+    // }
+
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
@@ -314,13 +324,14 @@ $(function () {
             $("#cnOutputDate").val(cnOutputDate || 10);
         });
 
+        // FIXME: 2024-01-04 옵저버 풀어주는 보수사항
         // 옵저버 설정
         const sessionPtKey = sessionStorage.getItem("ptKey");
         if (sessionPtKey !== "null") {
-            $("#kakaotalk-sharing-btn, #share-email, #handleSgdSubmit").hide();
-            $("input[type=text], textarea, select").attr("readonly", true);
+            // $("#kakaotalk-sharing-btn, #share-email, #handleSgdSubmit").hide();
+            // $("input[type=text], textarea, select").attr("readonly", true);
         } else {
-            $(".auth-display").attr("style", "display: flex !important");
+            // $(".auth-display").attr("style", "display: flex !important");
         }
     });
 

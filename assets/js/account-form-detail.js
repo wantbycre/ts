@@ -1,3 +1,9 @@
+const path = $(location).attr("pathname");
+const toHref =
+    path === "/account-income-form-detail.html"
+        ? "/account-income.html"
+        : "/account-outcome.html";
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -61,7 +67,8 @@ function PUT_PARTNER(
     postNum,
     addr1,
     addr2,
-    memo
+    memo,
+    PARAM_TAB
 ) {
     http({
         method: "PUT",
@@ -87,7 +94,7 @@ function PUT_PARTNER(
                     },
                 },
             }).then((res) => {
-                history.back();
+                location.href = `${toHref}?tab=${PARAM_TAB}`;
             });
         })
         .catch(function (error) {
@@ -119,7 +126,7 @@ function DELETE_PARTNER(UID, PARAM_TAB) {
                     },
                 },
             }).then((res) => {
-                location.href = "/account.html";
+                location.href = `${toHref}?tab=${PARAM_TAB}`;
             });
         })
         .catch(function (error) {
@@ -247,7 +254,8 @@ $(function () {
             postNum,
             addr1,
             addr2,
-            memo
+            memo,
+            PARAM_TAB
         );
     });
 
@@ -278,8 +286,8 @@ $(function () {
 
         if (!userId) return alertError("아이디를 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
-        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        if (!pw.match(/^(?=.*[0-9]).{4,25}$/)) {
+            return alertError("숫자 4자리 이상 입력하세요.");
         }
 
         swal("신규 거래처 계정을 생성 하시겠습니까?", {
@@ -308,8 +316,8 @@ $(function () {
 
         if (!userId) return alertError("아이디를 입력하세요");
         if (!pw) return alertError("패스워드를 입력하세요");
-        if (!pw.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/)) {
-            return alertError("영문 숫자 조합 8자리 이상 입력하세요.");
+        if (!pw.match(/^(?=.*[0-9]).{4,25}$/)) {
+            return alertError("숫자 4자리 이상 입력하세요.");
         }
 
         swal("비밀번호를 변경 하시겠습니까?", {

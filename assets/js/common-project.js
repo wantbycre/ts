@@ -8,17 +8,23 @@ let scrollDate = moment().format("YYYY-MM-DD");
 
 function setChart(DATAS) {
     // 최소 월 / 최대 월 배열 (inputDate가 있는 항목만)
-    const dateRange = DATAS.filter((n) => n.inputDate).map((n) =>
+    const minDateRange = DATAS.filter((n) => n.dkbDesignDate).map((n) =>
+        moment(n.dkbDesignDate)
+    );
+
+    const maxDateRange = DATAS.filter((n) => n.inputDate).map((n) =>
         moment(n.inputDate)
     );
 
     // 프로젝트 시작 DATE
     // const startMoment = moment("2023-01-01");
-    const startMoment = moment.min(dateRange);
+    const startMoment = moment.min(minDateRange);
 
     // 프로젝트 종료 DATE
     // const endMoment = moment("2024-05-22");
-    const endMoment = moment.max(dateRange);
+    const endMoment = moment.max(maxDateRange);
+
+    // console.log("aaa", startMoment, endMoment);
 
     // 해당 월 (0~11 표기하기에 +1)
     const startMonth = startMoment.month() + 1;
@@ -349,15 +355,15 @@ function setUniqueObj(DATAS) {
         ...new Map(DATAS.map((obj) => [obj.UID, obj])).values(),
     ];
 
-    // console.log(uniqueObjArr);
-
-    // TODO: 공무/설계에 따라 링크 제거 및 추가
-    // TODO: 권한에 따라 기성/노무비 컬럼을 추가해야합니다.
+    console.log("uniqueObjArr", uniqueObjArr);
 
     const currentPath = window.location.pathname;
 
     uniqueObjArr.forEach((el, i) => {
         // 좌측 타이틀 적용
+        // FIXME: 2014-01-05 하자보수시 jhName/jmName 에서 projectName 으로변경
+        // ${el.jhName}<br/>
+        // ${el.jmName}<br/>
         $("#chart-title tbody").append(`
 			<tr data-uid="${el.UID}">
 				<td>
@@ -373,8 +379,7 @@ function setUniqueObj(DATAS) {
 					</a>
 				</td>
 				<td>
-					${el.jhName}<br/>
-					${el.jmName}<br/>
+					${el.projectName}
 				</td>
 				<td>
 					${el.pjName}<br/>
@@ -540,23 +545,28 @@ async function GET_PROJECT(projectStts) {
 function setOffsetPosition(letDate) {
     setTimeout(() => {
         const todayYear = String(moment(letDate).year());
-        const todayMonth = String(moment(letDate).month() + 1);
+        const todayMonth =
+            String(moment(letDate).month() + 1).length === 1
+                ? String(moment(letDate).month() + 1).padStart(2, "0")
+                : String(moment(letDate).month() + 1);
         const thisTableLeft = $("#chart-content").offset().left;
 
         // console.log("스크롤", letDate, todayYear, todayMonth, thisTableLeft);
 
-        const currentOffset = $(
+        const isCurrentDate = $(
             "#chart-content table[data-index=" +
                 (todayYear + todayMonth) +
                 "] tbody tr:first-child td[data-date='" +
                 letDate +
                 "']"
-        ).offset().left;
-
-        $(".table-scroll-section").animate(
-            { scrollLeft: currentOffset - thisTableLeft },
-            100
         );
+
+        if (isCurrentDate.length > 0) {
+            $(".table-scroll-section").animate(
+                { scrollLeft: isCurrentDate.offset().left - thisTableLeft },
+                100
+            );
+        }
     }, 500);
 }
 

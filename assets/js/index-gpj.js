@@ -153,7 +153,14 @@ async function POST_PROJECT_FILE(filePath, fileType, files) {
 
 // 공통자료 상세 리스트
 function lists2(el) {
-    const sessionPtKey = sessionStorage.getItem("ptKey");
+    // const sessionPtKey = sessionStorage.getItem("ptKey");
+    // ${
+    // 	sessionPtKey === "null"
+    // 		? `<a href="#" type="button" class="btn-delete gpi-delete-gisung" data-uid="${el.UID}">
+    // 				<i class="fas fa-plus text-danger"></i>
+    // 			</a>`
+    // 		: ``
+    // }
 
     return `
 		<div class="d-flex justify-content-between">
@@ -161,13 +168,9 @@ function lists2(el) {
 				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
 				${el.fileName}
 			</a>
-			${
-                sessionPtKey === "null"
-                    ? `<a href="#" type="button" class="btn-delete gpi-delete-gisung" data-uid="${el.UID}">
-							<i class="fas fa-plus text-danger"></i>
-						</a>`
-                    : ``
-            }
+			<a href="#" type="button" class="btn-delete gpi-delete-gisung" data-uid="${el.UID}">
+				<i class="fas fa-plus text-danger"></i>
+			</a>
 		</div>
 	`;
 }
@@ -243,9 +246,9 @@ $(function () {
         // 옵저버 설정
         const sessionPtKey = sessionStorage.getItem("ptKey");
         if (sessionPtKey !== "null") {
-            $("#handleSubmit").hide();
+            // $("#handleSubmit").hide();
         } else {
-            $(".auth-display").attr("style", "display: flex !important");
+            // $(".auth-display").attr("style", "display: flex !important");
         }
     });
 

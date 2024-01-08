@@ -43,9 +43,14 @@ $(function () {
     // console.log(path);
 
     // 권한
-    if (sessionLevel === "2") {
-        $(".auth-display").attr("style", "display: list-item !important");
-    }
+    setTimeout(function () {
+        if (sessionLevel === "2" || sessionLevel === "5") {
+            $(".auth-display-menu").attr(
+                "style",
+                "display: list-item !important"
+            );
+        }
+    }, 100);
 
     switch (path) {
         case "/":
@@ -60,34 +65,46 @@ $(function () {
         case "/index-sg-corner.html":
         case "/index-sgd.html":
             $("#nav-list > li").eq(1).addClass("active");
+            $(".collapse").hide();
             break;
-        case "/dashboard.html":
+        // case "/dashboard.html":
+        //     $("#nav-list > li").eq(2).addClass("active");
+        //     break;
+        case "/account-income.html":
+        case "/account-income-form.html":
+        case "/account-income-form-detail.html":
+            $(".collapse").hide();
             $("#nav-list > li").eq(2).addClass("active");
             break;
-        case "/account.html":
-        case "/account-form.html":
-        case "/account-form-detail.html":
-            $("#nav-list > li").eq(2).addClass("active");
+        case "/account-outcome.html":
+        case "/account-outcome-form.html":
+        case "/account-outcome-form-detail.html":
+            $(".collapse").hide();
+            $("#nav-list > li").eq(3).addClass("active");
             break;
         case "/member.html":
         case "/member-form.html":
         case "/member-detail.html":
-            $("#nav-list > li").eq(3).addClass("active");
+            $("#nav-list > li").eq(4).addClass("active");
+            $(".collapse").hide();
             break;
         case "/accounting.html":
         case "/accounting-detail.html":
-            $("#nav-list > li").eq(4).addClass("active");
+            $("#nav-list > li").eq(5).addClass("active");
+            $(".collapse").hide();
             break;
         case "/notice.html":
         case "/notice-form.html":
         case "/notice-detail.html":
-            $("#nav-list > li").eq(5).addClass("active");
+            $("#nav-list > li").eq(6).addClass("active");
+            $(".collapse").hide();
             break;
         case "/folder.html":
         case "/folder-form.html":
         case "/file.html":
         case "/file-form.html":
-            $("#nav-list > li").eq(6).addClass("active");
+            $("#nav-list > li").eq(7).addClass("active");
+            $(".collapse").hide();
             break;
         default:
             null;

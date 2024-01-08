@@ -26,12 +26,12 @@ async function GET_USER(page) {
             $("#table-list tbody").append(`
 				<tr>
 					<td>${listCount - i}</td>
-					<td>${el.userName}</td>
-					<td>${el.position}</td>
+					<td>${el.userName || ""}</td>
+					<td>${el.position || ""}</td>
 					<td>${el.userId}</td>
 					<td>${el.levelName}</td>
-					<td>${el.telNum}</td>
-					<td>${el.addr1} ${el.addr2}</td>
+					<td>${el.telNum || ""}</td>
+					<td>${el.addr1 || ""} ${el.addr2 || ""}</td>
 					<td>${el.quittingDate ? `<span class="text-danger">퇴사</span>` : `재직중`}</td>
 					<td>${el.regDate}</td>
 					<td>
