@@ -11,19 +11,7 @@ async function GET_PARTNER(page) {
 
     const { data } = res.data;
 
-    $(
-        "#jhPartner",
-        "#jmPartner",
-        "#pjPartner",
-        "#jrPartner",
-        "#sgPartner",
-        "#cornerPartner",
-        "#ngdPartner",
-        "#cmPartner",
-        "#deckPartner",
-        "#tablePartner",
-        "#scPartner"
-    ).empty();
+    $(".select-empty").empty();
 
     // console.log(data);
 
