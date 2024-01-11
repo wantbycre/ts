@@ -97,17 +97,19 @@ async function GET_PARTNER_MASTER() {
         url: "pt_master",
     });
 
+    // console.log(res.data.data);
+
     res.data.data.forEach((el, i) => {
         if (path === "/account-income-form.html") {
             if (el.UID > 2) {
                 $("#ptUID").append(
-                    `<option value="${i + 1}">${el.ptName}</option>`
+                    `<option value="${el.UID}">${el.ptName}</option>`
                 );
             }
         } else {
             if (el.UID < 3) {
                 $("#ptUID").append(
-                    `<option value="${i + 1}">${el.ptName}</option>`
+                    `<option value="${el.UID}">${el.ptName}</option>`
                 );
             }
         }
@@ -143,7 +145,7 @@ function alertError(text) {
 $(function () {
     GET_PARTNER_MASTER();
 
-    console.log(path);
+    // console.log(path);
 
     $("#ptUID").change(function () {
         const val = $(this).val();

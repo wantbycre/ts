@@ -125,14 +125,22 @@ $(function () {
                             sessionStorage.setItem("href", "/index-gj-jr.html");
                             break;
                         case "sgPartner":
+                        case "dkbsgPartner":
                             location.href = "/index-sgd.html";
                             sessionStorage.setItem("href", "/index-sgd.html");
                             break;
-                        case "cornerPartner":
+                        case "cnsgPartner":
                             location.href = "/index-sg-corner.html";
                             sessionStorage.setItem(
                                 "href",
-                                "/index-sg-corne.html"
+                                "/index-sg-corner.html"
+                            );
+                            break;
+                        case "cornerPartner":
+                            location.href = "/index-gj-corner.html";
+                            sessionStorage.setItem(
+                                "href",
+                                "/index-sg-corner.html"
                             );
                             break;
                         case "ngdPartner":

@@ -187,6 +187,32 @@ function PUT_PASSWORD(userUID, pw) {
         });
 }
 
+// 거래처 항목
+async function GET_PARTNER_MASTER() {
+    const res = await http({
+        method: "GET",
+        url: "pt_master",
+    });
+
+    // console.log(res.data.data);
+
+    res.data.data.forEach((el, i) => {
+        if (path === "/account-income-form-detail.html") {
+            if (el.UID > 2) {
+                $("#ptUID").append(
+                    `<option value="${el.UID}">${el.ptName}</option>`
+                );
+            }
+        } else {
+            if (el.UID < 3) {
+                $("#ptUID").append(
+                    `<option value="${el.UID}">${el.ptName}</option>`
+                );
+            }
+        }
+    });
+}
+
 function alertError(text) {
     swal(text, {
         icon: "error",
@@ -211,7 +237,11 @@ $(function () {
     GET_PARTNER_DETAIL(PARAM_UID).then((res) => {
         const { data } = res;
         console.log(data);
-        $("#ptUID").val(data.ptUID).attr("selected", "selected");
+
+        GET_PARTNER_MASTER().then((_) => {
+            $("#ptUID").val(data.ptUID).attr("selected", "selected");
+        });
+
         $("#partnerName").val(data.partnerName);
         $("#manager").val(data.manager);
         $("#partnerTel").val(data.partnerTel);

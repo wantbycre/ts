@@ -14,7 +14,7 @@ async function GET_ACCOUNT(PARAM_UID) {
 
     $("#account-table tbody").empty();
 
-    // console.log(data);
+    console.log(list);
 
     if (list.length === 0) {
         $("#account-table tbody").append(`
@@ -63,15 +63,15 @@ async function GET_PARTNER_MASTER(PARAM_UID) {
 
     $("#pills-tab").empty();
 
-    console.log(PARAM_UID);
+    console.log("tab", PARAM_UID);
 
     res.data.data.forEach((el, i) => {
         if (tabNum === 3) {
-            if (el.UID > 2) {
+            if (el.orderNo > 2) {
                 $("#pills-tab").append(`
 					<li class="nav-item submenu account-tab">
 						<a
-							class="nav-link ${PARAM_UID === i + 1 ? `active show` : ``}" 
+							class="nav-link ${PARAM_UID === el.UID ? `active show` : ``}" 
 							href="#"
 							data-index="${el.UID}"
 						>
@@ -81,11 +81,11 @@ async function GET_PARTNER_MASTER(PARAM_UID) {
 				`);
             }
         } else {
-            if (el.UID < 3) {
+            if (el.orderNo < 3) {
                 $("#pills-tab").append(`
 					<li class="nav-item submenu account-tab">
 						<a
-							class="nav-link ${PARAM_UID === i + 1 ? `active show` : ``}" 
+							class="nav-link ${PARAM_UID === el.UID ? `active show` : ``}" 
 							href="#"
 							data-index="${el.UID}"
 						>

@@ -8,9 +8,8 @@ function comma(number) {
 }
 
 $(function () {
-    const sessionLevel = sessionStorage.getItem("level");
-
-    if (sessionLevel === "2") {
-        $(".auth-display").attr("style", "display: block !important");
-    }
+    // const sessionLevel = sessionStorage.getItem("level");
+    // if (sessionLevel === "2") {
+    //     $(".auth-display").attr("style", "display: block !important");
+    // }
 });
