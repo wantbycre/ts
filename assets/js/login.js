@@ -124,8 +124,8 @@ $(function () {
                             location.href = "/index-gj-jr.html";
                             sessionStorage.setItem("href", "/index-gj-jr.html");
                             break;
+                        // case "sgPartner":
                         case "sgPartner":
-                        case "dkbsgPartner":
                             location.href = "/index-sgd.html";
                             sessionStorage.setItem("href", "/index-sgd.html");
                             break;

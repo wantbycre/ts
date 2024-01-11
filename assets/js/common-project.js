@@ -355,7 +355,7 @@ function setUniqueObj(DATAS) {
         ...new Map(DATAS.map((obj) => [obj.UID, obj])).values(),
     ];
 
-    console.log("uniqueObjArr", uniqueObjArr);
+    // console.log("uniqueObjArr", uniqueObjArr);
 
     const currentPath = window.location.pathname;
 
@@ -410,6 +410,7 @@ function setUniqueObj(DATAS) {
 						data-toggle="modal"
 						data-target=".modal-joning"
 						data-uid="${el.UID}" 
+						data-code="${el.projectCode}"
 						class="handleProjectJoningPop"
 					>
 						<i class="fas fa-file-alt" style="font-size: 18px;"></i>

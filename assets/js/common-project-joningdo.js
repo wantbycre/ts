@@ -1,4 +1,5 @@
 let joningProjectUID = "";
+let joningProjectCode = "";
 
 // 공통자료 조회
 async function GET_PROJECT_JONING_FILE(projectUID) {
@@ -17,7 +18,7 @@ async function POST_PROJECT_JONING_FILE(filePath, fileType, files) {
     // 다중 파일
     for (let i = 0; i < files.length; i++) {
         formData.append(
-            `project/${projectCode}/${filePath}/${fileType}`,
+            `project/${joningProjectCode}/${filePath}/${fileType}`,
             files[i]
         );
     }
@@ -118,8 +119,10 @@ $(function () {
     // 공통자료 팝업 오버라이드
     $(document).on("click", ".handleProjectJoningPop", function () {
         const uid = $(this).data("uid");
+        const code = $(this).data("code");
 
         joningProjectUID = uid;
+        joningProjectCode = code;
 
         listsJoningFecth();
 

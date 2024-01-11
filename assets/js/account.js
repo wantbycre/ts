@@ -63,7 +63,7 @@ async function GET_PARTNER_MASTER(PARAM_UID) {
 
     $("#pills-tab").empty();
 
-    console.log("tab", PARAM_UID);
+    // console.log("tab", PARAM_UID);
 
     res.data.data.forEach((el, i) => {
         if (tabNum === 3) {
