@@ -39,7 +39,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 			<div class="d-flex">
 				<button 
 					type="button" 
-					class="aps-button active ${data.cnStts === 9 ? `brown` : ``}"
+					class="aps-button active brown2 ${data.cnStts === 9 ? `brown` : ``}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"

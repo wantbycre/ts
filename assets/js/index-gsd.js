@@ -29,6 +29,23 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(sttsData);
 
     sttsData.forEach((data, i) => {
+        let sttsColor = ``;
+
+        switch (data.stts) {
+            case 5:
+                sttsColor = `purple`;
+                break;
+            case 6:
+                sttsColor = `green`;
+                break;
+            case 7:
+                sttsColor = `green blur`;
+                break;
+            default:
+                sttsColor = `gray`;
+                break;
+        }
+
         if (
             data.scheduleUID === sttsData[i + 1]?.scheduleUID ||
             data.scheduleUID === sttsData[i - 1]?.scheduleUID
@@ -57,7 +74,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 				<div class="d-flex">
 					<button 
 						type="button" 
-						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
+						class="aps-button v3 active ${sttsColor}"
 						data-stts="${data.stts}"
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
@@ -117,7 +134,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 				<div class="d-flex">
 					<button 
 						type="button" 
-						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
+						class="aps-button v3 active ${sttsColor}"
 						data-stts="${data.stts}"
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
@@ -167,7 +184,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 			<div class="d-flex">
     			<button 
 					type="button" 
-					class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
+					class="aps-button active ${sttsColor}"
 					data-stts="${data.stts}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
@@ -243,19 +260,29 @@ function setHistory(data) {
     data.forEach((el) => {
         switch (el.changeType) {
             case "데크보설계이력":
-                $(".history1").append(getHitoryDetail(el));
+                $(".history1 .history-content")
+                    .empty()
+                    .append(getHitoryDetail(el));
                 break;
             case "데크보입고이력":
-                $(".history2").append(getHitoryDetail(el));
+                $(".history2 .history-content")
+                    .empty()
+                    .append(getHitoryDetail(el));
                 break;
             case "코너철판설계이력":
-                $(".history3").append(getHitoryDetail(el));
+                $(".history3 .history-content")
+                    .empty()
+                    .append(getHitoryDetail(el));
                 break;
             case "코너철판입고이력":
-                $(".history4").append(getHitoryDetail(el));
+                $(".history4 .history-content")
+                    .empty()
+                    .append(getHitoryDetail(el));
                 break;
             case "구간분할입고이력":
-                $(".history5").append(getHitoryDetail(el));
+                $(".history5 .history-content")
+                    .empty()
+                    .append(getHitoryDetail(el));
                 break;
             default:
                 return;
@@ -371,8 +398,8 @@ async function POST_PROJECT_FILE(filePath, fileType, files, memo) {
 function lists(el) {
     return `
 		<div class="d-flex justify-content-between">
-			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+			<a href="${el.filePath}" class="file-list v2" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 		</div>
@@ -416,7 +443,7 @@ function listsFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "변경승인도면_BOM_CP_스트럽":
+                case "승인도면_BOM_CP_스트럽":
                     $("#content-gsd-seung").append(lists(el));
                     break;
                 case "코너철판_변경설계도면":
@@ -613,6 +640,8 @@ $(function () {
         // stts 7번일 경우 수정 불가
         if (stts === 6) {
             $("#handleGsdSubmit").attr("disabled", false);
+        } else {
+            $("#handleGsdSubmit").attr("disabled", true);
         }
 
         // # inputDate 기준 무조건

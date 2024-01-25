@@ -65,7 +65,7 @@ $(function () {
         case "/index-sg-corner.html":
         case "/index-sgd.html":
             $("#nav-list > li").eq(1).addClass("active");
-            $(".collapse").hide();
+            // $(".collapse").hide();
             break;
         // case "/dashboard.html":
         //     $("#nav-list > li").eq(2).addClass("active");
@@ -73,38 +73,38 @@ $(function () {
         case "/account-income.html":
         case "/account-income-form.html":
         case "/account-income-form-detail.html":
-            $(".collapse").hide();
+            // $(".collapse").hide();
             $("#nav-list > li").eq(2).addClass("active");
             break;
         case "/account-outcome.html":
         case "/account-outcome-form.html":
         case "/account-outcome-form-detail.html":
-            $(".collapse").hide();
+            // $(".collapse").hide();
             $("#nav-list > li").eq(3).addClass("active");
             break;
         case "/member.html":
         case "/member-form.html":
         case "/member-detail.html":
             $("#nav-list > li").eq(4).addClass("active");
-            $(".collapse").hide();
+            // $(".collapse").hide();
             break;
         case "/accounting.html":
         case "/accounting-detail.html":
             $("#nav-list > li").eq(5).addClass("active");
-            $(".collapse").hide();
+            // $(".collapse").hide();
             break;
         case "/notice.html":
         case "/notice-form.html":
         case "/notice-detail.html":
             $("#nav-list > li").eq(6).addClass("active");
-            $(".collapse").hide();
+            // $(".collapse").hide();
             break;
         case "/folder.html":
         case "/folder-form.html":
         case "/file.html":
         case "/file-form.html":
             $("#nav-list > li").eq(7).addClass("active");
-            $(".collapse").hide();
+            // $(".collapse").hide();
             break;
         default:
             null;
@@ -127,6 +127,11 @@ $(function () {
 
     // 공사현황 클릭
     $("#handleLevelHref").click(function () {
+        location.href = sessionStorage.getItem("href");
+    });
+
+    // 로고 클릭
+    $("#handleHrefClick").click(function () {
         location.href = sessionStorage.getItem("href");
     });
 });

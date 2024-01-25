@@ -19,7 +19,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
             n.stts === 7
     );
 
-    // console.log(sttsData);
+    console.log(sttsData);
 
     sttsData.forEach((data, i) => {
         if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
@@ -45,7 +45,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 			<div class="d-flex">
     			<button 
 					type="button" 
-					class="aps-button active ${data.stts === 7 ? `green` : ``}"
+					class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"
 					data-div-uid="${data.divUID}"
@@ -132,8 +132,8 @@ async function POST_PROJECT_FILE(filePath, fileType, files) {
 function lists(el) {
     return `
 		<div class="d-flex justify-content-between">
-			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+			<a href="${el.filePath}" class="file-list v2" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 		</div>
@@ -152,8 +152,8 @@ function lists2(el) {
 
     return `
 		<div class="d-flex justify-content-between">
-			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+			<a href="${el.filePath}" class="file-list v3" download="${el.fileName}">
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			<a href="#" type="button" class="btn-delete sg-team-delete-gisung" data-uid="${el.UID}">

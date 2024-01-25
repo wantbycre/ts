@@ -328,6 +328,17 @@ table.table.v2.table-sum tbody tr td {
     background-color: #cd8323 !important;
 }
 
+.aps-button.brown2 .aps-top,
+.aps-button.brown2 .aps-middle > div,
+.aps-button.brown2 .aps-bottom > div {
+    background-color: #cd8323 !important;
+    /* color: #fff !important; */
+}
+
+.aps-button.brown.brown2 .aps-bottom > div:last-child {
+    background-color: #ae6709 !important;
+}
+
 .aps-button.pink .aps-top,
 .aps-button.pink .aps-middle > div,
 .aps-button.pink .aps-bottom > div {
@@ -489,7 +500,7 @@ table.table.v2.table-sum tbody tr td {
 .file-content {
     overflow: auto;
     height: 135px;
-    padding: 10px;
+    padding: 3px;
     border: 1px solid #afafaf;
 }
 
@@ -509,7 +520,18 @@ table.table.v2.table-sum tbody tr td {
 }
 
 .file-list {
-    width: 220px;
+    width: 246px;
+    letter-spacing: -1px;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.file-list.v2 {
+    width: 100%;
+}
+
+.file-list.v3 {
+    width: 370px;
 }
 
 .section-history {
@@ -533,6 +555,7 @@ table.table.v2.table-sum tbody tr td {
     border: 0;
     background: none;
     transform: rotate(45deg);
+    text-align: right;
 }
 
 /* .delete-calendar {

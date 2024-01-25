@@ -75,7 +75,7 @@ function commonLists(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			${

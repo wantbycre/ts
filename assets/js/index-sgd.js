@@ -8,6 +8,10 @@ let emailFile = [];
 let currentDkbDesignDate = "";
 let currentPjInputDate = "";
 let currentInputDate = "";
+
+let setFloor = "";
+let setSection = "";
+
 /**
  *
  * common-project 호출하는 함수
@@ -243,7 +247,7 @@ function lists(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			<a href="#" type="button" class="btn-delete sgd-delete" data-uid="${el.UID}">
@@ -388,7 +392,7 @@ function kakaoShare() {
         templateArgs: {
             text: `●태성건업 설계도면 발송공지●
 현장명: ${scheduleCode}
-구간명: 설계-데크보
+구간명: ${setFloor}F-${setSection}구간
 발송일: ${moment().format("YYYY-MM-DD")}`,
         },
     });
@@ -420,15 +424,8 @@ $(function () {
         scheduleDate = tdDate || date;
 
         $("#sender").val(emailSender);
-
-        // 이메일 보내기 문구
-        const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-데크보\n발송일: ${moment().format(
-            "YYYY-MM-DD"
-        )}`;
-
-        $("#content").val(emailText);
-
         $(".modal-seol").modal();
+
         listsSgdFecth();
 
         // 수정
@@ -446,6 +443,9 @@ $(function () {
                 );
                 const inputDate = moment(ipDate).diff(moment(pjDate), "days");
 
+                setFloor = data.floor;
+                setSection = data.section;
+
                 currentDkbDesignDate = dkbDate;
                 currentPjInputDate = pjDate;
                 currentInputDate = ipDate;
@@ -458,6 +458,15 @@ $(function () {
                 $("#pjInputDate").val(pjInputDate).attr("selected", "selected");
                 $("#inputDate").val(inputDate).attr("selected", "selected");
                 $("#dkbDesignDate").datepicker().datepicker("setDate", dkbDate);
+
+                // 이메일 보내기 문구
+                const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: ${setFloor}F-${setSection}구간\n발송일: ${moment().format(
+                    "YYYY-MM-DD"
+                )}`;
+
+                $("#content").val(emailText);
+
+                // console.log("emailText", emailText);
             });
         } else {
             // 신규

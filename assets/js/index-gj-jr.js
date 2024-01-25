@@ -261,8 +261,12 @@ function lists(el, bool) {
 
     return `
 		<div class="d-flex justify-content-between">
-			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+			<a
+				href="${el.filePath}" 
+				class="${bool ? `file-list v3` : `file-list v2`}" 
+				download="${el.fileName}"
+			>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			${
@@ -296,7 +300,7 @@ function lists2(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			<a href="#" type="button" class="btn-delete gj-jr-gisung" data-uid="${el.UID}">
@@ -314,7 +318,7 @@ function listsFecth() {
 
         res.data.forEach((el) => {
             switch (el.fileType) {
-                case "변경승인도면_BOM_CP_스트럽":
+                case "승인도면_BOM_CP_스트럽":
                     $("#content-gsd-seung").append(lists(el, false));
                     break;
                 case "송장_색도면_상차사진":

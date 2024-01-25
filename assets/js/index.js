@@ -21,11 +21,28 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     projectData = [];
     projectData.push(sttsData);
 
-    // console.log(DATAS);
+    console.log(DATAS);
 
     sttsData.forEach((data, i) => {
-        const currentDate =
-            currentSuc === "1" ? data.dkbDesignDate : data.inputDate;
+        // const currentDate =
+        //     currentSuc === "1" ? data.dkbDesignDate : data.inputDate;
+
+        let sttsColor = ``;
+
+        switch (data.stts) {
+            case 5:
+                sttsColor = `purple`;
+                break;
+            case 6:
+                sttsColor = `green`;
+                break;
+            case 7:
+                sttsColor = `green blur`;
+                break;
+            default:
+                sttsColor = `gray`;
+                break;
+        }
 
         $(
             "#chart-content table[data-index=" +
@@ -33,7 +50,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 "] tbody tr[data-uid=" +
                 data.UID +
                 "] td[data-date=" +
-                currentDate +
+                data.inputDate +
                 "] .add-section .nbsp"
         ).remove();
 
@@ -43,7 +60,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
                 "] tbody tr[data-uid=" +
                 data.UID +
                 "] td[data-date=" +
-                currentDate +
+                data.inputDate +
                 "] .add-section"
         ).append(`
 			<div class="d-flex">
@@ -52,8 +69,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 					class="
 						aps-button
 						active
-						${data.stts === 7 ? `green blur` : `green`} 
-						${currentSuc === "2" ? `fianl-gray` : ``}
+						${sttsColor} 
 					"
 					data-product-uid="${data.UID}"
 					data-schedule-uid="${data.scheduleUID}"

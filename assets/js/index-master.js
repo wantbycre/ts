@@ -28,6 +28,23 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
     console.log(sttsData);
 
     sttsData.forEach((data, i) => {
+        let sttsColor = ``;
+
+        switch (data.stts) {
+            case 5:
+                sttsColor = `purple`;
+                break;
+            case 6:
+                sttsColor = `green`;
+                break;
+            case 7:
+                sttsColor = `green blur`;
+                break;
+            default:
+                sttsColor = `gray`;
+                break;
+        }
+
         if (data.scheduleUID !== sttsData[i - 1]?.scheduleUID) {
             if (data.etcNote) {
                 $(
@@ -52,7 +69,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 				<div class="d-flex">
 					<button 
 						type="button" 
-						class="aps-button v3 active ${data.stts === 7 ? `green blur` : `green`}"
+						class="aps-button v3 active ${sttsColor}"
 						data-product-uid="${data.UID}"
 						data-schedule-uid="${data.scheduleUID}"
 						data-div-uid="${data.divUID}"
@@ -101,7 +118,7 @@ function SET_CLASS_PROJECT(DATAS, thisYear, thisMonth) {
 					<div class="d-flex">
 						<button 
 							type="button" 
-							class="aps-button active ${data.stts === 7 ? `green blur` : `green`}"
+							class="aps-button active ${sttsColor}"
 							data-product-uid="${data.UID}"
 							data-schedule-uid="${data.scheduleUID}"
 							data-div-uid="${data.divUID}"
@@ -305,7 +322,7 @@ function lists(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 		</div>

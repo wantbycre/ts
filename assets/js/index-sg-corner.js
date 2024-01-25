@@ -2,6 +2,10 @@ let scheduleUID = 0;
 let scheduleCode = "";
 let scheduleDate = "";
 let emailFile = [];
+
+let setFloor = "";
+let setSection = "";
+
 /**
  *
  * common-project 호출하는 함수
@@ -172,7 +176,7 @@ function lists(el) {
     return `
 		<div class="d-flex justify-content-between">
 			<a href="${el.filePath}" class="file-list" download="${el.fileName}">
-				<i class="fas fa-file-alt" style="font-size: 14px;"></i>
+				<i class="fas fa-file-alt" style="font-size: 11px;"></i>
 				${el.fileName}
 			</a>
 			<a href="#" type="button" class="btn-delete sg-corner-delete" data-uid="${el.UID}">
@@ -260,7 +264,7 @@ function kakaoShare() {
         templateArgs: {
             text: `●태성건업 설계도면 발송공지●
 현장명: ${scheduleCode}
-구간명: 설계-코너철판
+구간명: ${setFloor}F-${setSection}구간
 발송일: ${moment().format("YYYY-MM-DD")}`,
         },
     });
@@ -282,14 +286,6 @@ $(function () {
         // console.log("scheduleDate", scheduleDate);
 
         $("#sender").val(emailSender);
-
-        // 이메일 보내기 문구
-        const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: 설계-코너철판\n발송일: ${moment().format(
-            "YYYY-MM-DD"
-        )}`;
-
-        $("#content").val(emailText);
-
         $(".modal-seol").modal();
 
         listsSgdFecth();
@@ -302,6 +298,9 @@ $(function () {
                 moment(data.cnInputDate),
                 "days"
             );
+
+            setFloor = data.floor;
+            setSection = data.section;
 
             $("#cnDesignDate")
                 .datepicker()
@@ -322,6 +321,13 @@ $(function () {
                 );
 
             $("#cnOutputDate").val(cnOutputDate || 10);
+
+            // 이메일 보내기 문구
+            const emailText = `●태성건업 설계도면 발송공지●\n현장명: ${scheduleCode}\n구간명: ${setFloor}F-${setSection}구간\n발송일: ${moment().format(
+                "YYYY-MM-DD"
+            )}`;
+
+            $("#content").val(emailText);
         });
 
         // FIXME: 2024-01-04 옵저버 풀어주는 보수사항

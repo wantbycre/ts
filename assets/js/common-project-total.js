@@ -102,16 +102,16 @@ function GET_TOTAL(projectStts, startDate, endDate) {
 
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(0)
-            .text(comma(sum.totalArea));
+            .text(comma(String(parseFloat((sum.totalArea || 0).toFixed(2)))));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(1)
-            .text(comma(sum.totalDkbCnt));
+            .text(comma(String(sum.totalDkbCnt || 0)));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(2)
-            .text(comma(sum.totalStrup.toFixed(2)));
+            .text(comma(String(parseFloat((sum.totalStrup || 0).toFixed(2)))));
         $("#chart-sum table thead tr.table-sum-thead th")
             .eq(3)
-            .text(comma(sum.totalCnCnt));
+            .text(comma(String(sum.totalCnCnt || 0)));
     });
 }
 
